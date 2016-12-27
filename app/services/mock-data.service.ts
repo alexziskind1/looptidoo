@@ -1,0 +1,163 @@
+//angular imports
+import { Injectable } from '@angular/core';
+
+//nativescript imports
+import * as fileSystemModule from 'file-system';
+
+//3rd party imports
+import * as faker from 'faker';
+import * as _ from 'lodash';
+
+//app imports
+import * as constModule from '../shared/constants';
+import { ItemTypeEnum, PriorityEnum, StatusEnum } from '../shared/static-data';
+
+import { PTDomain } from '../typings/domain';
+
+
+import IUser = PTDomain.IUser;
+import IPTItem = PTDomain.IPTItem;
+//import IItemType = PTDomain.IItemType;
+//import IPriority = PTDomain.IPriority;
+import ITask = PTDomain.ITask;
+import IComment = PTDomain.IComment;
+//import ItemTypeEnum = PTDomain.ItemTypeEnum;
+//import PriorityEnum = PTDomain.PriorityEnum;
+//import StatusEnum = PTDomain.StatusEnum;
+
+@Injectable()
+export class MockDataService {
+
+    public generatePTItems(users: Array<IUser>): Array<IPTItem> {
+        let items = _.times(constModule.NUM_PT_ITEMS, () => {
+            return this.generatePTItem(users);
+        });
+        return items;
+    }
+
+    public generatePTItem(users: Array<IUser>): IPTItem {
+        let date = faker.date.past(1);
+        let title = this.toTitleCase(faker.company.bs());
+
+        let typeStr = _.sample(ItemTypeEnum);
+        let type = ItemTypeEnum[typeStr];
+
+        let priorityStr = _.sample(PriorityEnum);
+        let priority = PriorityEnum[priorityStr];
+
+        let statusStr = _.sample(StatusEnum);
+        let status = StatusEnum[priorityStr];
+
+
+        let ptItem: IPTItem = {
+            id: faker.random.uuid(),
+            title: title,
+            dateCreated: date,
+            dateModified: date,
+            type: type,
+            estimate: _.random(1, 24),
+            priority: priority,
+            status: status,
+            assignee: _.sample(users),
+            tasks: this.generateTasks(),
+            comments: this.generateComments(users)
+        };
+
+        return ptItem;
+    }
+
+    public generateTasks(): Array<ITask> {
+        let numTasks = _.random(0, 5);
+        let tasks = _.times(numTasks, () => {
+            return this.generateTask();
+        });
+        return tasks;
+    }
+
+    public generateTask(): ITask {
+        let date = faker.date.past(1);
+        let title = this.toTitleCase(faker.company.bs());
+        let task: ITask = {
+            id: faker.random.uuid(),
+            title: title,
+            dateCreated: date,
+            dateModified: date,
+            completed: faker.random.boolean()
+        };
+        return task;
+    }
+
+    public generateUsers(): Array<IUser> {
+        let avatarsMen = this.getUserAvatars('images/avatars/base64/men.txt');
+        let avatarsWomen = this.getUserAvatars('images/avatars/base64/women.txt');
+        let users = _.times(constModule.NUM_USERS, () => {
+            return this.generateUser(avatarsMen, avatarsWomen);
+        });
+        return users;
+    }
+
+    public generateUser(avatarsMen: string[], avatarsWomen: string[]): IUser {
+        let genderBool = faker.random.boolean();
+        let genderInt = parseInt(genderBool + '');
+        let firstName = faker.name.firstName(genderInt);
+        let lastName = faker.name.lastName(genderInt);
+        let avatar = genderBool ? _.sample(avatarsMen) : _.sample(avatarsWomen);
+
+        let user: IUser = {
+            id: faker.random.uuid(),
+            fullName: firstName + ' ' + lastName,
+            avatar: avatar
+        };
+        return user;
+    }
+
+    public generateComments(users: Array<IUser>): Array<IComment> {
+        let numComments = _.random(0, 5);
+        let comments = _.times(numComments, () => {
+            return this.generateComment(users);
+        });
+        return comments;
+    }
+
+    public generateComment(users: Array<IUser>): IComment {
+        let date = faker.date.past(1);
+        let title = this.toTitleCase(faker.company.bs());
+        let commentText = this.toTitleCase(faker.lorem.sentence(20, 40));
+
+        let comment: IComment = {
+            id: faker.random.uuid(),
+            title: title,
+            comment: commentText,
+            dateCreated: date,
+            dateModified: date,
+            userId: _.sample(users).id
+        };
+        return comment;
+    }
+
+    private getUserAvatars(path) {
+        var avatarList: Array<string> = [];
+        var currentAppFolder = fileSystemModule.knownFolders.currentApp();
+        var menAvatarsFile = currentAppFolder.getFile(path);
+        var fileText = menAvatarsFile.readTextSync();
+
+        var lines = fileText.split('\n');
+        for (var i = 0; i < lines.length; i++) {
+            avatarList.push('data:image/png;base64,' + lines[i]);
+        }
+        return avatarList;
+    }
+
+    private toTitleCase(str) {
+        return str.replace(/\w\S*/g, function (txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
+    }
+
+    private pickRandomProperty(obj) {
+        var result;
+        var count = 0;
+        for (var prop in obj)
+            if (Math.random() < 1 / ++count)
+                result = prop;
+        return result;
+    }
+}

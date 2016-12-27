@@ -1,0 +1,17 @@
+<StackLayout>
+    <Label text="pt item list"></Label>
+
+    <Button text="add" (tap)="addItem()"></Button>
+
+    <ListView [items]="ptItemsArrayObs | async" (itemTap)="listItemTap($event)">
+        <template let-item="item" let-i="index">
+            <GridLayout columns="200, *">
+                <StackLayout col="0">
+                    <Label [text]='i + ": " + item.title'></Label>
+                    <Label [text]='"estimate: " + item.estimate'></Label>
+                </StackLayout>
+                <Button col="1" class="btn btn-primary" text="change me" (tap)="changeMeTapped(item)"></Button>
+            </GridLayout>
+        </template>
+    </ListView>
+</StackLayout>

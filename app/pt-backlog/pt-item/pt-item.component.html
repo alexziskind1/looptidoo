@@ -1,0 +1,11 @@
+<StackLayout>
+    <Label text="pt item"></Label>
+    <StackLayout *ngIf="item">
+        <Label [text]="item.title"></Label>
+        <Label [text]="item.estimate"></Label>
+
+        <Button class="btn btn-primary" text="change me" (tap)="changeMeTapped()"></Button>
+
+    </StackLayout>
+
+</StackLayout>
