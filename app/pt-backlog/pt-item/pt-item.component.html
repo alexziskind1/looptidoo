@@ -1,11 +1,8 @@
 <StackLayout>
-    <Label text="pt item"></Label>
-    <StackLayout *ngIf="item">
-        <Label [text]="item.title"></Label>
-        <Label [text]="item.estimate"></Label>
+    <Label [text]="itemTitle"></Label>
 
-        <Button class="btn btn-primary" text="change me" (tap)="changeMeTapped()"></Button>
+    <SegmentedBar selectedBackgroundColor="#fac950" [items]="itemDetailScreens" (selectedIndexChanged)="selectedItemDetailScreenIndexChanged($event)"></SegmentedBar>
 
-    </StackLayout>
+    <router-outlet></router-outlet>
 
 </StackLayout>

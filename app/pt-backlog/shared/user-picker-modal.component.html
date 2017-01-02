@@ -1,0 +1,17 @@
+<StackLayout margin="24" horizontalAlignment="center" verticalAlignment="center">
+    <Label [text]="prompt"></Label>
+
+    <ListView [items]="userService.usersObs | async" (itemTap)="listItemTap($event)">
+        <template let-user="item" let-i="index">
+            <GridLayout columns="50, 200, *">
+                <Image col="0" [src]="user.avatar" stretch="aspectFit"></Image>
+                <Label col="1" [text]="user.fullName"></Label>
+            </GridLayout>
+        </template>
+    </ListView>
+
+    <StackLayout orientation="horizontal" marginTop="12">
+        <Button text="ok" (tap)="close('OK')"></Button>
+        <Button text="cancel" (tap)="close('Cancel')"></Button>
+    </StackLayout>
+</StackLayout>

@@ -9,8 +9,11 @@ import * as _ from 'lodash';
 import { UserService } from './user.service';
 import { MockDataService } from './mock-data.service';
 import { PTDomain } from '../typings/domain';
+import { ItemTypeEnum, PriorityEnum, StatusEnum } from '../shared/static-data';
 import IUser = PTDomain.IUser;
 import IPTItem = PTDomain.IPTItem;
+import ITask = PTDomain.ITask;
+import INewTask = PTDomain.INewTask;
 
 
 @Injectable()
@@ -93,8 +96,70 @@ export class BacklogService {
 
     }
 
+    public toggleTask(item: IPTItem, task: ITask) {
+        var index = _.indexOf(item.tasks, task);
+        task.completed = !task.completed;
+        item.tasks.splice(index, 1, task);
+    }
+
+    public updateTask(item: IPTItem, task: ITask, newTitle: string) {
+        var index = _.indexOf(item.tasks, task);
+        task.title = newTitle;
+        item.tasks.splice(index, 1, task);
+    }
+
+    public addTask(item: IPTItem, newTask: INewTask) {
+        var task: ITask = {
+            id: _.uniqueId(),
+            title: newTask.title,
+            completed: newTask.completed,
+            dateCreated: new Date(),
+            dateModified: new Date()
+        };
+        item.tasks.unshift(task);
+        //item.tasks.push(task);
+    }
+
+    public updatePtItem(item: IPTItem) {
+        this.publishUpdates();
+    }
+
+    public updatePtItemEstimate(item: IPTItem, incdec: boolean) {
+        if (item.estimate === 0 && !incdec) return;
+        item.estimate = incdec ? item.estimate + 1 : item.estimate - 1;
+        this.publishUpdates();
+    }
+
+    public updatePtItemPriority(item: IPTItem, incdec: boolean) {
+        if (PriorityEnum.isMax(item.priority) && incdec) return;
+        if (PriorityEnum.isMin(item.priority) && !incdec) return;
+
+        if (incdec) {
+            item.priority = PriorityEnum.nextPriority(item.priority);
+        } else {
+            item.priority = PriorityEnum.previousPriority(item.priority);
+        }
+        this.publishUpdates();
+    }
+
+    public updatePtItemType(item: IPTItem, newType: ItemTypeEnum) {
+        item.type = newType;
+        this.publishUpdates();
+    }
+
+    public updatePtItemAssignee(item: IPTItem, user: IUser) {
+        item.assignee = user;
+        this.publishUpdates();
+    }
+
     public incrementEstimate(item: IPTItem) {
         item.estimate++;
+        this.publishUpdates();
+    }
+
+    public switchAssignee(item: IPTItem) {
+        let ranUser = _.sample<IUser>(this.userService.users);
+        item.assignee = ranUser;
         this.publishUpdates();
     }
 

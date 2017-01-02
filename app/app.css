@@ -1,1 +1,50 @@
 @import 'nativescript-theme-core/css/core.light.css';
+
+.indicator-pbi {
+    background-color: green;
+}
+
+.indicator-bug {
+    background-color: red;;
+}
+
+.indicator-chore {
+    background-color: gray;
+}
+
+.indicator-impediment {
+    background-color: orange;
+}
+
+.task-wrapper {
+    border-bottom-width: 1;
+    border-bottom-color: #eeeeee;
+    padding: 0;
+    margin: 10;
+}
+
+
+.task-full {
+    height: 30;
+    width: 30;
+    background-color: green;
+}
+
+.task-empty {
+    height: 30;
+    width: 30;
+    border-color:green;
+    border-width: 1;
+}
+
+.task-empty-new {
+    height: 30;
+    width: 30;
+    border-color:gray;
+    border-width: 1;
+}
+
+.input-field {
+    border-bottom-width: 1;
+    border-bottom-color: gray;
+}

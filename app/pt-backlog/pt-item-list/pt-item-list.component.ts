@@ -4,6 +4,7 @@ import { Component, OnInit } from "@angular/core";
 //nativescript imports
 import { RouterExtensions } from 'nativescript-angular/router';
 import { ItemEventData, ListView } from 'ui/list-view';
+import { Page } from 'ui/page';
 
 //3rd party imports
 import * as _ from 'lodash';
@@ -36,7 +37,13 @@ export class PTItemListComponent implements OnInit {
         return this.backlogService.itemsSubj;
     }
 
-    constructor(private backlogService: BacklogService,
+
+    public getIndicatorClass(item: IPTItem) {
+        return ItemTypeEnum.getIndicatorClass(item.type);
+    }
+
+
+    constructor(private page: Page, private backlogService: BacklogService,
         private authService: AuthenticationService,
         private _routerExtensions: RouterExtensions) {
         this.backlogService.ptItemsObs.subscribe(data => {
@@ -44,6 +51,10 @@ export class PTItemListComponent implements OnInit {
             console.dir(data);
             this.ptItems = data;
         });
+
+        // this.page.on(Page.navigatingToEvent, () => {
+        //    this.backlogService.publishUpdates();
+        //});
     }
 
     public ngOnInit() {
@@ -83,6 +94,7 @@ export class PTItemListComponent implements OnInit {
     public changeMeTapped(item: IPTItem) {
         console.log(item.title);
         this.backlogService.incrementEstimate(item);
+        this.backlogService.switchAssignee(item);
     }
 
 }

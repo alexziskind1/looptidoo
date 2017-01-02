@@ -40,5 +40,9 @@ declare namespace PTDomain {
         comment: string;
     }
 
+    interface INewTask {
+        title: string;
+        completed: boolean;
+    }
 
 }

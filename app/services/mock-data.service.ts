@@ -67,7 +67,7 @@ export class MockDataService {
     }
 
     public generateTasks(): Array<ITask> {
-        let numTasks = _.random(0, 5);
+        let numTasks = _.random(5, 20);
         let tasks = _.times(numTasks, () => {
             return this.generateTask();
         });

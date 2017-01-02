@@ -1,0 +1,16 @@
+<StackLayout margin="24" horizontalAlignment="center" verticalAlignment="center">
+    <Label [text]="prompt"></Label>
+
+
+    <StackLayout>
+        <StackLayout *ngFor="let item of items">
+            <Label [text]="item.value" (tap)="typeSelect(item)"></Label>
+        </StackLayout>
+    </StackLayout>
+
+
+    <StackLayout orientation="horizontal" marginTop="12">
+        <Button text="ok" (tap)="close('OK')"></Button>
+        <Button text="cancel" (tap)="close('Cancel')"></Button>
+    </StackLayout>
+</StackLayout>

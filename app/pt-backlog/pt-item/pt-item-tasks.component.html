@@ -1,0 +1,47 @@
+<StackLayout [@slideIn]="animationState">
+    <Label text="pt item tasks"></Label>
+
+    <StackLayout *ngIf="item">
+        <Label [text]="item.title"></Label>
+        <Label [text]="item.tasks.length"></Label>
+
+
+        <ScrollView #tasksSrollView>
+            <StackLayout>
+
+                <StackLayout class="task-wrapper" [height]="taskHeight(newTaskTitle)">
+                    <GridLayout columns="50, 200, *">
+                        <StackLayout col="0">
+                            <StackLayout class="task-empty-new"></StackLayout>
+                        </StackLayout>
+                        <StackLayout col="1">
+                            <TextView #newTaskTV [(ngModel)]="newTaskTitle" hint="Enter new task..."></TextView>
+                        </StackLayout>
+                        <Button col="2" class="btn btn-primary" isEnabled="{{ newTaskTitle.length > 0 }}" text="add" (tap)="addTapped(newTaskTV)"></Button>
+                    </GridLayout>
+                </StackLayout>
+
+
+                <StackLayout class="task-wrapper" *ngFor="let task of tasks" [height]="taskHeight(task.title)">
+                    <GridLayout columns="50, 200, *">
+
+                        <StackLayout col="0" (tap)="toggleTapped(task)">
+                            <StackLayout [class]="task.completed ? 'task-full' : 'task-empty'"></StackLayout>
+                        </StackLayout>
+
+                        <StackLayout col="1">
+                            <TextView [ngModel]="task.title" (ngModelChange)="taskTitleChange(task, $event)"></TextView>
+                        </StackLayout>
+
+
+                    </GridLayout>
+                </StackLayout>
+
+
+
+            </StackLayout>
+        </ScrollView>
+
+
+    </StackLayout>
+</StackLayout>

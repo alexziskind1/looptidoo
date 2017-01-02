@@ -12,12 +12,14 @@ import { backlogRoutingConfig } from "./pt-backlog-routing.module";
 import { PTBacklogComponent } from './pt-backlog.component';
 import { PTItemListComponent } from './pt-item-list/pt-item-list.component';
 import { PTItemComponent } from './pt-item/pt-item.component';
+import { PTItemModule } from './pt-item/pt-item.module';
 
 @NgModule({
     imports: [
         NativeScriptModule,
         NativeScriptFormsModule,
-        backlogRoutingConfig
+        backlogRoutingConfig,
+        PTItemModule
     ],
     declarations: [
         PTBacklogComponent,
