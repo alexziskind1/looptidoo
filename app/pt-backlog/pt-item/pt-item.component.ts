@@ -11,6 +11,7 @@ import 'rxjs/add/operator/switchMap';
 
 //app imports
 import { BacklogService, AuthenticationService } from '../../services';
+import { ItemTypeEnum } from '../../shared/static-data';
 import { PTDomain } from '../../typings/domain';
 import IPTItem = PTDomain.IPTItem;
 
@@ -27,6 +28,10 @@ export class PTItemComponent implements OnInit {
 
     public get itemTitle() {
         return this.item ? this.item.title : '';
+    }
+
+    public get typeImg() {
+        return this.item ? ItemTypeEnum.getImage(this.item.type) : '';
     }
 
     public get itemDetailScreens() {

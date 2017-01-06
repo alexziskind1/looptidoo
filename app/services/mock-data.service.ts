@@ -39,10 +39,10 @@ export class MockDataService {
         let date = faker.date.past(1);
         let title = this.toTitleCase(faker.company.bs());
 
-        let typeStr = _.sample(ItemTypeEnum);
+        let typeStr = ItemTypeEnum[_.random(1, 4)];
         let type = ItemTypeEnum[typeStr];
 
-        let priorityStr = _.sample(PriorityEnum);
+        let priorityStr = PriorityEnum[_.random(1, 4)];
         let priority = PriorityEnum[priorityStr];
 
         let statusStr = _.sample(StatusEnum);
@@ -121,16 +121,15 @@ export class MockDataService {
 
     public generateComment(users: Array<IUser>): IComment {
         let date = faker.date.past(1);
-        let title = this.toTitleCase(faker.company.bs());
         let commentText = this.toTitleCase(faker.lorem.sentence(20, 40));
+        //let commentText = this.toTitleCase(faker.company.bs());
 
         let comment: IComment = {
             id: faker.random.uuid(),
-            title: title,
-            comment: commentText,
+            title: commentText,
             dateCreated: date,
             dateModified: date,
-            userId: _.sample(users).id
+            user: _.sample(users)
         };
         return comment;
     }

@@ -14,7 +14,9 @@ import { UserService, AuthenticationService } from './services';
 
 
 @NgModule({
-    declarations: [AppComponent],
+    declarations: [
+        AppComponent
+    ],
     bootstrap: [AppComponent],
     imports: [NativeScriptModule,
         NativeScriptRouterModule,

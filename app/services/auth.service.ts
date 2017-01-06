@@ -20,11 +20,13 @@ export class AuthenticationService {
     public currentUser: IUser;
 
     constructor(private userService: UserService) {
-        /*
+
         userService.usersObs.subscribe((d) => {
             this.currentUser = d[0];
+            console.log('setting current user');
+            console.dir(this.currentUser.fullName);
         });
-        */
+
     }
 
     public login(username: string, password: string) {

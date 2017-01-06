@@ -16,6 +16,42 @@
     background-color: orange;
 }
 
+.indicator-critical {
+    color: #820101;
+    background-color: #ffc9c9;
+    border-width: 1;
+    border-radius: 4;
+    border-color: #820101;
+    padding:2;
+}
+
+.indicator-high {
+    color: #b27100;
+    background-color: #ffe4b7;
+    border-width: 1;
+    border-radius: 4;
+    border-color: #b27100;
+    padding:2;
+}
+
+.indicator-medium {
+    color: #0c6d00;
+    background-color: #cfffc9;
+    border-width: 1;
+    border-radius: 4;
+    border-color: #0c6d00;
+    padding:2;
+}
+
+.indicator-low {
+    color: #002b6d;
+    background-color: #c1daff;
+    border-width: 1;
+    border-radius: 4;
+    border-color: #002b6d;
+    padding:2;
+}
+
 .task-wrapper {
     border-bottom-width: 1;
     border-bottom-color: #eeeeee;

@@ -13,7 +13,9 @@ import { ItemTypeEnum, PriorityEnum, StatusEnum } from '../shared/static-data';
 import IUser = PTDomain.IUser;
 import IPTItem = PTDomain.IPTItem;
 import ITask = PTDomain.ITask;
+import IComment = PTDomain.IComment;
 import INewTask = PTDomain.INewTask;
+import INewComment = PTDomain.INewComment;
 
 
 @Injectable()
@@ -92,9 +94,7 @@ export class BacklogService {
         this.publishUpdates();
     }
 
-    public loadBacklogItems() {
-
-    }
+    //public loadBacklogItems() {}
 
     public toggleTask(item: IPTItem, task: ITask) {
         var index = _.indexOf(item.tasks, task);
@@ -117,7 +117,17 @@ export class BacklogService {
             dateModified: new Date()
         };
         item.tasks.unshift(task);
-        //item.tasks.push(task);
+    }
+
+    public addComment(item: IPTItem, newComment: INewComment) {
+        var comment: IComment = {
+            id: _.uniqueId(),
+            title: newComment.title,
+            user: _.find(this.userService.users, (user) => user.id === newComment.userId),
+            dateCreated: new Date(),
+            dateModified: new Date()
+        };
+        item.comments.unshift(comment);
     }
 
     public updatePtItem(item: IPTItem) {

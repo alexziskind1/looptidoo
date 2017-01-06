@@ -36,13 +36,18 @@ declare namespace PTDomain {
     }
 
     interface IComment extends IPTObjectBase {
-        userId: string;
-        comment: string;
+        //userId: string;
+        user: IUser;
     }
 
     interface INewTask {
         title: string;
         completed: boolean;
+    }
+
+    interface INewComment {
+        title: string;
+        userId: string;
     }
 
 }

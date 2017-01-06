@@ -23,7 +23,10 @@
                 <StackLayout class="input-field">
                     <GridLayout rows="40" [columns]="formFieldGridCols" (tap)="showTypeModal()">
                         <Label col="0" text="Type"></Label>
-                        <Label col="1" [text]="item.type"></Label>
+                        <StackLayout col="1" orientation="horizontal">
+                            <Image [src]="item.type | typeImage"></Image>
+                            <Label [text]="item.type | typeDisplay"></Label>
+                        </StackLayout>
                     </GridLayout>
                 </StackLayout>
 
@@ -41,7 +44,9 @@
                 <StackLayout class="input-field">
                     <GridLayout rows="40" [columns]="formFieldGridCols">
                         <Label col="0" text="Priority"></Label>
-                        <Label col="1" [text]="item.priority"></Label>
+                        <StackLayout col="1">
+                            <Label [text]="item.priority | priorityDisplay" [class]="item.priority | priorityClass"></Label>
+                        </StackLayout>
                         <StackLayout col="2">
                             <inc-dec (notifyIncDecTapped)="priorityIncDecTapped($event)" [decEnabled]="priorityDecEnabled" [incEnabled]="priorityIncEnabled">
                             </inc-dec>

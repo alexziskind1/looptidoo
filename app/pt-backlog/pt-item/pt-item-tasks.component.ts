@@ -26,9 +26,6 @@ import INewTask = PTDomain.INewTask;
     animations: slideInAnimations
 })
 export class PTItemTasksComponent implements OnInit {
-    //@HostBinding('@routeAnimation') routeAnimation = true;
-    //@ViewChild('tasksSrollView') tasksSrollViewRef: ElementRef;
-
     private selectedViewIndex = 0;
     public item: IPTItem;
     public newTaskTitle: string = '';
@@ -50,7 +47,7 @@ export class PTItemTasksComponent implements OnInit {
 
 
     public ngOnInit() {
-        console.log('init item details: ' + this.route.parent.toString());
+        //console.log('init item details: ' + this.route.parent.toString());
 
         this.route.parent.params
             .switchMap((params: Params) => this.backlogService.getItem(params['id']))
@@ -94,9 +91,9 @@ export class PTItemTasksComponent implements OnInit {
 
     public taskTitleChange(task: ITask, args: string) {
         //task.title=$event.value
-        console.log('taskTitleChange: ');
-        console.log('task title: ' + task.title);
-        console.dir('new string: ' + args);
+        //console.log('taskTitleChange: ');
+        //console.log('task title: ' + task.title);
+        //console.dir('new string: ' + args);
         this.backlogService.updateTask(this.item, task, args);
     }
 }

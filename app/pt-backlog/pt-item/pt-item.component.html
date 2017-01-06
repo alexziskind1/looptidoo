@@ -1,4 +1,7 @@
 <StackLayout>
+
+    <Image [src]="typeImg" stretch="none"></Image>
+
     <Label [text]="itemTitle"></Label>
 
     <SegmentedBar selectedBackgroundColor="#fac950" [items]="itemDetailScreens" (selectedIndexChanged)="selectedItemDetailScreenIndexChanged($event)"></SegmentedBar>

@@ -22,13 +22,13 @@ export namespace ItemTypeEnum {
     export function getImage(type: ItemTypeEnum): string {
         switch (type) {
             case ItemTypeEnum.PBI:
-                return 'pbi.png';
+                return '~/images/i-pbi.png';
             case ItemTypeEnum.Bug:
-                return 'bug.png';
+                return '~/images/i-bug.png';
             case ItemTypeEnum.Chore:
-                return 'chore.png';
+                return '~/images/i-chore.png';
             case ItemTypeEnum.Impediment:
-                return 'impediment.png';
+                return '~/images/impediment.png';
             default:
                 return '';
         }
@@ -72,18 +72,18 @@ export namespace PriorityEnum {
                 return undefined;
         }
     }
-    export function getColor(priority: PriorityEnum): string {
+    export function getIndicatorClass(priority: PriorityEnum): string {
         switch (priority) {
             case PriorityEnum.Critical:
-                return 'red';
+                return 'indicator-critical';
             case PriorityEnum.High:
-                return 'yellow';
+                return 'indicator-high';
             case PriorityEnum.Medium:
-                return 'blue';
+                return 'indicator-medium';
             case PriorityEnum.Low:
-                return 'green';
+                return 'indicator-low';
             default:
-                return 'gray';
+                return '';
         }
     }
 }

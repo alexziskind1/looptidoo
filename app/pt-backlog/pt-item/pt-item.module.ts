@@ -19,6 +19,10 @@ import { PTItemChitchatComponent } from './pt-item-chitchat.component';
 import { IncDecComponent } from '../shared/inc-dec.component';
 import { ItemTypePickerModalComponent } from '../shared/item-type-picker-modal.component';
 import { UserPickerModalComponent } from '../shared/user-picker-modal.component';
+import { TypeDisplayPipe } from '../shared/type-display.pipe';
+import { TypeImagePipe } from '../shared/type-image.pipe';
+import { PriorityDisplayPipe } from '../shared/priority-display.pipe';
+import { PriorityClassPipe } from '../shared/priority-class.pipe';
 
 
 @NgModule({
@@ -33,7 +37,11 @@ import { UserPickerModalComponent } from '../shared/user-picker-modal.component'
         PTItemChitchatComponent,
         IncDecComponent,
         ItemTypePickerModalComponent,
-        UserPickerModalComponent
+        UserPickerModalComponent,
+        TypeDisplayPipe,
+        TypeImagePipe,
+        PriorityDisplayPipe,
+        PriorityClassPipe
     ],
     entryComponents: [
         ItemTypePickerModalComponent,
