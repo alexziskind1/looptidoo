@@ -1,6 +1,27 @@
+<ActionBar title="test">
+    <NavigationButton text="Back" android.systemIcon="ic_menu_back"></NavigationButton>
+    <StackLayout orientation="horizontal">
+        <Image [src]="typeImg" stretch="none"></Image>
+        <Label text="Item Details" class="action-label"></Label>
+    </StackLayout>
+
+    <ActionItem (tap)="onActionMenuTap()" ios.position="right" android.position="popup" android.systemIcon="ic_menu_moreoverflow_normal_holo_light">
+        <StackLayout class="navbar_image_wrapper" ios:horizontalAlignment="right">
+            <Image src="res://icon_elipses_white"></Image>
+        </StackLayout>
+    </ActionItem>
+
+    <ActionItem (tap)="onDelete()" ios.systemIcon="16" ios.position="right" text="delete" android.systemIcon="ic_menu_delete"
+        android.position="actionBar"></ActionItem>
+
+
+</ActionBar>
+
 <StackLayout>
 
-    <Image [src]="typeImg" stretch="none"></Image>
+
+
+
 
     <Label [text]="itemTitle"></Label>
 

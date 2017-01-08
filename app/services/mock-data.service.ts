@@ -93,7 +93,20 @@ export class MockDataService {
         let users = _.times(constModule.NUM_USERS, () => {
             return this.generateUser(avatarsMen, avatarsWomen);
         });
+        let userMe = this.getMeUser();
+        users.unshift(userMe);
         return users;
+    }
+
+    public getMeUser(): IUser {
+        let avatarMe = this.getUserAvatars('images/avatars/base64/me.txt')[0];
+
+        let userMe: IUser = {
+            id: faker.random.uuid(),
+            fullName: 'Alex Ziskind',
+            avatar: avatarMe
+        };
+        return userMe;
     }
 
     public generateUser(avatarsMen: string[], avatarsWomen: string[]): IUser {

@@ -14,6 +14,7 @@ import IUser = PTDomain.IUser;
 import IPTItem = PTDomain.IPTItem;
 import ITask = PTDomain.ITask;
 import IComment = PTDomain.IComment;
+import INewItem = PTDomain.INewItem;
 import INewTask = PTDomain.INewTask;
 import INewComment = PTDomain.INewComment;
 
@@ -84,17 +85,34 @@ export class BacklogService {
         return Promise.resolve(selectedItem);
     }
 
+    public addNewPTItem(newItem: INewItem, assignee: IUser) {
+        let item: IPTItem = {
+            id: _.uniqueId(),
+            title: newItem.title,
+            description: newItem.description,
+            type: newItem.type,
+            estimate: 0,
+            priority: PriorityEnum.Medium,
+            status: StatusEnum.Open,
+            assignee: assignee,
+            tasks: [],
+            comments: [],
+            dateCreated: new Date(),
+            dateModified: new Date()
+        };
+        this.addItem(item);
+    }
 
-    public addItem(newItem: IPTItem) {
-        this._allItems.unshift(newItem);
+    public addItem(item: IPTItem) {
+        this._allItems.unshift(item);
         this._observer.next(this._allItems);
-        //this._genetatedItems.push(newItem);
-        //this._itemsSubj.next(newItem);
-
         this.publishUpdates();
     }
 
-    //public loadBacklogItems() {}
+    public deleteItem(item: IPTItem) {
+        _.remove(this._allItems, (ptitem) => ptitem.id === item.id);
+        this.publishUpdates();
+    }
 
     public toggleTask(item: IPTItem, task: ITask) {
         var index = _.indexOf(item.tasks, task);

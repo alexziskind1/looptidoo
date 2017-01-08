@@ -5,6 +5,7 @@ import { Router, ActivatedRoute, Params, UrlSegment } from '@angular/router';
 //nativescript imports
 import { RouterExtensions } from 'nativescript-angular/router';
 import { SelectedIndexChangedEventData } from 'ui/segmented-bar';
+import { confirm, action, ActionOptions, ConfirmOptions } from 'ui/dialogs';
 
 //3rd party imports
 import 'rxjs/add/operator/switchMap';
@@ -62,9 +63,50 @@ export class PTItemComponent implements OnInit {
 
     public ngOnInit() {
         this.route.params
-            // (+) converts string 'id' to a number
             .switchMap((params: Params) => this.backlogService.getItem(params['id']))
             .subscribe((item: IPTItem) => this.item = item);
+    }
+
+    public onActionMenuTap() {
+        var options: ActionOptions = {
+            title: 'Item Actions',
+            cancelButtonText: 'Cancel',
+            actions: ['Delete']
+        };
+
+        action(options).then((result) => {
+            if (result === 'Delete') {
+                this.onDelete();
+            }
+        });
+    }
+
+    public onDelete() {
+        //Simple approach
+        //if (confirm('Are you sure you want to delete this item?')) {
+
+        //}
+
+        //Better approach with promise
+        var options: ConfirmOptions = {
+            title: "Delete Item",
+            message: "Are you sure you want to delete this item?",
+            okButtonText: "Yes",
+            cancelButtonText: "Cancel"
+        };
+        //confirm without options, with promise
+        confirm('Are you sure you want to delete this item?')
+            //confirm with options, with promise
+            //confirm(options)
+            .then((result: boolean) => {
+                // result can be true/false/undefined
+                if (result) {
+                    this.backlogService.deleteItem(this.item);
+                    setTimeout(() => {
+                        this.routerExtensions.back();
+                    }, 100);
+                }
+            });
     }
 
     public selectedItemDetailScreenIndexChanged(args: SelectedIndexChangedEventData) {

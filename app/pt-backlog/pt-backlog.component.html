@@ -1,4 +1,15 @@
+<ActionBar title="Backlog">
+    <NavigationButton text="First" android.systemIcon="ic_menu_back"></NavigationButton>
+    <ActionItem text="TapMe"></ActionItem>
+</ActionBar>
+
 <StackLayout>
+
+
     <Label text="backlog"></Label>
+
+
+    <Button text="add" (tap)="showAddItemModal()"></Button>
+
     <pt-item-list></pt-item-list>
 </StackLayout>

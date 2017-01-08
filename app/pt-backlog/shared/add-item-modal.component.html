@@ -1,0 +1,36 @@
+<StackLayout>
+    <DockLayout stretchLastChild="false">
+        <Button dock="left" text="Cancel" (tap)="tapCancel()"></Button>
+        <Button dock="right" text="Done" (tap)="tapDone()" [isEnabled]="btnDoneEnabled"></Button>
+    </DockLayout>
+
+
+    <Label text="add item modals"></Label>
+    <ScrollView #tasksSrollView>
+        <StackLayout>
+
+
+
+            <StackLayout class="input-field">
+                <TextView hint="Enter title..." [(ngModel)]="newItem.title" [height]="textViewFieldHeight(newItem.title)" class="input"></TextView>
+            </StackLayout>
+
+            <StackLayout class="input-field">
+                <TextView hint="Enter description..." [(ngModel)]="newItem.description" [height]="textViewFieldHeight(newItem.description)"
+                    class="input"></TextView>
+            </StackLayout>
+
+            <StackLayout class="input-field">
+                <GridLayout rows="40" [columns]="formFieldGridCols" (tap)="showTypeModal()">
+                    <Label col="0" text="Type"></Label>
+                    <StackLayout col="1" orientation="horizontal">
+                        <Image [src]="newItem.type | typeImage"></Image>
+                        <Label [text]="newItem.type | typeDisplay"></Label>
+                    </StackLayout>
+                </GridLayout>
+            </StackLayout>
+
+        </StackLayout>
+    </ScrollView>
+
+</StackLayout>

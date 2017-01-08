@@ -1,5 +1,15 @@
 @import 'nativescript-theme-core/css/core.light.css';
 
+ActionBar {
+    background-color:  #3C5AFD;
+    color: white;
+}
+
+.navbar_image_wrapper {
+    width: 30; 
+    height:30;
+}
+
 .indicator-pbi {
     background-color: green;
 }

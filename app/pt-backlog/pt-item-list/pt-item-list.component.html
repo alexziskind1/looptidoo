@@ -1,8 +1,6 @@
 <StackLayout>
     <Label text="pt item list"></Label>
 
-    <Button text="add" (tap)="addItem()"></Button>
-
     <ListView [items]="ptItemsSubj | async" (itemTap)="listItemTap($event)">
         <template let-item="item" let-i="index">
             <GridLayout columns="5, 50, 200, *">

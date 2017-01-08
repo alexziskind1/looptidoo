@@ -50,4 +50,10 @@ declare namespace PTDomain {
         userId: string;
     }
 
+    interface INewItem {
+        title: string;
+        description?: string;
+        type: enums.ItemTypeEnum;
+    }
+
 }

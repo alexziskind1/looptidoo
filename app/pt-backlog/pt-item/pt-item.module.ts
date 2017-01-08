@@ -19,17 +19,16 @@ import { PTItemChitchatComponent } from './pt-item-chitchat.component';
 import { IncDecComponent } from '../shared/inc-dec.component';
 import { ItemTypePickerModalComponent } from '../shared/item-type-picker-modal.component';
 import { UserPickerModalComponent } from '../shared/user-picker-modal.component';
-import { TypeDisplayPipe } from '../shared/type-display.pipe';
-import { TypeImagePipe } from '../shared/type-image.pipe';
-import { PriorityDisplayPipe } from '../shared/priority-display.pipe';
-import { PriorityClassPipe } from '../shared/priority-class.pipe';
+//import { TypeDisplayPipe, PriorityClassPipe, PriorityDisplayPipe, TypeImagePipe } from '../pipes';
+import { PipeModule } from '../pipes/pipe.module';
 
 
 @NgModule({
     imports: [
         NativeScriptModule,
         NativeScriptFormsModule,
-        ptItemRoutingConfig
+        ptItemRoutingConfig,
+        PipeModule
     ],
     declarations: [
         PTItemDetailsComponent,
@@ -37,11 +36,11 @@ import { PriorityClassPipe } from '../shared/priority-class.pipe';
         PTItemChitchatComponent,
         IncDecComponent,
         ItemTypePickerModalComponent,
-        UserPickerModalComponent,
-        TypeDisplayPipe,
-        TypeImagePipe,
-        PriorityDisplayPipe,
-        PriorityClassPipe
+        UserPickerModalComponent
+        //TypeDisplayPipe,
+        //TypeImagePipe,
+        //PriorityDisplayPipe,
+        //PriorityClassPipe
     ],
     entryComponents: [
         ItemTypePickerModalComponent,

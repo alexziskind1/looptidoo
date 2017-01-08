@@ -62,25 +62,6 @@ export class PTItemListComponent implements OnInit {
     }
 
 
-
-    public addItem() {
-        let newItem: IPTItem = {
-            id: '',
-            title: 'new item',
-            description: 'new item desc',
-            type: ItemTypeEnum.Bug,
-            estimate: 4,
-            priority: PriorityEnum.High,
-            status: StatusEnum.Open,
-            assignee: this.authService.currentUser,
-            tasks: [],
-            comments: [],
-            dateCreated: new Date(),
-            dateModified: new Date()
-        };
-        this.backlogService.addItem(newItem);
-    }
-
     public listItemTap(args: ItemEventData) {
         let lv = <ListView>args.object;
         let item = <IPTItem>lv.items[args.index];

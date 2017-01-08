@@ -6,9 +6,7 @@ import { Router, ActivatedRoute, Params, UrlSegment } from '@angular/router';
 import { RouterExtensions } from 'nativescript-angular/router';
 import { SegmentedBar } from 'ui/segmented-bar';
 
-import * as dialogs from "ui/dialogs";
-import { ModalDialogService, ModalDialogOptions, ModalDialogParams } from 'nativescript-angular/modal-dialog'
-//import { ModalDialogService, ModalDialogOptions, ModalDialogParams } from "nativescript-angular/directives/dialogs";
+import { ModalDialogService, ModalDialogOptions } from 'nativescript-angular/modal-dialog';
 import { ItemTypePickerModalComponent } from "../shared/item-type-picker-modal.component";
 import { UserPickerModalComponent } from "../shared/user-picker-modal.component";
 
@@ -56,7 +54,7 @@ export class PTItemDetailsComponent {
         private router: Router,
         private routerExtensions: RouterExtensions,
         private backlogService: BacklogService,
-        private modal: ModalDialogService,
+        private modalService: ModalDialogService,
         private vcRef: ViewContainerRef) { }
 
 
@@ -112,7 +110,7 @@ export class PTItemDetailsComponent {
             viewContainerRef: this.vcRef
         };
 
-        this.modal.showModal(ItemTypePickerModalComponent, options).then((res: ItemTypeEnum) => {
+        this.modalService.showModal(ItemTypePickerModalComponent, options).then((res: ItemTypeEnum) => {
             this.backlogService.updatePtItemType(this.item, res);
         });
     }
@@ -124,7 +122,7 @@ export class PTItemDetailsComponent {
             viewContainerRef: this.vcRef
         };
 
-        this.modal.showModal(UserPickerModalComponent, options).then((res: IUser) => {
+        this.modalService.showModal(UserPickerModalComponent, options).then((res: IUser) => {
             this.backlogService.updatePtItemAssignee(this.item, res);
         });
     }
