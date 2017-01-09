@@ -1,15 +1,59 @@
 <ActionBar title="Backlog">
     <NavigationButton text="First" android.systemIcon="ic_menu_back"></NavigationButton>
-    <ActionItem text="TapMe"></ActionItem>
+    <ActionItem text="TapMe" (tap)="showSlideout($event)"></ActionItem>
 </ActionBar>
 
-<StackLayout>
 
+<RadSideDrawer #drawer [transition]="sideDrawerTransition" selectionBehavior="None">
+    <StackLayout tkDrawerContent>
 
-    <Label text="backlog"></Label>
+        <GridLayout rows="*, auto">
+            <StackLayout style="background-color: #053140;">
+<Image src="res://logo" class="slide-out-img" stretch="none"></Image>
 
+<AbsoluteLayout>
+    <Button (tap)="selectView(0, 'My agenda')" [class]="selectedViewIndex === 0 ? 'slide-out-btn' : 'slide-out-btn-selected' "
+        text="My agenda"></Button>
+    <Button (tap)="selectView(0, 'My agenda')" [class]="selectedViewIndex === 0 ? 'slide-out-btn' : 'slide-out-btn-selected' "
+        text="My agenda"></Button>
+</AbsoluteLayout>
 
-    <Button text="add" (tap)="showAddItemModal()"></Button>
+<AbsoluteLayout>
+    <Button (tap)="selectView(1, 'All sessions')" [class]="selectedViewIndex === 1 ? 'slide-out-btn' : 'slide-out-btn-selected' "
+        text="All sessions"></Button>
+    <Button (tap)="selectView(1, 'All sessions')" [class]="selectedViewIndex === 1 ? 'slide-out-btn' : 'slide-out-btn-selected' "
+        text="All sessions"></Button>
+</AbsoluteLayout>
 
-    <pt-item-list></pt-item-list>
+<AbsoluteLayout>
+    <Button (tap)="selectView(2, 'Sponsors')" [class]="selectedViewIndex === 2 ? 'slide-out-btn' : 'slide-out-btn-selected' "
+        text="Sponsors"></Button>
+    <Button (tap)="selectView(2, 'Sponsors')" [class]="selectedViewIndex === 2 ? 'slide-out-btn' : 'slide-out-btn-selected' "
+        text="Sponsors"></Button>
+</AbsoluteLayout>
+
 </StackLayout>
+</GridLayout>
+
+</StackLayout>
+
+<StackLayout tkMainContent>
+
+    <StackLayout>
+
+
+        <Label text="backlog"></Label>
+    </StackLayout>
+
+    <StackLayout tkMainContent>
+
+        <Button text="add" (tap)="showAddItemModal()"></Button>
+
+        <pt-item-list></pt-item-list>
+    </StackLayout>
+
+
+</StackLayout>
+
+
+</RadSideDrawer>

@@ -4,6 +4,8 @@ import { NgModule } from "@angular/core";
 //nativescript imports
 import { NativeScriptModule } from "nativescript-angular/platform";
 import { NativeScriptFormsModule } from "nativescript-angular/forms";
+import { SIDEDRAWER_DIRECTIVES } from "nativescript-telerik-ui/sidedrawer/angular";
+
 
 //app imports
 import { BacklogService } from '../services/backlog.service';
@@ -14,7 +16,6 @@ import { PTItemListComponent } from './pt-item-list/pt-item-list.component';
 import { PTItemComponent } from './pt-item/pt-item.component';
 import { PTItemModule } from './pt-item/pt-item.module';
 import { AddItemModalComponent } from './shared/add-item-modal.component';
-//import { TypeDisplayPipe, PriorityClassPipe, PriorityDisplayPipe, TypeImagePipe } from './shared/pipes';
 import { PipeModule } from './pipes/pipe.module';
 
 
@@ -30,8 +31,8 @@ import { PipeModule } from './pipes/pipe.module';
         PTBacklogComponent,
         PTItemListComponent,
         PTItemComponent,
-        AddItemModalComponent
-        //TypeDisplayPipe, PriorityClassPipe, PriorityDisplayPipe, TypeImagePipe
+        AddItemModalComponent,
+        SIDEDRAWER_DIRECTIVES
     ],
     entryComponents: [
         AddItemModalComponent
