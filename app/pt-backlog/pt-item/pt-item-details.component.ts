@@ -5,18 +5,18 @@ import { Router, ActivatedRoute, Params, UrlSegment } from '@angular/router';
 //nativescript imports
 import { RouterExtensions } from 'nativescript-angular/router';
 import { SegmentedBar } from 'ui/segmented-bar';
-
+import { confirm, action, ActionOptions, ConfirmOptions } from 'ui/dialogs';
 import { ModalDialogService, ModalDialogOptions } from 'nativescript-angular/modal-dialog';
-import { ItemTypePickerModalComponent } from "../shared/item-type-picker-modal.component";
-import { UserPickerModalComponent } from "../shared/user-picker-modal.component";
 
 //3rd party imports
 import 'rxjs/add/operator/switchMap';
 
 //app imports
+import { ItemTypePickerModalComponent } from "../shared/item-type-picker-modal.component";
+import { UserPickerModalComponent } from "../shared/user-picker-modal.component";
 import { slideInDownAnimation, slideInAnimations } from '../../shared/animations';
 import { BacklogService, AuthenticationService } from '../../services';
-import { ItemTypeEnum, PriorityEnum } from '../../shared/static-data';
+import { ItemTypeEnum, PriorityEnum, StatusEnum } from '../../shared/static-data';
 import { PTDomain } from '../../typings/domain';
 import IPTItem = PTDomain.IPTItem;
 import IUser = PTDomain.IUser;
@@ -112,6 +112,28 @@ export class PTItemDetailsComponent {
 
         this.modalService.showModal(ItemTypePickerModalComponent, options).then((res: ItemTypeEnum) => {
             this.backlogService.updatePtItemType(this.item, res);
+        });
+    }
+
+    public showStatusOptions() {
+        let statusKeys = [];
+        let statuses = [];
+        for (var enumMember in StatusEnum) {
+            var isValueProperty = parseInt(enumMember, 10) >= 0;
+            if (isValueProperty) {
+                statuses.push(StatusEnum[enumMember]);
+                statusKeys.push({ key: enumMember, value: StatusEnum[enumMember] });
+            }
+        }
+
+        var options: ActionOptions = {
+            title: 'Select Status',
+            cancelButtonText: 'Cancel',
+            actions: statuses
+        };
+
+        action(options).then((result) => {
+            this.backlogService.updatePtItemStatus(this.item, result);
         });
     }
 

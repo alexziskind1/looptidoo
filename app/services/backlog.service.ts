@@ -6,8 +6,9 @@ import { Observable, Observer, BehaviorSubject } from "rxjs/Rx";
 import * as _ from 'lodash';
 
 //app imports
-import { UserService } from './user.service';
+import { AuthenticationService, UserService } from './';
 import { MockDataService } from './mock-data.service';
+import { FilterState } from '../shared/filter-state.model';
 import { PTDomain } from '../typings/domain';
 import { ItemTypeEnum, PriorityEnum, StatusEnum } from '../shared/static-data';
 import IUser = PTDomain.IUser;
@@ -26,7 +27,9 @@ export class BacklogService {
     private _itemsObs: Observable<Array<IPTItem>>;
     private _itemsSubj: BehaviorSubject<Array<IPTItem>>;
     private _observer: Observer<Array<IPTItem>>;
+    private _filterState: FilterState;
     private _allItems: Array<IPTItem> = [];
+    private _filteredItems: Array<IPTItem> = [];
 
     public get itemsSubj(): BehaviorSubject<Array<IPTItem>> {
         return this._itemsSubj;
@@ -55,6 +58,7 @@ export class BacklogService {
 
     constructor(private mockDataService: MockDataService,
         private userService: UserService,
+        private authService: AuthenticationService,
         private zone: NgZone) {
         this._genetatedItems = this.mockDataService.generatePTItems(this.userService.users);
 
@@ -62,6 +66,9 @@ export class BacklogService {
         _.forEach(this._genetatedItems, (item) => {
             this._allItems.push(item);
         });
+
+        this._filterState = { filterViewIndex: 0 };
+
         this.publishUpdates();
 
 
@@ -185,17 +192,50 @@ export class BacklogService {
         this.publishUpdates();
     }
 
+    public updatePtItemStatus(item: IPTItem, newStatusStr: string) {
+        let newStatus = StatusEnum[newStatusStr];
+        if (item.status != newStatus) {
+            item.status = newStatus;
+            this.publishUpdates();
+        }
+    }
+
     public switchAssignee(item: IPTItem) {
         let ranUser = _.sample<IUser>(this.userService.users);
         item.assignee = ranUser;
         this.publishUpdates();
     }
 
+    public filter(filterState: FilterState) {
+        this._filterState = filterState;
+        this.publishUpdates();
+    }
+
     private publishUpdates() {
+        console.log('publishUpdates');
+        console.dir(this._filterState);
+        var filteredItems = [];
+        switch (this._filterState.filterViewIndex) {
+            case 0:
+                filteredItems = this._allItems.filter(i => i.assignee.id === this.authService.currentUser.id);
+                break;
+            case 1:
+                filteredItems = this._allItems.filter(i => i.status === StatusEnum.Open || i.status === StatusEnum.ReOpened);
+                break;
+            case 2:
+                filteredItems = this._allItems.filter(i => i.status === StatusEnum.Closed);
+                break;
+            default:
+                filteredItems = this._allItems;
+        }
+        //this._filteredItems = filteredItems;
+
         // Make sure all updates are published inside NgZone so that change detection is triggered if needed
         this.zone.run(() => {
             // must emit a *new* value (immutability!)
-            this.itemsSubj.next([...this._allItems]);
+            //this.itemsSubj.next([...this._allItems]);
+            console.log('in the zone, applying next filteredItems');
+            this.itemsSubj.next([...filteredItems]);
         });
     }
 }

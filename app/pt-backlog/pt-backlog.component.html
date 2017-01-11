@@ -7,53 +7,39 @@
 <RadSideDrawer #drawer [transition]="sideDrawerTransition" selectionBehavior="None">
     <StackLayout tkDrawerContent>
 
-        <GridLayout rows="*, auto">
-            <StackLayout style="background-color: #053140;">
-<Image src="res://logo" class="slide-out-img" stretch="none"></Image>
+        <GridLayout class="side-drawer-panel" rows="*, auto">
+            <StackLayout>
+                <Image src="res://rps_logo" class="slide-out-img" stretch="none"></Image>
+                <Button (tap)="selectFilteredView(0, 'My items')" [class]="selectedViewIndex === 0 ? 'slide-out-btn' : 'slide-out-btn-selected' "
+                    text="My items"></Button>
 
-<AbsoluteLayout>
-    <Button (tap)="selectView(0, 'My agenda')" [class]="selectedViewIndex === 0 ? 'slide-out-btn' : 'slide-out-btn-selected' "
-        text="My agenda"></Button>
-    <Button (tap)="selectView(0, 'My agenda')" [class]="selectedViewIndex === 0 ? 'slide-out-btn' : 'slide-out-btn-selected' "
-        text="My agenda"></Button>
-</AbsoluteLayout>
+                <Button (tap)="selectFilteredView(1, 'Open items')" [class]="selectedViewIndex === 1 ? 'slide-out-btn' : 'slide-out-btn-selected' "
+                    text="Open items"></Button>
 
-<AbsoluteLayout>
-    <Button (tap)="selectView(1, 'All sessions')" [class]="selectedViewIndex === 1 ? 'slide-out-btn' : 'slide-out-btn-selected' "
-        text="All sessions"></Button>
-    <Button (tap)="selectView(1, 'All sessions')" [class]="selectedViewIndex === 1 ? 'slide-out-btn' : 'slide-out-btn-selected' "
-        text="All sessions"></Button>
-</AbsoluteLayout>
+                <Button (tap)="selectFilteredView(2, 'Finished items')" [class]="selectedViewIndex === 2 ? 'slide-out-btn' : 'slide-out-btn-selected' "
+                    text="Finished items"></Button>
+            </StackLayout>
+        </GridLayout>
 
-<AbsoluteLayout>
-    <Button (tap)="selectView(2, 'Sponsors')" [class]="selectedViewIndex === 2 ? 'slide-out-btn' : 'slide-out-btn-selected' "
-        text="Sponsors"></Button>
-    <Button (tap)="selectView(2, 'Sponsors')" [class]="selectedViewIndex === 2 ? 'slide-out-btn' : 'slide-out-btn-selected' "
-        text="Sponsors"></Button>
-</AbsoluteLayout>
-
-</StackLayout>
-</GridLayout>
-
-</StackLayout>
-
-<StackLayout tkMainContent>
-
-    <StackLayout>
-
-
-        <Label text="backlog"></Label>
     </StackLayout>
 
     <StackLayout tkMainContent>
 
-        <Button text="add" (tap)="showAddItemModal()"></Button>
+        <StackLayout>
 
-        <pt-item-list></pt-item-list>
+
+            <Label text="backlog"></Label>
+        </StackLayout>
+
+        <StackLayout tkMainContent>
+
+            <Button text="add" (tap)="showAddItemModal()"></Button>
+
+            <pt-item-list [selectedViewIndex]="selectedViewIndex"></pt-item-list>
+        </StackLayout>
+
+
     </StackLayout>
-
-
-</StackLayout>
 
 
 </RadSideDrawer>

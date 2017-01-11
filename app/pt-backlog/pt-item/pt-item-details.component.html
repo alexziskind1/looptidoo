@@ -33,7 +33,7 @@
                 <StackLayout class="input-field">
                     <GridLayout rows="40" [columns]="formFieldGridCols">
                         <Label col="0" text="Estimate"></Label>
-                        <Label col="1" [text]="item.estimate"></Label>
+                        <Label col="1" [text]="item.estimate | estimateDisplay"></Label>
                         <StackLayout col="2">
                             <inc-dec (notifyIncDecTapped)="estimateIncDecTapped($event)" decEnabled="{{ item.estimate > 0 }}">
                             </inc-dec>
@@ -55,6 +55,17 @@
                 </StackLayout>
 
                 <StackLayout class="input-field">
+                    <GridLayout rows="40" [columns]="formFieldGridCols" (tap)="showStatusOptions()">
+                        <Label col="0" text="Status"></Label>
+                        <StackLayout col="1" orientation="horizontal">
+                            <Label [text]="item.status | statusDisplay"></Label>
+                        </StackLayout>
+                    </GridLayout>
+                </StackLayout>
+
+
+
+                <StackLayout class="input-field">
                     <GridLayout rows="40" [columns]="formFieldGridCols">
                         <Label col="0" text="Assignee"></Label>
                         <StackLayout col="1" orientation="horizontal" (tap)="showAssigneeModal()">
@@ -65,9 +76,7 @@
 
                 </StackLayout>
 
-                <StackLayout class="input-field">
-                    <Label [text]="item.estimate"></Label>
-                </StackLayout>
+
 
                 <StackLayout class="input-field">
                     <Button class="btn btn-primary" text="change me" (tap)="changeMeTapped()"></Button>

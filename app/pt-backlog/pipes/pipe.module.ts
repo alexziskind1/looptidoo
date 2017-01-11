@@ -5,7 +5,14 @@ import { NgModule } from "@angular/core";
 import { NativeScriptModule } from "nativescript-angular/platform";
 
 //app imports
-import { TypeDisplayPipe, PriorityClassPipe, PriorityDisplayPipe, TypeImagePipe } from './';
+import {
+    TypeDisplayPipe,
+    EstimateDisplayPipe,
+    PriorityClassPipe,
+    PriorityDisplayPipe,
+    TypeImagePipe,
+    StatusDisplayPipe
+} from './';
 
 
 @NgModule({
@@ -16,13 +23,17 @@ import { TypeDisplayPipe, PriorityClassPipe, PriorityDisplayPipe, TypeImagePipe 
         TypeDisplayPipe,
         TypeImagePipe,
         PriorityDisplayPipe,
-        PriorityClassPipe
+        StatusDisplayPipe,
+        PriorityClassPipe,
+        EstimateDisplayPipe
     ],
     exports: [
         TypeDisplayPipe,
         TypeImagePipe,
         PriorityDisplayPipe,
-        PriorityClassPipe
+        StatusDisplayPipe,
+        PriorityClassPipe,
+        EstimateDisplayPipe
     ]
 })
 export class PipeModule { }

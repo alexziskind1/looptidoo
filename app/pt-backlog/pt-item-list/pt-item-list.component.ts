@@ -1,5 +1,5 @@
 //angular imports
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input, ChangeDetectionStrategy } from "@angular/core";
 
 //nativescript imports
 import { RouterExtensions } from 'nativescript-angular/router';
@@ -12,6 +12,7 @@ import * as _ from 'lodash';
 //app imports
 import { BacklogService, AuthenticationService } from '../../services';
 import { ItemTypeEnum, PriorityEnum, StatusEnum } from '../../shared/static-data';
+import { FilterState } from '../../shared/filter-state.model';
 import { PTDomain } from '../../typings/domain';
 import IPTItem = PTDomain.IPTItem;
 //import IItemType = PTDomain.IItemType;
@@ -20,10 +21,22 @@ import IPTItem = PTDomain.IPTItem;
 @Component({
     moduleId: module.id,
     selector: 'pt-item-list',
-    templateUrl: 'pt-item-list.component.html'
+    templateUrl: 'pt-item-list.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PTItemListComponent implements OnInit {
     public ptItems: IPTItem[] = [];
+    private _selectedViewIndex: number;
+
+    @Input() public get selectedViewIndex() {
+        return this._selectedViewIndex;
+    }
+    public set selectedViewIndex(value: number) {
+        this._selectedViewIndex = value;
+        this.refresh();
+
+        //this.hideSearchKeyboard();
+    }
 
     public get ptItemsArray() {
         return this.backlogService.items;
@@ -43,7 +56,8 @@ export class PTItemListComponent implements OnInit {
     }
 
 
-    constructor(private page: Page, private backlogService: BacklogService,
+    constructor(private page: Page,
+        private backlogService: BacklogService,
         private authService: AuthenticationService,
         private _routerExtensions: RouterExtensions) {
         this.backlogService.ptItemsObs.subscribe(data => {
@@ -51,6 +65,7 @@ export class PTItemListComponent implements OnInit {
             console.dir(data);
             this.ptItems = data;
         });
+        console.log('list contrsuctor selectedViewIndex: ' + this.selectedViewIndex);
 
         // this.page.on(Page.navigatingToEvent, () => {
         //    this.backlogService.publishUpdates();
@@ -58,7 +73,14 @@ export class PTItemListComponent implements OnInit {
     }
 
     public ngOnInit() {
+        console.log('list ngOnInit selectedViewInde: ' + this.selectedViewIndex);
+    }
 
+    private refresh() {
+        console.log('refresh');
+        let filterState: FilterState = new FilterState(
+            this.selectedViewIndex);
+        this.backlogService.filter(filterState);
     }
 
 

@@ -46,7 +46,7 @@ export class MockDataService {
         let priority = PriorityEnum[priorityStr];
 
         let statusStr = _.sample(StatusEnum);
-        let status = StatusEnum[priorityStr];
+        let status = StatusEnum[statusStr];
 
 
         let ptItem: IPTItem = {

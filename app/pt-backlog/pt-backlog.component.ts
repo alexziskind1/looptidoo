@@ -1,5 +1,5 @@
 //angular imports
-import { Component, AfterViewInit, ViewChild, ViewContainerRef } from "@angular/core";
+import { Component, AfterViewInit, ViewChild, ViewContainerRef, ChangeDetectionStrategy } from "@angular/core";
 
 //nativescript imports
 import { ModalDialogService, ModalDialogOptions } from 'nativescript-angular/modal-dialog';
@@ -16,7 +16,9 @@ import INewItem = PTDomain.INewItem;
 @Component({
     moduleId: module.id,
     selector: 'pt-backlog',
-    templateUrl: 'pt-backlog.component.html'
+    templateUrl: 'pt-backlog.component.html',
+    styleUrls: ['pt-backlog.component.css'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PTBacklogComponent implements AfterViewInit {
 
@@ -24,6 +26,8 @@ export class PTBacklogComponent implements AfterViewInit {
     private _drawer: SideDrawerType;
 
     @ViewChild(RadSideDrawerComponent) public drawerComponent: RadSideDrawerComponent;
+
+    public selectedViewIndex: number;
 
     public get sideDrawerTransition(): DrawerTransitionBase {
         return this._sideDrawerTransition;
@@ -33,7 +37,9 @@ export class PTBacklogComponent implements AfterViewInit {
     constructor(private backlogService: BacklogService,
         private authService: AuthenticationService,
         private modalService: ModalDialogService,
-        private vcRef: ViewContainerRef) { }
+        private vcRef: ViewContainerRef) {
+        this.selectedViewIndex = 1;
+    }
 
     public ngAfterViewInit() {
         this._drawer = this.drawerComponent.sideDrawer;
@@ -43,6 +49,14 @@ export class PTBacklogComponent implements AfterViewInit {
 
     public showSlideout() {
         this._drawer.showDrawer();
+    }
+
+    public selectFilteredView(itemFilterIndex: number, pageTitle: string) {
+        this.selectedViewIndex = itemFilterIndex;
+        this._drawer.closeDrawer();
+        console.log('selectedViewIndex: ' + this.selectedViewIndex);
+        //this.actionBarTitle = pageTitle;
+        //this.isSessionsPage = this.selectedViewIndex < 2;
     }
 
     public showAddItemModal() {
