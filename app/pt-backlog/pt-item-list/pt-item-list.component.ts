@@ -83,6 +83,12 @@ export class PTItemListComponent implements OnInit {
         this.backlogService.filter(filterState);
     }
 
+    public btnLoaded(args) {
+        console.log('btn loaded: ' + args);
+        var btn = args.object;
+        //TODO: check for specific platform
+        btn.android.setFocusable(false);
+    }
 
     public listItemTap(args: ItemEventData) {
         let lv = <ListView>args.object;

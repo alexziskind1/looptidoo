@@ -67,6 +67,11 @@ export class PTItemComponent implements OnInit {
             .subscribe((item: IPTItem) => this.item = item);
     }
 
+    public onNavBackTap() {
+        //TODO check to see if this is redundant on iOS
+        this.routerExtensions.backToPreviousPage();
+    }
+
     public onActionMenuTap() {
         var options: ActionOptions = {
             title: 'Item Actions',
@@ -103,7 +108,7 @@ export class PTItemComponent implements OnInit {
                 if (result) {
                     this.backlogService.deleteItem(this.item);
                     setTimeout(() => {
-                        this.routerExtensions.back();
+                        this.routerExtensions.backToPreviousPage();
                     }, 100);
                 }
             });
