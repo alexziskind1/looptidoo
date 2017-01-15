@@ -11,5 +11,6 @@
         "lib": true,
         "platforms": true,
         ".vscode": true
-    }
+    },
+    "editor.wrappingColumn": 110
 }
