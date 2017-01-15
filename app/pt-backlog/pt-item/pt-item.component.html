@@ -25,7 +25,7 @@
 
     <Label [text]="itemTitle"></Label>
 
-    <SegmentedBar selectedBackgroundColor="#fac950" [items]="itemDetailScreens" (selectedIndexChanged)="selectedItemDetailScreenIndexChanged($event)"></SegmentedBar>
+    <SegmentedBar #sb selectedBackgroundColor="#fac950" [items]="myNavItems" selectedIndex="0" (selectedIndexChange)="selectedItemDetailScreenIndexChanged(sb)"></SegmentedBar>
 
     <router-outlet></router-outlet>
 
