@@ -87,7 +87,9 @@ export class PTItemListComponent implements OnInit {
         console.log('btn loaded: ' + args);
         var btn = args.object;
         //TODO: check for specific platform
-        btn.android.setFocusable(false);
+        if (btn.android) {
+            btn.android.setFocusable(false);
+        }
     }
 
     public listItemTap(args: ItemEventData) {
