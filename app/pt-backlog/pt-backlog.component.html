@@ -23,10 +23,17 @@
     </StackLayout>
 
     <StackLayout tkMainContent>
-        <StackLayout>
-            <Button text="add" (tap)="showAddItemModal()"></Button>
-            <pt-item-list [selectedViewIndex]="selectedViewIndex"></pt-item-list>
-        </StackLayout>
+        <GridLayout rows="*, 60">
+
+            <StackLayout row="0" class="list-container">
+                <pt-item-list [selectedViewIndex]="selectedViewIndex"></pt-item-list>
+            </StackLayout>
+
+            <StackLayout row="1" class="btn-add-wrapper">
+                <Button text="Add" class="btn-add" (tap)="showAddItemModal()"></Button>
+            </StackLayout>
+
+        </GridLayout>
     </StackLayout>
 
 </RadSideDrawer>

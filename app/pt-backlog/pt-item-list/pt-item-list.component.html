@@ -1,19 +1,17 @@
-<StackLayout>
-    <ListView [items]="ptItemsSubj | async" (itemTap)="listItemTap($event)" separatorColor="#97a879">
-        <template let-item="item" let-i="index">
-            <GridLayout class="li-wrapper" rows="60" columns="10, 50, 200, *">
-                <StackLayout class="li-indicator" row="0" col="0">
-                    <Label [class]="getIndicatorClass(item)"></Label>
-                </StackLayout>
+<ListView class="items-list" [items]="ptItemsSubj | async" (itemTap)="listItemTap($event)" separatorColor="#97a879">
+    <template let-item="item" let-i="index">
+        <GridLayout class="li-wrapper" rows="60" columns="10, 50, 200, *">
+            <StackLayout class="li-indicator" row="0" col="0">
+                <Label [class]="getIndicatorClass(item)"></Label>
+            </StackLayout>
 
-                <Image col="1" [src]="item.assignee.avatar" stretch="aspectFit"></Image>
+            <Image col="1" [src]="item.assignee.avatar" stretch="aspectFit"></Image>
 
-                <StackLayout col="2">
-                    <Label [text]='i + ": " + item.title'></Label>
-                    <Label [text]='"estimate: " + item.estimate'></Label>
-                </StackLayout>
-                <Button col="3" class="btn btn-primary" text="cha" (loaded)="btnLoaded($event)" (tap)="changeMeTapped(item)"></Button>
-            </GridLayout>
-        </template>
-    </ListView>
-</StackLayout>
+            <StackLayout class="li-info-wrapper" col="2">
+                <Label class="li-title" textWrap="true" [text]="item.title"></Label>
+                <Label class="li-estimate" [text]='"estimate: " + item.estimate'></Label>
+            </StackLayout>
+            <Button col="3" class="btn btn-primary" text="cha" (loaded)="btnLoaded($event)" (tap)="changeMeTapped(item)"></Button>
+        </GridLayout>
+    </template>
+</ListView>

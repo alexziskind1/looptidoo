@@ -13,6 +13,23 @@ TextView {
     font-size: 14;
 }
 
+.list-container {
+    height: 100%;
+}
+
+.btn-add-wrapper {
+    vertical-align: middle;
+    height: 100%;
+}
+.btn-add {
+    vertical-align: middle;
+    height: 100%;
+    background-color: #555a97;
+    border-color: #555a97;
+    border-width: 1;
+    color: white;
+}
+
 .form-field-col {
     vertical-align: middle;
     horizontal-align: left;
