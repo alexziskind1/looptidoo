@@ -75,13 +75,13 @@ export namespace PriorityEnum {
     export function getIndicatorClass(priority: PriorityEnum): string {
         switch (priority) {
             case PriorityEnum.Critical:
-                return 'indicator-critical';
+                return 'indicator-priority critical';
             case PriorityEnum.High:
-                return 'indicator-high';
+                return 'indicator-priority high';
             case PriorityEnum.Medium:
-                return 'indicator-medium';
+                return 'indicator-priority medium';
             case PriorityEnum.Low:
-                return 'indicator-low';
+                return 'indicator-priority low';
             default:
                 return '';
         }

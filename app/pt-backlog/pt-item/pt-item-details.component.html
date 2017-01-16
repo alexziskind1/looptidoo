@@ -32,9 +32,9 @@
 
                 <StackLayout class="input-field">
                     <GridLayout rows="40" [columns]="formFieldGridCols">
-                        <Label col="0" text="Estimate"></Label>
-                        <Label col="1" [text]="item.estimate | estimateDisplay"></Label>
-                        <StackLayout col="2">
+                        <Label col="0" text="Estimate" class="form-field-col"></Label>
+                        <Label col="1" [text]="item.estimate | estimateDisplay" class="form-field-col"></Label>
+                        <StackLayout col="2" class="form-field-col">
                             <inc-dec (notifyIncDecTapped)="estimateIncDecTapped($event)" decEnabled="{{ item.estimate > 0 }}">
                             </inc-dec>
                         </StackLayout>
@@ -43,11 +43,11 @@
 
                 <StackLayout class="input-field">
                     <GridLayout rows="40" [columns]="formFieldGridCols">
-                        <Label col="0" text="Priority"></Label>
-                        <StackLayout col="1">
+                        <Label col="0" text="Priority" class="form-field-col"></Label>
+                        <StackLayout col="1" class="form-field-col">
                             <Label [text]="item.priority | priorityDisplay" [class]="item.priority | priorityClass"></Label>
                         </StackLayout>
-                        <StackLayout col="2">
+                        <StackLayout col="2" class="form-field-col">
                             <inc-dec (notifyIncDecTapped)="priorityIncDecTapped($event)" [decEnabled]="priorityDecEnabled" [incEnabled]="priorityIncEnabled">
                             </inc-dec>
                         </StackLayout>

@@ -12,6 +12,7 @@
     width: 40;
     border-right-width: 1;
     border-right-color: #999999;
+    margin-top: -4;
 }
 .pm-left:highlighted {
     background-color: #eeeeee;
@@ -20,6 +21,12 @@
     font-size: 20;
     color: gray;
     width: 40;
+    padding: 0;
+    border-color: white;
+    border-width: 1;
+    border-top-right-radius: 6;
+    border-bottom-right-radius: 6;
+    margin-top: -4;
 }
 .pm-right:highlighted {
     background-color: #eeeeee;
@@ -27,4 +34,9 @@
 .pm-disabled {
     color: white;
     background-color: #eeeeee;
+    border-top-color: #eeeeee;
+    border-bottom-color: #eeeeee;
+    border-left-color: #eeeeee;
+    border-width: 1;
+    border-radius: 6;
 }

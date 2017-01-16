@@ -5,6 +5,15 @@ ActionBar {
     color: white;
 }
 
+TextView {
+    font-size: 14;
+}
+
+.form-field-col {
+    vertical-align: middle;
+    horizontal-align: left;
+}
+
 .navbar_image_wrapper {
     width: 30; 
     height:30;
@@ -26,40 +35,36 @@ ActionBar {
     background-color: orange;
 }
 
-.indicator-critical {
+.indicator-priority {
+    border-width: 1;
+    border-radius: 4;
+    padding:2;
+    text-align: center;
+    width: 70;
+}
+
+.indicator-priority.critical {
     color: #820101;
     background-color: #ffc9c9;
-    border-width: 1;
-    border-radius: 4;
     border-color: #820101;
-    padding:2;
 }
 
-.indicator-high {
+.indicator-priority.high {
     color: #b27100;
     background-color: #ffe4b7;
-    border-width: 1;
-    border-radius: 4;
     border-color: #b27100;
-    padding:2;
 }
 
-.indicator-medium {
+.indicator-priority.medium {
     color: #0c6d00;
     background-color: #cfffc9;
-    border-width: 1;
-    border-radius: 4;
     border-color: #0c6d00;
-    padding:2;
 }
 
-.indicator-low {
+.indicator-priority.low {
     color: #002b6d;
     background-color: #c1daff;
-    border-width: 1;
-    border-radius: 4;
     border-color: #002b6d;
-    padding:2;
 }
 
 .task-wrapper {
