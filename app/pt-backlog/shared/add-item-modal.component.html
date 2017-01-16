@@ -1,4 +1,4 @@
-<StackLayout>
+<StackLayout class="modal-wrapper">
     <DockLayout stretchLastChild="false">
         <Button dock="left" text="Cancel" (tap)="tapCancel()"></Button>
         <Button dock="right" text="Done" (tap)="tapDone()" [isEnabled]="btnDoneEnabled"></Button>
@@ -6,7 +6,7 @@
 
 
     <Label text="add item modals"></Label>
-    <ScrollView #tasksSrollView>
+    <ScrollView>
         <StackLayout>
 
 

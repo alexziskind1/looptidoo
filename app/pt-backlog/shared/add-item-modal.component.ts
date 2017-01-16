@@ -80,7 +80,10 @@ export class AddItemModalComponent implements OnInit {
         };
 
         this.modalService.showModal(ItemTypePickerModalComponent, options).then((res: ItemTypeEnum) => {
-            this.newItem.type = res;
+            console.log('res: ' + res);
+            if (res) {
+                this.newItem.type = res;
+            }
         });
     }
 }

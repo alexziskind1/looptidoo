@@ -27,10 +27,8 @@ export class ItemTypePickerModalComponent implements OnInit {
         this.prompt = params.context.promptMsg;
     }
 
-    public close(res: string) {
-        this.params.closeCallback(res);
-
-
+    public close() {
+        this.params.closeCallback(null);
     }
 
     ngOnInit() {

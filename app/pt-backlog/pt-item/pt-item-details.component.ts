@@ -111,7 +111,9 @@ export class PTItemDetailsComponent {
         };
 
         this.modalService.showModal(ItemTypePickerModalComponent, options).then((res: ItemTypeEnum) => {
-            this.backlogService.updatePtItemType(this.item, res);
+            if (res) {
+                this.backlogService.updatePtItemType(this.item, res);
+            }
         });
     }
 
@@ -145,7 +147,9 @@ export class PTItemDetailsComponent {
         };
 
         this.modalService.showModal(UserPickerModalComponent, options).then((res: IUser) => {
-            this.backlogService.updatePtItemAssignee(this.item, res);
+            if (res) {
+                this.backlogService.updatePtItemAssignee(this.item, res);
+            }
         });
     }
 

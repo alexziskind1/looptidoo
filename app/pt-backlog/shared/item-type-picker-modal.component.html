@@ -1,4 +1,4 @@
-<StackLayout margin="24" horizontalAlignment="center" verticalAlignment="center">
+<StackLayout class="modal-wrapper" margin="24" horizontalAlignment="center" verticalAlignment="center">
     <Label [text]="prompt"></Label>
 
 
@@ -10,7 +10,6 @@
 
 
     <StackLayout orientation="horizontal" marginTop="12">
-        <Button text="ok" (tap)="close('OK')"></Button>
-        <Button text="cancel" (tap)="close('Cancel')"></Button>
+        <Button text="cancel" (tap)="close()"></Button>
     </StackLayout>
 </StackLayout>

@@ -1,7 +1,11 @@
 @import 'nativescript-theme-core/css/core.light.css';
 
+Page {
+    background-color: white;
+}
+
 ActionBar {
-    background-color:  #3C5AFD;
+    background-color:  #4b5833;
     color: white;
 }
 
@@ -12,6 +16,34 @@ TextView {
 .form-field-col {
     vertical-align: middle;
     horizontal-align: left;
+}
+
+.modal-wrapper {
+    background-color: white;
+}
+
+.slide-out-img {
+    margin: 0;
+}
+
+.slide-out-btn {
+    color: #e4ba4e;
+    font-size: 19;
+    height: 44;
+    text-align: left;
+    horizontal-align: stretch;
+    margin: 0 12;
+    background-color: #333333;
+}
+
+.slide-out-btn-selected {
+    color: white;
+    font-size: 19;
+    height: 44;
+    text-align: left;
+    horizontal-align: stretch;
+    margin: 0 12;
+    background-color: #333333;
 }
 
 .navbar_image_wrapper {

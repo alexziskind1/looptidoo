@@ -1,5 +1,5 @@
 //angular imports
-import { Component, OnInit, Input, ChangeDetectionStrategy } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 
 //nativescript imports
 import { RouterExtensions } from 'nativescript-angular/router';
@@ -22,7 +22,23 @@ import IPTItem = PTDomain.IPTItem;
     moduleId: module.id,
     selector: 'pt-item-list',
     templateUrl: 'pt-item-list.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    styles: [
+        `
+            .li-wrapper {
+
+            }
+            .li-indicator {
+                height: 58;
+                width: 10;
+                text-align: left;
+            }
+            .li-indicator label {
+                width: 5;
+                height: 58;
+                horizontal-align: left;
+            }
+        `
+    ]
 })
 export class PTItemListComponent implements OnInit {
     public ptItems: IPTItem[] = [];

@@ -1,45 +1,32 @@
 <ActionBar title="Backlog">
-    
+
     <ActionItem text="TapMe" (tap)="showSlideout($event)"></ActionItem>
 </ActionBar>
 
 
 <RadSideDrawer #drawer [transition]="sideDrawerTransition" selectionBehavior="None">
-    <StackLayout tkDrawerContent>
 
+    <StackLayout tkDrawerContent>
         <GridLayout class="side-drawer-panel" rows="*, auto">
             <StackLayout>
-                <Image src="res://rps_logo" class="slide-out-img" stretch="none"></Image>
-                <Button (tap)="selectFilteredView(0, 'My items')" [class]="selectedViewIndex === 0 ? 'slide-out-btn' : 'slide-out-btn-selected' "
-                    text="My items"></Button>
+                <Image src="res://rps_logo" class="slide-out-img" stretch="aspectFit"></Image>
+                <Button (tap)="selectFilteredView(0, 'MY ITEMS')" [class]="selectedViewIndex === 0 ? 'slide-out-btn-selected' : 'slide-out-btn' "
+                    text="MY ITEMS"></Button>
 
-                <Button (tap)="selectFilteredView(1, 'Open items')" [class]="selectedViewIndex === 1 ? 'slide-out-btn' : 'slide-out-btn-selected' "
-                    text="Open items"></Button>
+                <Button (tap)="selectFilteredView(1, 'OPEN ITEMS')" [class]="selectedViewIndex === 1 ? 'slide-out-btn-selected' : 'slide-out-btn' "
+                    text="OPEN ITEMS"></Button>
 
-                <Button (tap)="selectFilteredView(2, 'Finished items')" [class]="selectedViewIndex === 2 ? 'slide-out-btn' : 'slide-out-btn-selected' "
-                    text="Finished items"></Button>
+                <Button (tap)="selectFilteredView(2, 'FINISHED ITEMS')" [class]="selectedViewIndex === 2 ? 'slide-out-btn-selected' : 'slide-out-btn' "
+                    text="FINISHED ITEMS"></Button>
             </StackLayout>
         </GridLayout>
-
     </StackLayout>
 
     <StackLayout tkMainContent>
-
         <StackLayout>
-
-
-            <Label text="backlog"></Label>
-        </StackLayout>
-
-        <StackLayout tkMainContent>
-
             <Button text="add" (tap)="showAddItemModal()"></Button>
-
             <pt-item-list [selectedViewIndex]="selectedViewIndex"></pt-item-list>
         </StackLayout>
-
-
     </StackLayout>
-
 
 </RadSideDrawer>
