@@ -20,7 +20,8 @@ import IPTItem = PTDomain.IPTItem;
 @Component({
     moduleId: module.id,
     selector: 'pt-item',
-    templateUrl: 'pt-item.component.html'
+    templateUrl: 'pt-item.component.html',
+    styleUrls: ['pt-item.component.css']
 })
 export class PTItemComponent implements OnInit {
 

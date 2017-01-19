@@ -2,6 +2,7 @@
 
 Page {
     background-color: white;
+    margin-top: -20;
 }
 
 ActionBar {
@@ -21,6 +22,7 @@ TextView {
 
 .modal-wrapper {
     background-color: white;
+    margin-top: 20;
 }
 
 .slide-out-img {

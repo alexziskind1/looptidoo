@@ -11,7 +11,9 @@ import { AppComponent } from "./app.component";
 import { LoginModule } from "./pt-login/pt-login.module";
 import { PTBacklogModule } from "./pt-backlog/pt-backlog.module";
 import { UserService, AuthenticationService } from './services';
+import { setStatusBarColors } from "./shared/status-bar-util";
 
+setStatusBarColors();
 
 @NgModule({
     declarations: [
