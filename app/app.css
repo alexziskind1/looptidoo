@@ -68,20 +68,27 @@ TextView {
     height:30;
 }
 
+/*colors
+PBI - 527FD7
+bug - D75252
+Impediment - D7C152
+Chore - 
+*/
+
 .indicator-pbi {
-    background-color: green;
+    background-color: #527FD7;
 }
 
 .indicator-bug {
-    background-color: red;;
+    background-color: #D75252;
 }
 
 .indicator-chore {
-    background-color: gray;
+    background-color: #666666;
 }
 
 .indicator-impediment {
-    background-color: orange;
+    background-color: #D7C152;
 }
 
 .indicator-priority {
