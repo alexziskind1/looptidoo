@@ -31,8 +31,11 @@ export class AuthenticationService {
 
     public login(username: string, password: string) {
         return Observable.create((observer: Observer<IUser>) => {
-            observer.next(this.currentUser);
-            appSettingsModule.setString(APP_SETTINGS_CURRENT_USER, JSON.stringify(this.currentUser));
+            //simulate logging in
+            setTimeout(() => {
+                observer.next(this.currentUser);
+                appSettingsModule.setString(APP_SETTINGS_CURRENT_USER, JSON.stringify(this.currentUser));
+            }, 1000);
         });
     }
 

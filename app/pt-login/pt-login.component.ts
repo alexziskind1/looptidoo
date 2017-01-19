@@ -1,8 +1,12 @@
 //angular imports 
-import { Component } from "@angular/core";
+import { Component, ViewChild, ElementRef, OnInit } from "@angular/core";
 
 //nativescript imports
 import { RouterExtensions } from 'nativescript-angular/router';
+import { Page } from 'ui/page';
+import { View } from "ui/core/view";
+import { Animation } from "ui/animation";
+import { Color } from "color";
 
 //app imports
 import { AuthenticationService, UserService } from '../services';
@@ -11,18 +15,25 @@ import ILoginModel = PTDomain.ILoginModel;
 
 @Component({
     moduleId: module.id,
-    selector: "pt-login",
-    templateUrl: "pt-login.component.html"
+    selector: 'pt-login',
+    templateUrl: 'pt-login.component.html',
+    styleUrls: ['pt-login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
     public isLoading: boolean = false;
     public loginModel: ILoginModel = { username: 'alexziskind', password: 'Nuvious' };
 
-    constructor(private router: RouterExtensions,
+    constructor(private page: Page,
+        private router: RouterExtensions,
         private authService: AuthenticationService,
-        private userService: UserService) { }
+        private userService: UserService) {
 
+    }
+
+    public ngOnInit() {
+        //this.page.actionBarHidden = true;
+    }
 
     public login() {
         this.isLoading = true;
@@ -30,10 +41,11 @@ export class LoginComponent {
             .subscribe(
             data => {
                 this.router.navigate(["/"], { clearHistory: true });
+                this.isLoading = false;
             },
             error => {
-                //this.alertService.error(error);
                 this.isLoading = false;
             });
     }
+
 }

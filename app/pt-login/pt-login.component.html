@@ -1,6 +1,23 @@
-<StackLayout>
+<ActionBar title="">
+    <ActionItem text="Sign up"></ActionItem>
+</ActionBar>
 
-    <Label text="LOGIN"></Label>
+<GridLayout class="login-container">
+    <GridLayout rows="auto, auto">
 
-    <Button text="login" (tap)="login()"></Button>
-</StackLayout>
+        <StackLayout row="0" class="logo-container">
+            <Image src="res://rps_logo" stretch="aspectFit"></Image>
+        </StackLayout>
+
+        <StackLayout row="1">
+            <TextField hint="Username" class="login-field" [(ngModel)]="loginModel.username" [isEnabled]="!isLoading"></TextField>
+            <TextField hint="Password" class="login-field" secure="true" [(ngModel)]="loginModel.password" [isEnabled]="!isLoading"></TextField>
+            <StackLayout class="btn-login-wrapper">
+                <Button text="SIGN IN" class="btn-login" (tap)="login()" [isEnabled]="!isLoading"></Button>
+            </StackLayout>
+        </StackLayout>
+
+
+        <ActivityIndicator [busy]="isLoading" rowSpan="2"></ActivityIndicator>
+    </GridLayout>
+</GridLayout>
