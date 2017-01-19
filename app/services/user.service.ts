@@ -33,8 +33,6 @@ export class UserService {
 
     public getUserAvatar(userId: string) {
         let user = _.find(this.users, (user) => user.id === userId);
-        console.log('getUserAvatar: ' + userId);
-        console.log(user.avatar);
         return user.avatar;
     }
 
