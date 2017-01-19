@@ -135,7 +135,9 @@ export class PTItemDetailsComponent {
         };
 
         action(options).then((result) => {
-            this.backlogService.updatePtItemStatus(this.item, result);
+            if (result != 'Cancel') {
+                this.backlogService.updatePtItemStatus(this.item, result);
+            }
         });
     }
 
