@@ -5,6 +5,7 @@ import { Component, AfterViewInit, ViewChild, ViewContainerRef, ChangeDetectionS
 import { ModalDialogService, ModalDialogOptions } from 'nativescript-angular/modal-dialog';
 import { RadSideDrawerComponent, SideDrawerType } from 'nativescript-telerik-ui/sidedrawer/angular';
 import { DrawerTransitionBase, SideDrawerLocation, SlideInOnTopTransition } from 'nativescript-telerik-ui/sidedrawer';
+import { RouterExtensions } from 'nativescript-angular/router';
 
 //app imports
 import { BacklogService, AuthenticationService } from '../services';
@@ -34,7 +35,8 @@ export class PTBacklogComponent implements AfterViewInit {
         //return this._drawerService.sideDrawerTransition;
     }
 
-    constructor(private backlogService: BacklogService,
+    constructor(private router: RouterExtensions,
+        private backlogService: BacklogService,
         private authService: AuthenticationService,
         private modalService: ModalDialogService,
         private vcRef: ViewContainerRef) {
@@ -71,6 +73,11 @@ export class PTBacklogComponent implements AfterViewInit {
                 this.backlogService.addNewPTItem(newItem, this.authService.currentUser);
             }
         });
+    }
+
+    public logoutTap() {
+        this.authService.logout();
+        this.router.navigate(["/login"], { clearHistory: true });
     }
 }
 

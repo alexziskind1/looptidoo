@@ -1,6 +1,8 @@
 //angular imports 
 import { Component } from "@angular/core";
-import { Router } from "@angular/router";
+
+//nativescript imports
+import { RouterExtensions } from 'nativescript-angular/router';
 
 //app imports
 import { AuthenticationService, UserService } from '../services';
@@ -15,9 +17,9 @@ import ILoginModel = PTDomain.ILoginModel;
 export class LoginComponent {
 
     public isLoading: boolean = false;
-    public loginModel: ILoginModel = { username: '', password: '' };
+    public loginModel: ILoginModel = { username: 'alexziskind', password: 'Nuvious' };
 
-    constructor(private router: Router,
+    constructor(private router: RouterExtensions,
         private authService: AuthenticationService,
         private userService: UserService) { }
 
@@ -27,7 +29,7 @@ export class LoginComponent {
         this.authService.login(this.loginModel.username, this.loginModel.password)
             .subscribe(
             data => {
-                this.router.navigate(["/"]);
+                this.router.navigate(["/"], { clearHistory: true });
             },
             error => {
                 //this.alertService.error(error);

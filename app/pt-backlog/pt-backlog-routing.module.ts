@@ -8,10 +8,13 @@ import { PTItemDetailsComponent } from "./pt-item/pt-item-details.component";
 import { PTItemTasksComponent } from "./pt-item/pt-item-tasks.component";
 import { PTItemChitchatComponent } from "./pt-item/pt-item-chitchat.component";
 
+import { AuthGuard } from '../services/auth-guard.service';
+
 const backlogRoutes: Routes = [
     {
         path: "pt-backlog",
-        component: PTBacklogComponent
+        component: PTBacklogComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: "pt-item/:id",

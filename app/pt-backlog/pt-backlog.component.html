@@ -19,6 +19,9 @@
                 <Button (tap)="selectFilteredView(2, 'FINISHED ITEMS')" [class]="selectedViewIndex === 2 ? 'slide-out-btn-selected' : 'slide-out-btn' "
                     text="FINISHED ITEMS"></Button>
             </StackLayout>
+            <StackLayout>
+                <Button (tap)="logoutTap()" text="LOGOUT"></Button>
+            </StackLayout>
         </GridLayout>
     </StackLayout>
 
