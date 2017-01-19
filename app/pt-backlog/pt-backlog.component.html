@@ -7,9 +7,11 @@
 <RadSideDrawer #drawer [transition]="sideDrawerTransition" selectionBehavior="None">
 
     <StackLayout tkDrawerContent>
-        <GridLayout class="side-drawer-panel" rows="*, auto">
-            <StackLayout>
+        <GridLayout class="side-drawer-panel" rows="auto, *, 100">
+            <StackLayout row="0">
                 <Image src="res://rps_logo" class="slide-out-img" stretch="aspectFit"></Image>
+            </StackLayout>
+            <StackLayout row="1">
                 <Button (tap)="selectFilteredView(0, 'MY ITEMS')" [class]="selectedViewIndex === 0 ? 'slide-out-btn-selected' : 'slide-out-btn' "
                     text="MY ITEMS"></Button>
 
@@ -19,8 +21,8 @@
                 <Button (tap)="selectFilteredView(2, 'FINISHED ITEMS')" [class]="selectedViewIndex === 2 ? 'slide-out-btn-selected' : 'slide-out-btn' "
                     text="FINISHED ITEMS"></Button>
             </StackLayout>
-            <StackLayout>
-                <Button (tap)="logoutTap()" text="LOGOUT"></Button>
+            <StackLayout row="2">
+                <Button (tap)="logoutTap()" text="LOGOUT" class="slide-out-btn"></Button>
             </StackLayout>
         </GridLayout>
     </StackLayout>
