@@ -1,8 +1,8 @@
 @import 'nativescript-theme-core/css/core.light.css';
+@import url("~/platform.css");
 
 Page {
     background-color: white;
-    margin-top: -20;
 }
 
 ActionBar {
