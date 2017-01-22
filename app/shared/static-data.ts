@@ -28,7 +28,7 @@ export namespace ItemTypeEnum {
             case ItemTypeEnum.Chore:
                 return '~/images/i-chore.png';
             case ItemTypeEnum.Impediment:
-                return '~/images/impediment.png';
+                return '~/images/i-impediment.png';
             default:
                 return '';
         }
