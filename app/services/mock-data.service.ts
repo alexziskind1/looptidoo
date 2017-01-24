@@ -88,10 +88,12 @@ export class MockDataService {
     }
 
     public generateUsers(): Array<IUser> {
-        let avatarsMen = this.getUserAvatars('images/avatars/base64/men.txt');
-        let avatarsWomen = this.getUserAvatars('images/avatars/base64/women.txt');
+        //let avatarsMen = this.getUserAvatars('images/avatars/base64/men.txt');
+        //let avatarsWomen = this.getUserAvatars('images/avatars/base64/women.txt');
+        let avatarsLi = this.getUserLiUserAvatars('images/avatars/base64/base64.txt');
         let users = _.times(constModule.NUM_USERS, () => {
-            return this.generateUser(avatarsMen, avatarsWomen);
+            //return this.generateUser(avatarsMen, avatarsWomen);
+            return this.generateUser(avatarsLi);
         });
         let userMe = this.getMeUser();
         users.unshift(userMe);
@@ -109,12 +111,17 @@ export class MockDataService {
         return userMe;
     }
 
-    public generateUser(avatarsMen: string[], avatarsWomen: string[]): IUser {
+    public generateUser(avatarsMen: string[], avatarsWomen?: string[]): IUser {
         let genderBool = faker.random.boolean();
         let genderInt = parseInt(genderBool + '');
         let firstName = faker.name.firstName(genderInt);
         let lastName = faker.name.lastName(genderInt);
-        let avatar = genderBool ? _.sample(avatarsMen) : _.sample(avatarsWomen);
+        var avatar;
+        if (avatarsWomen) {
+            avatar = genderBool ? _.sample(avatarsMen) : _.sample(avatarsWomen);
+        } else {
+            avatar = _.sample(avatarsMen);
+        }
 
         let user: IUser = {
             id: faker.random.uuid(),
@@ -156,6 +163,19 @@ export class MockDataService {
         var lines = fileText.split('\n');
         for (var i = 0; i < lines.length; i++) {
             avatarList.push('data:image/png;base64,' + lines[i]);
+        }
+        return avatarList;
+    }
+
+    private getUserLiUserAvatars(path) {
+        var avatarList: Array<string> = [];
+        var currentAppFolder = fileSystemModule.knownFolders.currentApp();
+        var menAvatarsFile = currentAppFolder.getFile(path);
+        var fileText = menAvatarsFile.readTextSync();
+
+        var lines = fileText.split('\n');
+        for (var i = 0; i < lines.length; i++) {
+            avatarList.push(lines[i]);
         }
         return avatarList;
     }
