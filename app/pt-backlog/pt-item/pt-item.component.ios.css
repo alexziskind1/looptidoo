@@ -1,3 +1,17 @@
 .pt-item-container {
     margin-top: 20;
+    background-color: #eeedf2;
 }
+
+.pt-item-detail-header {
+    border-width: 1;
+    border-color: red;
+    background-color: #333333;
+    color: #ffffff;
+    padding: 10;
+}
+
+.pt-item-detail-header-title {
+    margin-bottom: 10;
+}
+

@@ -19,9 +19,11 @@
 
 <StackLayout class="pt-item-container">
 
-    <Label [text]="itemTitle"></Label>
+    <StackLayout class="pt-item-detail-header">
+        <Label [text]="itemTitle" class="pt-item-detail-header-title"></Label>
 
-    <SegmentedBar #sb selectedBackgroundColor="#fac950" [items]="myNavItems" selectedIndex="0" (selectedIndexChange)="selectedItemDetailScreenIndexChanged(sb)"></SegmentedBar>
+        <SegmentedBar #sb selectedBackgroundColor="#fac950" [items]="myNavItems" selectedIndex="0" (selectedIndexChange)="selectedItemDetailScreenIndexChanged(sb)"></SegmentedBar>
+    </StackLayout>
 
     <router-outlet></router-outlet>
 

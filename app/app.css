@@ -17,7 +17,7 @@ TextView {
 
 .form-field-col {
     vertical-align: middle;
-    horizontal-align: left;
+    horizontal-align: right;
 }
 
 .modal-wrapper {
@@ -120,13 +120,13 @@ Chore -
 .task-full {
     height: 30;
     width: 30;
-    background-color: green;
+    background-color: #4b5833;
 }
 
 .task-empty {
     height: 30;
     width: 30;
-    border-color:green;
+    border-color: #4b5833;
     border-width: 1;
 }
 
@@ -138,6 +138,26 @@ Chore -
 }
 
 .input-field {
-    border-bottom-width: 1;
-    border-bottom-color: gray;
+    margin-left: 15;
+    margin-right: 15;
+    font-size: 14;
+}
+
+.input-field-border {
+    border-bottom-width: 0.5;
+    border-bottom-color: #e4e4e6;
+}
+
+.input {
+    color: #4b5833;
+}
+
+.icon-arrow-wrapper {
+
+}
+
+.icon-arrow {
+    height: 15;
+    vertical-align: middle;
+    horizontal-align: right;
 }

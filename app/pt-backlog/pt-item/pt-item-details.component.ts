@@ -26,6 +26,7 @@ import IUser = PTDomain.IUser;
     moduleId: module.id,
     selector: 'pt-item-details',
     templateUrl: 'pt-item-details.component.html',
+    styleUrls: ['pt-item-details.component.css'],
     animations: slideInAnimations
 })
 export class PTItemDetailsComponent {

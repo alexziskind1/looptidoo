@@ -10,70 +10,85 @@
 
             <StackLayout class="">
 
-                <StackLayout class="input-field">
-                    <TextView colSpan="3" hint="Enter title..." [height]="textViewFieldHeight(item.title)" [ngModel]="item.title" (ngModelChange)="titleChange($event)"
-                        class="input"></TextView>
-                </StackLayout>
+                <StackLayout class="pt-item-detail-group">
+                    <StackLayout class="input-field input-field-border">
+                        <TextView colSpan="3" hint="Enter title..." [height]="textViewFieldHeight(item.title)" [ngModel]="item.title" (ngModelChange)="titleChange($event)"
+                            class="input"></TextView>
+                    </StackLayout>
 
-                <StackLayout class="input-field">
-                    <TextView hint="Enter description..." [height]="textViewFieldHeight(item.description)" [ngModel]="item.description" (ngModelChange)="descriptionChange($event)"
-                        class="input"></TextView>
-                </StackLayout>
-
-                <StackLayout class="input-field">
-                    <GridLayout rows="40" [columns]="formFieldGridCols" (tap)="showTypeModal()">
-                        <Label col="0" text="Type"></Label>
-                        <StackLayout col="1" orientation="horizontal">
-                            <Image [src]="item.type | typeImage"></Image>
-                            <Label [text]="item.type | typeDisplay"></Label>
-                        </StackLayout>
-                    </GridLayout>
-                </StackLayout>
-
-                <StackLayout class="input-field">
-                    <GridLayout rows="40" [columns]="formFieldGridCols">
-                        <Label col="0" text="Estimate" class="form-field-col"></Label>
-                        <Label col="1" [text]="item.estimate | estimateDisplay" class="form-field-col"></Label>
-                        <StackLayout col="2" class="form-field-col">
-                            <inc-dec (notifyIncDecTapped)="estimateIncDecTapped($event)" decEnabled="{{ item.estimate > 0 }}">
-                            </inc-dec>
-                        </StackLayout>
-                    </GridLayout>
-                </StackLayout>
-
-                <StackLayout class="input-field">
-                    <GridLayout rows="40" [columns]="formFieldGridCols">
-                        <Label col="0" text="Priority" class="form-field-col"></Label>
-                        <StackLayout col="1" class="form-field-col">
-                            <Label [text]="item.priority | priorityDisplay" [class]="item.priority | priorityClass"></Label>
-                        </StackLayout>
-                        <StackLayout col="2" class="form-field-col">
-                            <inc-dec (notifyIncDecTapped)="priorityIncDecTapped($event)" [decEnabled]="priorityDecEnabled" [incEnabled]="priorityIncEnabled">
-                            </inc-dec>
-                        </StackLayout>
-                    </GridLayout>
-                </StackLayout>
-
-                <StackLayout class="input-field">
-                    <GridLayout rows="40" [columns]="formFieldGridCols" (tap)="showStatusOptions()">
-                        <Label col="0" text="Status"></Label>
-                        <StackLayout col="1" orientation="horizontal">
-                            <Label [text]="item.status | statusDisplay"></Label>
-                        </StackLayout>
-                    </GridLayout>
+                    <StackLayout class="input-field">
+                        <TextView hint="Enter description..." [height]="textViewFieldHeight(item.description)" [ngModel]="item.description" (ngModelChange)="descriptionChange($event)"
+                            class="input"></TextView>
+                    </StackLayout>
                 </StackLayout>
 
 
+                <StackLayout class="pt-item-detail-group">
+                    <StackLayout class="input-field input-field-border">
+                        <GridLayout rows="40" [columns]="formFieldGridCols" (tap)="showTypeModal()">
+                            <Label col="0" text="Type"></Label>
+                            <StackLayout col="1" orientation="horizontal" class="form-field-col">
+                                <Label [text]="item.type | typeDisplay" class="input"></Label>
+                                <Image [src]="item.type | typeImage"></Image>
+                            </StackLayout>
+                            <GridLayout col="2" class="icon-arrow-wrapper">
+                                <Image src="res://icon_arrow_forward" class="icon-arrow"></Image>
+                            </GridLayout>
+                        </GridLayout>
+                    </StackLayout>
 
-                <StackLayout class="input-field">
-                    <GridLayout rows="40" [columns]="formFieldGridCols">
-                        <Label col="0" text="Assignee"></Label>
-                        <StackLayout col="1" orientation="horizontal" (tap)="showAssigneeModal()">
-                            <Image [src]="item.assignee.avatar" stretch="aspectFit"></Image>
-                            <Label [text]="item.assignee.fullName"></Label>
-                        </StackLayout>
-                    </GridLayout>
+                    <StackLayout class="input-field input-field-border">
+                        <GridLayout rows="40" [columns]="formFieldGridCols" (tap)="showStatusOptions()">
+                            <Label col="0" text="Status"></Label>
+                            <StackLayout col="1" orientation="horizontal" class="form-field-col">
+                                <Label [text]="item.status | statusDisplay" class="input"></Label>
+                            </StackLayout>
+                            <GridLayout col="2" class="icon-arrow-wrapper">
+                                <Image src="res://icon_arrow_forward" class="icon-arrow"></Image>
+                            </GridLayout>
+                        </GridLayout>
+                    </StackLayout>
 
+                    <StackLayout class="input-field input-field-border">
+                        <GridLayout rows="40" [columns]="formFieldGridCols">
+                            <Label col="0" text="Estimate"></Label>
+                            <Label col="1" [text]="item.estimate | estimateDisplay" class="form-field-col input"></Label>
+                            <StackLayout col="2" class="form-field-col">
+                                <inc-dec (notifyIncDecTapped)="estimateIncDecTapped($event)" decEnabled="{{ item.estimate > 0 }}">
+                                </inc-dec>
+                            </StackLayout>
+                        </GridLayout>
+                    </StackLayout>
+
+                    <StackLayout class="input-field">
+                        <GridLayout rows="40" [columns]="formFieldGridCols">
+                            <Label col="0" text="Priority"></Label>
+                            <StackLayout col="1" class="form-field-col">
+                                <Label [text]="item.priority | priorityDisplay" [class]="item.priority | priorityClass"></Label>
+                            </StackLayout>
+                            <StackLayout col="2" class="form-field-col">
+                                <inc-dec (notifyIncDecTapped)="priorityIncDecTapped($event)" [decEnabled]="priorityDecEnabled" [incEnabled]="priorityIncEnabled">
+                                </inc-dec>
+                            </StackLayout>
+                        </GridLayout>
+                    </StackLayout>
+
+
+                </StackLayout>
+
+                <StackLayout class="pt-item-detail-group">
+                    <StackLayout class="input-field">
+                        <GridLayout rows="40" [columns]="formFieldGridCols" (tap)="showAssigneeModal()">
+                            <Label col="0" text="Assignee"></Label>
+                            <StackLayout col="1" orientation="horizontal" class="form-field-col">
+                                <Label [text]="item.assignee.fullName" class="input"></Label>
+                                <Image [src]="item.assignee.avatar" stretch="aspectFit"></Image>
+                            </StackLayout>
+                            <GridLayout col="2" class="icon-arrow-wrapper">
+                                <Image src="res://icon_arrow_forward" class="icon-arrow"></Image>
+                            </GridLayout>
+                        </GridLayout>
+                    </StackLayout>
                 </StackLayout>
 
 
