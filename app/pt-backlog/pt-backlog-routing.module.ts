@@ -22,7 +22,8 @@ const backlogRoutes: Routes = [
         children: [
             {
                 path: "",
-                redirectTo: "pt-item-details"
+                redirectTo: "pt-item-details",
+                pathMatch: "full"
             },
             {
                 path: "pt-item-details",
