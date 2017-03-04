@@ -7,7 +7,7 @@ import { StatusEnum } from '../../shared/static-data';
 
 @Pipe({ name: 'statusDisplay' })
 export class StatusDisplayPipe implements PipeTransform {
-    transform(value: StatusEnum): string {
+    transform(value: number): string {
         return StatusEnum[value];
     }
 }
