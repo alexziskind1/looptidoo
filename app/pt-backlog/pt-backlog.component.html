@@ -29,9 +29,9 @@
     <StackLayout tkMainContent>
         <GridLayout class="backlog-container" rows="*, 60">
 
-            <StackLayout row="0" class="list-container">
+            <GridLayout row="0" class="list-container">
                 <pt-item-list [selectedViewIndex]="selectedViewIndex"></pt-item-list>
-            </StackLayout>
+            </GridLayout>
 
             <StackLayout row="1" class="btn-add-wrapper">
                 <Button text="Add" class="btn-add" (tap)="showAddItemModal()"></Button>
