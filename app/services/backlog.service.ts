@@ -212,8 +212,6 @@ export class BacklogService {
     }
 
     private publishUpdates() {
-        console.log('publishUpdates');
-        console.dir(this._filterState);
         var filteredItems = [];
         switch (this._filterState.filterViewIndex) {
             case 0:
@@ -228,13 +226,10 @@ export class BacklogService {
             default:
                 filteredItems = this._allItems;
         }
-        //this._filteredItems = filteredItems;
 
         // Make sure all updates are published inside NgZone so that change detection is triggered if needed
         this.zone.run(() => {
             // must emit a *new* value (immutability!)
-            //this.itemsSubj.next([...this._allItems]);
-            console.log('in the zone, applying next filteredItems');
             this.itemsSubj.next([...filteredItems]);
         });
     }
