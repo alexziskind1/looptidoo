@@ -53,7 +53,7 @@
                             <Label col="0" text="Estimate"></Label>
                             <Label col="1" [text]="item.estimate | estimateDisplay" class="form-field-col input"></Label>
                             <StackLayout col="2" class="form-field-col">
-                                <inc-dec (notifyIncDecTapped)="estimateIncDecTapped($event)" decEnabled="{{ item.estimate > 0 }}">
+                                <inc-dec (notifyIncDecTapped)="estimateIncDecTapped($event)" [decEnabled]=" item.estimate > 0">
                                 </inc-dec>
                             </StackLayout>
                         </GridLayout>
