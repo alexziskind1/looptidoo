@@ -5,3 +5,7 @@
     border-top-color: #e4e4e6;
     border-bottom-color: #e4e4e6;      
 }
+
+.item-type-layout {
+    justify-content: space-between;
+}

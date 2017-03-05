@@ -25,11 +25,12 @@
                     <StackLayout class="input-field input-field-border">
                         <GridLayout rows="40" [columns]="formFieldGridCols" (tap)="showTypeModal()">
                             <Label col="0" text="Type"></Label>
-                            <StackLayout col="1" orientation="horizontal" class="form-field-col">
-                                <Image [src]="item.type | typeImage" class="input-img"></Image>
-                                <Label [text]="item.type | typeDisplay" class="input"></Label>
-
-                            </StackLayout>
+                            <GridLayout col="1" style="border-width: 1; border-color:red;" orientation="horizontal" class="form-field-col">
+                                <FlexLayout class="item-type-layout">
+                                    <Image col="0" [src]="item.type | typeImage" class="input-img"></Image>
+                                    <Label col="1" [text]="item.type | typeDisplay" class="input"></Label>
+                                </FlexLayout>
+                            </GridLayout>
                             <GridLayout col="2" class="icon-arrow-wrapper">
                                 <Image src="res://icon_arrow_forward" class="icon-arrow"></Image>
                             </GridLayout>

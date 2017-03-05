@@ -1,17 +1,29 @@
-<StackLayout class="modal-wrapper" margin="24" horizontalAlignment="center" verticalAlignment="center">
-    <Label [text]="prompt"></Label>
+<GridLayout class="modal-wrapper " rows="50, *">
 
-    <ListView [items]="userService.usersObs | async" (itemTap)="listItemTap($event)">
-        <template let-user="item" let-i="index">
-            <GridLayout columns="50, 200, *">
-                <Image col="0" [src]="user.avatar" stretch="aspectFit"></Image>
-                <Label col="1" [text]="user.fullName"></Label>
+    <StackLayout row="0" class="pt-item-detail-header bold">
+        <GridLayout columns="*, 50">
+            <Label col="0" [text]="itemTitle" textWrap="true" class="pt-item-detail-header-title"></Label>
+            <GridLayout col="1" class="modal-close-wrapper" (tap)="close()">
+                <Image src="res://icon_close_white" class="modal-close-img"></Image>
             </GridLayout>
-        </template>
-    </ListView>
 
-    <StackLayout orientation="horizontal" marginTop="12">
-        <Button text="ok" (tap)="close('OK')"></Button>
-        <Button text="cancel" (tap)="close('Cancel')"></Button>
+        </GridLayout>
     </StackLayout>
-</StackLayout>
+
+    <StackLayout row="1">
+        <Label [text]="prompt" class="form-group-label"></Label>
+
+        <StackLayout class="form-group form-list">
+            <ListView [items]="userService.usersObs | async" (itemTap)="listItemTap($event)">
+                <template let-user="item" let-i="index">
+                    <GridLayout columns="50, 200, *" class="user-picker-row">
+                        <Image col="0" [src]="user.avatar" stretch="aspectFit"></Image>
+                        <Label col="1" [text]="user.fullName" class="user-picker-name"></Label>
+                    </GridLayout>
+                </template>
+            </ListView>
+        </StackLayout>
+
+    </StackLayout>
+
+</GridLayout>

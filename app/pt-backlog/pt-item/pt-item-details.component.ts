@@ -144,7 +144,7 @@ export class PTItemDetailsComponent {
 
     public showAssigneeModal() {
         const options: ModalDialogOptions = {
-            context: { promptMsg: "Select assignee" },
+            context: { itemTitle: this.item.title, promptMsg: "Select assignee" },
             fullscreen: true,
             viewContainerRef: this.vcRef
         };

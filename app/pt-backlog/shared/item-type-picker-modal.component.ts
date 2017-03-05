@@ -1,5 +1,5 @@
 //angular imports
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 
 //nativescript imports
 import { Page } from 'ui/page';
@@ -18,24 +18,23 @@ import { PTDomain } from '../../typings/domain';
     templateUrl: 'item-type-picker-modal.component.html'
 })
 export class ItemTypePickerModalComponent implements OnInit {
-    @Input() public prompt: string;
-    @Input() public itemTitle: string;
+    public prompt: string;
+    public itemTitle: string;
 
     public items: DisplayItem[];
 
-    constructor(private params: ModalDialogParams, private userService: UserService) {
-        this.prompt = params.context.promptMsg;
-        this.itemTitle = params.context.itemTitle;
-    }
+    constructor(private params: ModalDialogParams, private userService: UserService) { }
 
     public close() {
         this.params.closeCallback(null);
     }
 
     ngOnInit() {
+        this.prompt = this.params.context.promptMsg;
+        this.itemTitle = this.params.context.itemTitle;
+
         let theItems: DisplayItem[] = [];
 
-        let keys = [];
         for (var enumMember in ItemTypeEnum) {
             let intVal = parseInt(enumMember, 10);
             var isValueProperty = intVal >= 0;
@@ -47,7 +46,6 @@ export class ItemTypePickerModalComponent implements OnInit {
     }
 
     public typeSelect(args: any) {
-        //console.log(args);
         this.params.closeCallback(ItemTypeEnum[args]);
     }
 }

@@ -1,5 +1,5 @@
 //angular imports
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 
 //nativescript imports
 import { Page } from 'ui/page';
@@ -17,28 +17,25 @@ import IUser = PTDomain.IUser;
     templateUrl: 'user-picker-modal.component.html'
 })
 export class UserPickerModalComponent implements OnInit {
-    @Input() public prompt: string;
-    constructor(private params: ModalDialogParams, private userService: UserService) {
-        this.prompt = params.context.promptMsg;
-    }
+    public prompt: string;
+    public itemTitle: string;
+
+    constructor(private params: ModalDialogParams, private userService: UserService) { }
 
     public close(res: string) {
         this.params.closeCallback(res);
-
     }
 
     ngOnInit() {
-        console.log("ModalContent.ngOnInit");
+        this.prompt = this.params.context.promptMsg;
+        this.itemTitle = this.params.context.itemTitle;
     }
 
-    ngOnDestroy() {
-        console.log("ModalContent.ngOnDestroy");
-    }
 
     public listItemTap(args: ItemEventData) {
         let lv = <ListView>args.object;
         let user = <IUser>lv.items[args.index];
-        console.log('list item tap: ' + user.fullName);
+        ///console.log('list item tap: ' + user.fullName);
         this.params.closeCallback(user);
 
     }
