@@ -49,7 +49,7 @@ import IPTItem = PTDomain.IPTItem;
             }
             .li-estimate {
                 font-size: 10;
-                                font-weight: bold;
+                font-weight: bold;
                 color: #555a97;
             }
         `

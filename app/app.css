@@ -151,6 +151,11 @@ Chore -
 .input {
     color: #4b5833;
 }
+.input-user {
+    font-size: 10;
+    font-weight: bold;
+    color: #555a97;
+}
 
 .icon-arrow-wrapper {
 
@@ -160,4 +165,14 @@ Chore -
     height: 15;
     vertical-align: middle;
     horizontal-align: right;
+}
+
+.input-img {
+    height: 20;
+    margin-left: 10;
+    margin-right: 10;
+}
+.input-img.avatar {
+    height: 30;
+    margin-right: 0;
 }

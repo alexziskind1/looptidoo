@@ -2,9 +2,7 @@
 
     <StackLayout *ngIf="item">
 
-        <StackLayout #header>
-            <Label [text]="item.title"></Label>
-        </StackLayout>
+
 
         <ScrollView #tasksSrollView>
 
@@ -28,8 +26,9 @@
                         <GridLayout rows="40" [columns]="formFieldGridCols" (tap)="showTypeModal()">
                             <Label col="0" text="Type"></Label>
                             <StackLayout col="1" orientation="horizontal" class="form-field-col">
+                                <Image [src]="item.type | typeImage" class="input-img"></Image>
                                 <Label [text]="item.type | typeDisplay" class="input"></Label>
-                                <Image [src]="item.type | typeImage"></Image>
+
                             </StackLayout>
                             <GridLayout col="2" class="icon-arrow-wrapper">
                                 <Image src="res://icon_arrow_forward" class="icon-arrow"></Image>
@@ -81,8 +80,9 @@
                         <GridLayout rows="40" [columns]="formFieldGridCols" (tap)="showAssigneeModal()">
                             <Label col="0" text="Assignee"></Label>
                             <StackLayout col="1" orientation="horizontal" class="form-field-col">
-                                <Label [text]="item.assignee.fullName" class="input"></Label>
-                                <Image [src]="item.assignee.avatar" stretch="aspectFit"></Image>
+                                <Label [text]="item.assignee.fullName" class="input-user"></Label>
+                                <Image [src]="item.assignee.avatar" class="input-img avatar"></Image>
+
                             </StackLayout>
                             <GridLayout col="2" class="icon-arrow-wrapper">
                                 <Image src="res://icon_arrow_forward" class="icon-arrow"></Image>
