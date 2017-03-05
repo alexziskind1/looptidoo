@@ -1,10 +1,12 @@
 //angular imports
-import { Component, OnInit, HostBinding, ViewContainerRef } from "@angular/core";
+import { Component, OnInit, HostBinding, ViewChild, ElementRef, ViewContainerRef, NgZone } from "@angular/core";
 import { Router, ActivatedRoute, Params, UrlSegment } from '@angular/router';
 
 //nativescript imports
 import { RouterExtensions } from 'nativescript-angular/router';
 import { SegmentedBar } from 'ui/segmented-bar';
+import { View } from 'ui/core/view';
+import { Color } from 'color';
 import { confirm, action, ActionOptions, ConfirmOptions } from 'ui/dialogs';
 import { ModalDialogService, ModalDialogOptions } from 'nativescript-angular/modal-dialog';
 
@@ -30,7 +32,12 @@ import IUser = PTDomain.IUser;
     animations: slideInAnimations
 })
 export class PTItemDetailsComponent {
-    //@HostBinding('@routeAnimation') routeAnimation = true;
+
+    @ViewChild('itemTypeRow') itemTypeRow: ElementRef;
+    @ViewChild('itemTypeName') itemTypeName: ElementRef;
+
+    @ViewChild('itemAssigneeRow') itemAssigneeRow: ElementRef;
+    @ViewChild('itemAssigneeName') itemAssigneeName: ElementRef;
 
     public item: IPTItem;
     private selectedViewIndex = 0;
@@ -56,12 +63,11 @@ export class PTItemDetailsComponent {
         private routerExtensions: RouterExtensions,
         private backlogService: BacklogService,
         private modalService: ModalDialogService,
-        private vcRef: ViewContainerRef) { }
+        private vcRef: ViewContainerRef,
+        private zone: NgZone) { }
 
 
     public ngOnInit() {
-        console.log('init item details: ' + this.route.parent.toString());
-
         this.route.parent.params
             .switchMap((params: Params) => this.backlogService.getItem(params['id']))
             .subscribe((item: IPTItem) => this.item = item);
@@ -114,6 +120,7 @@ export class PTItemDetailsComponent {
         this.modalService.showModal(ItemTypePickerModalComponent, options).then((res: ItemTypeEnum) => {
             if (res) {
                 this.backlogService.updatePtItemType(this.item, res);
+                this.flashRow(this.itemTypeRow.nativeElement, this.itemTypeName.nativeElement);
             }
         });
     }
@@ -152,8 +159,22 @@ export class PTItemDetailsComponent {
         this.modalService.showModal(UserPickerModalComponent, options).then((res: IUser) => {
             if (res) {
                 this.backlogService.updatePtItemAssignee(this.item, res);
+                this.flashRow(this.itemAssigneeRow.nativeElement, this.itemAssigneeName.nativeElement);
             }
         });
+    }
+
+    private flashRow(theRow: View, theView: View) {
+        theView.opacity = 0;
+        theRow.backgroundColor = new Color('#efefef');
+
+        setTimeout(() => {
+            theRow.animate({
+                duration: 500,
+                backgroundColor: new Color('ffffff')
+            });
+            theView.animate({ duration: 200, opacity: 1 });
+        }, 500);
     }
 
 }
