@@ -30,7 +30,7 @@ TextView {
 }
 
 .slide-out-btn {
-    color: #e4ba4e;
+    color: #b6cb93;
     font-size: 19;
     height: 44;
     text-align: left;
@@ -109,32 +109,27 @@ Chore -
     border-color: #002b6d;
 }
 
-.task-wrapper {
-    border-bottom-width: 1;
-    border-bottom-color: #eeeeee;
-    padding: 0;
-    margin: 10;
-}
-
-
-.task-full {
-    height: 30;
-    width: 30;
-    background-color: #4b5833;
-}
-
-.task-empty {
-    height: 30;
-    width: 30;
-    border-color: #4b5833;
+.tasks-group {
+    background-color: #ffffff;
+    margin: 15 0 15 0;
     border-width: 1;
+    border-top-color: #e4e4e6;
+    border-bottom-color: #e4e4e6;  
 }
 
-.task-empty-new {
-    height: 30;
-    width: 30;
-    border-color:gray;
-    border-width: 1;
+.task-checkbox {
+    height: 25;
+    horizontal-align: left;
+}
+
+.btn-task-add {
+    background-color: #e4e4e6;
+    color: #ffffff;
+    margin-right: -15;
+}
+.btn-task-add.enabled {
+    background-color: #555c95;
+    color: #ffffff;
 }
 
 .input-field {

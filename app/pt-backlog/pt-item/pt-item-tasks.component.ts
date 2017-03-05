@@ -79,21 +79,17 @@ export class PTItemTasksComponent implements OnInit {
     }
 
     public taskHeight(taskTitle: string) {
-        if (taskTitle) {
-            let lineHeight = 20;
-            let numlines = Math.ceil(taskTitle.length / 25);
-            return ((numlines < 2 ? 2 : numlines) * lineHeight) + 10;
-        }
-        else {
-            return 40;
-        }
+        //if (taskTitle) {
+        let lineHeight = 20;
+        let numlines = Math.ceil(taskTitle.length / 25);
+        return ((numlines < 2 ? 2 : numlines) * lineHeight) + 10;
+        //}
+        //else {
+        //    return 40;
+        //}
     }
 
     public taskTitleChange(task: ITask, args: string) {
-        //task.title=$event.value
-        //console.log('taskTitleChange: ');
-        //console.log('task title: ' + task.title);
-        //console.dir('new string: ' + args);
         this.backlogService.updateTask(this.item, task, args);
     }
 }

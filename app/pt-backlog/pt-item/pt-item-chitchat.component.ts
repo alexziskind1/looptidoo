@@ -23,7 +23,27 @@ import INewComment = PTDomain.INewComment;
     moduleId: module.id,
     selector: 'pt-item-chitchat',
     templateUrl: 'pt-item-chitchat.component.html',
-    animations: slideInAnimations
+    animations: slideInAnimations,
+    styles: [`
+        .img-comment-avatar {
+            margin-top: 5;
+        }
+        .comment-text-wrapper {
+            margin-left: 10;
+        }
+        .comment-name {
+            font-size: 10;
+            font-weight: bold;
+            color: #555a97;
+            margin-left: 5;
+        }
+        .comment-date {
+            font-size: 10;
+            font-weight: bold;
+            color: #555a97;
+            horizontal-align: right;
+        }
+    `]
 })
 export class PTItemChitchatComponent implements OnInit {
 
@@ -77,15 +97,9 @@ export class PTItemChitchatComponent implements OnInit {
     }
 
     public commentHeight(commentTitle: string) {
-        //console.log('commentHeight: ' + commentTitle);
-        if (commentTitle) {
-            let lineHeight = 20;
-            let numlines = Math.ceil(commentTitle.length / 25);
-            return ((numlines < 2 ? 2 : numlines) * lineHeight) + 10;
-        }
-        else {
-            return 40;
-        }
+        let lineHeight = 20;
+        let numlines = Math.ceil(commentTitle.length / 22);
+        return ((numlines < 2 ? 2 : numlines) * lineHeight) + 10;
     }
 
 }
