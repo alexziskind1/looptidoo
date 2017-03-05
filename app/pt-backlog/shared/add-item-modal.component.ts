@@ -1,5 +1,5 @@
 //angular imports
-import { Component, Input, OnInit, ViewContainerRef } from "@angular/core";
+import { Component, OnInit, ViewContainerRef } from "@angular/core";
 
 //nativescript imports
 import { Page } from 'ui/page';
@@ -18,11 +18,25 @@ import IUser = PTDomain.IUser;
 @Component({
     moduleId: module.id,
     selector: 'add-item-modal',
-    templateUrl: 'add-item-modal.component.html'
+    templateUrl: 'add-item-modal.component.html',
+    styles: [`
+        .btn-item-add-wrapper {
+            vertical-align: middle;
+            height: 60;
+        }
+        .btn-item-add {
+            height: 100%;
+            background-color: #e4e4e6;
+            color: #ffffff;
+        }
+        .btn-item-add.enabled {
+            background-color: #555c95;
+            color: #ffffff;
+        }
+    `]
 })
 export class AddItemModalComponent implements OnInit {
-    @Input() public prompt: string;
-
+    public prompt: string;
 
     public formFieldGridCols = '90, *, 90';
     public newItem: INewItem;

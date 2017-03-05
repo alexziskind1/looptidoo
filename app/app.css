@@ -128,6 +128,7 @@ Chore -
     border-top-color: #e4e4e6;
     border-bottom-color: #e4e4e6;  
 }
+
 .form-list.form-list {
     margin: 15 0 0 0;
 }
@@ -193,6 +194,8 @@ Chore -
     height: 30;
     margin-right: 0;
 }
+
+
 
 .pt-item-detail-header {
     background-color: #333333;
