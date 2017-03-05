@@ -106,7 +106,7 @@ export class PTItemDetailsComponent {
 
     public showTypeModal() {
         const options: ModalDialogOptions = {
-            context: { promptMsg: "Select item type" },
+            context: { itemTitle: this.item.title, promptMsg: "Select item type" },
             fullscreen: true,
             viewContainerRef: this.vcRef
         };

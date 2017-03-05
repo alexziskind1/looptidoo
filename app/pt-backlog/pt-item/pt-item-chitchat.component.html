@@ -2,7 +2,7 @@
     <StackLayout *ngIf="item">
         <ScrollView #tasksSrollView>
             <StackLayout>
-                <StackLayout class="tasks-group">
+                <StackLayout class="form-group">
                     <StackLayout class="input-field" [height]="commentHeight(newCommentText)">
                         <GridLayout columns="40, *, 70">
                             <GridLayout col="0">
@@ -17,7 +17,7 @@
                     </StackLayout>
                 </StackLayout>
 
-                <StackLayout class="tasks-group">
+                <StackLayout class="form-group">
                     <StackLayout class="input-field input-field-border" *ngFor="let comment of comments" [height]="commentHeight(comment.title)">
                         <GridLayout columns="40, *">
 

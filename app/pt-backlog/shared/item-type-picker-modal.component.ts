@@ -19,11 +19,13 @@ import { PTDomain } from '../../typings/domain';
 })
 export class ItemTypePickerModalComponent implements OnInit {
     @Input() public prompt: string;
+    @Input() public itemTitle: string;
 
     public items: DisplayItem[];
 
     constructor(private params: ModalDialogParams, private userService: UserService) {
         this.prompt = params.context.promptMsg;
+        this.itemTitle = params.context.itemTitle;
     }
 
     public close() {
@@ -45,7 +47,8 @@ export class ItemTypePickerModalComponent implements OnInit {
     }
 
     public typeSelect(args: any) {
-        this.params.closeCallback(ItemTypeEnum[args.value]);
+        //console.log(args);
+        this.params.closeCallback(ItemTypeEnum[args]);
     }
 }
 
