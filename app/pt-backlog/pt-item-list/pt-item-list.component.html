@@ -1,6 +1,6 @@
 <ListView class="items-list" [items]="ptItemsSubj | async" (itemTap)="listItemTap($event)" separatorColor="#97a879">
     <template let-item="item" let-i="index">
-        <GridLayout class="li-wrapper" rows="60" columns="10, 50, 200, *">
+        <GridLayout class="li-wrapper" rows="60" columns="10, 50,  *, 100">
             <StackLayout class="li-indicator" row="0" col="0">
                 <Label [class]="getIndicatorClass(item)"></Label>
             </StackLayout>
@@ -11,7 +11,11 @@
                 <Label class="li-title" textWrap="true" [text]="item.title"></Label>
                 <Label class="li-estimate" [text]='"estimate: " + item.estimate'></Label>
             </StackLayout>
-            <Button col="3" class="btn btn-primary" text="cha" (loaded)="btnLoaded($event)" (tap)="changeMeTapped(item)"></Button>
+
+            <StackLayout col="3">
+                <Label [text]="item.dateCreated | date" class="item-date"></Label>
+            </StackLayout>
+
         </GridLayout>
     </template>
 </ListView>
