@@ -10,7 +10,6 @@ import { ItemEventData, ListView } from 'ui/list-view';
 import { UserService } from '../../services';
 import { ItemTypeEnum } from '../../shared/static-data';
 import { PTDomain } from '../../typings/domain';
-import IUser = PTDomain.IUser;
 
 
 @Component({
@@ -21,7 +20,7 @@ import IUser = PTDomain.IUser;
 export class ItemTypePickerModalComponent implements OnInit {
     @Input() public prompt: string;
 
-    public items: Array<string>;
+    public items: DisplayItem[];
 
     constructor(private params: ModalDialogParams, private userService: UserService) {
         this.prompt = params.context.promptMsg;
@@ -32,23 +31,26 @@ export class ItemTypePickerModalComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log("ModalContent.ngOnInit");
+        let theItems: DisplayItem[] = [];
 
         let keys = [];
         for (var enumMember in ItemTypeEnum) {
-            var isValueProperty = parseInt(enumMember, 10) >= 0;
+            let intVal = parseInt(enumMember, 10);
+            var isValueProperty = intVal >= 0;
             if (isValueProperty) {
-                keys.push({ key: enumMember, value: ItemTypeEnum[enumMember] });
+                theItems.push({ value: enumMember, title: ItemTypeEnum[enumMember], img: ItemTypeEnum.getImage(intVal) });
             }
         }
-        this.items = keys;
-    }
-
-    ngOnDestroy() {
-        console.log("ModalContent.ngOnDestroy");
+        this.items = theItems;
     }
 
     public typeSelect(args: any) {
         this.params.closeCallback(ItemTypeEnum[args.value]);
     }
+}
+
+interface DisplayItem {
+    title: string;
+    value: string;
+    img: string;
 }

@@ -3,8 +3,9 @@
 
 
     <StackLayout>
-        <StackLayout *ngFor="let item of items">
-            <Label [text]="item.value" (tap)="typeSelect(item)"></Label>
+        <StackLayout *ngFor="let item of items" orientation="horizontal">
+            <Image [src]="item.img" col="0" class="input-img"></Image>
+            <Label [text]="item.title" (tap)="typeSelect(item)" col="1"></Label>
         </StackLayout>
     </StackLayout>
 
