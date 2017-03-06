@@ -23,10 +23,7 @@ export class AuthenticationService {
 
         userService.usersObs.subscribe((d) => {
             this.currentUser = d[0];
-            console.log('setting current user');
-            console.dir(this.currentUser.fullName);
         });
-
     }
 
     public login(username: string, password: string) {
@@ -44,7 +41,6 @@ export class AuthenticationService {
     }
 
     static isLoggedIn(): boolean {
-        console.log('isLoggedIn check');
         return !!appSettingsModule.getString(APP_SETTINGS_CURRENT_USER);
     }
 }

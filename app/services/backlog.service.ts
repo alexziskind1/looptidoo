@@ -41,19 +41,6 @@ export class BacklogService {
 
     public get ptItemsObs(): Observable<Array<IPTItem>> {
         return this._itemsObs;
-        /*
-        return Observable.create((observer: Observer<Array<IPTItem>>) => {
-            this._observer = observer;
-
-            
-                        this.userService.usersObs.subscribe((users: Array<IUser>) => {
-                            console.log('subscribe to users');
-                            let items = this.mockDataService.generatePTItems(users);
-                            observer.next(items);
-                        });
-                        
-        });
-        */
     }
 
     constructor(private mockDataService: MockDataService,
@@ -75,15 +62,7 @@ export class BacklogService {
         this._itemsObs = Observable.create((observer: Observer<Array<IPTItem>>) => {
             this._observer = observer;
             observer.next(this._allItems);
-            /*
-                        this.userService.usersObs.subscribe((users: Array<IUser>) => {
-                            console.log('subscribe to users');
-                            let items = this.mockDataService.generatePTItems(users);
-                            observer.next(items);
-                        });
-                        */
         });
-
     }
 
 

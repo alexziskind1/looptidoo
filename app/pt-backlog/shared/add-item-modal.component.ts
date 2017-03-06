@@ -67,11 +67,7 @@ export class AddItemModalComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log("ModalContent.ngOnInit");
-    }
 
-    ngOnDestroy() {
-        console.log("ModalContent.ngOnDestroy");
     }
 
     public textViewFieldHeight(value: string): number {
@@ -94,7 +90,6 @@ export class AddItemModalComponent implements OnInit {
         };
 
         this.modalService.showModal(ItemTypePickerModalComponent, options).then((res: ItemTypeEnum) => {
-            console.log('res: ' + res);
             if (res) {
                 this.newItem.type = res;
             }

@@ -46,28 +46,11 @@ export class PTItemComponent implements OnInit {
 
     private _selectedIndex;
     public set selectedIndex(val) {
-        console.log('set selectedIndex to: ' + val);
         this._selectedIndex = val;
     }
     public get selectedIndex() {
-        console.log('get selectedIndex: ' + this._selectedIndex);
         return this._selectedIndex;
     }
-
-    /*
-        public get selectedItemDetailScreenIndex() {
-            return this._selectedItemDetailScreenIndex;
-        }
-        public set selectedItemDetailScreenIndex(value: number) {
-            if (this._selectedItemDetailScreenIndex !== value && value >= 0 && value < this.itemDetailScreens.length) {
-                this._selectedItemDetailScreenIndex = value;
-                let path = this.itemDetailScreens[this._selectedItemDetailScreenIndex].routePath;
-                // Navigate with relative link
-                //this._routerExtensions.navigate(['/pt-item', item.id]);
-                this.routerExtensions.navigate([path], { relativeTo: this.route });
-            }
-        }
-        */
 
     constructor(private route: ActivatedRoute,
         private router: Router,
@@ -134,15 +117,11 @@ export class PTItemComponent implements OnInit {
     }
 
     public selectedItemDetailScreenIndexChanged(segBar: SegmentedBar) {
-        console.log('selectedItemDetailScreenIndexChanged: ' + segBar.selectedIndex);
-        console.log('nav to: ' + this._itemDetailScreens[segBar.selectedIndex].routePath);
-
         let newIndex = segBar.selectedIndex;
         if (this._selectedItemDetailScreenIndex !== newIndex && newIndex >= 0 && newIndex < this._itemDetailScreens.length) {
             this._selectedItemDetailScreenIndex = newIndex;
             let path = this._itemDetailScreens[this._selectedItemDetailScreenIndex].routePath;
             // Navigate with relative link
-            //this._routerExtensions.navigate(['/pt-item', item.id]);
             this.routerExtensions.navigate([path], { relativeTo: this.route });
         }
 

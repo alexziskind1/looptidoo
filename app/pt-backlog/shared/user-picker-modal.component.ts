@@ -35,8 +35,6 @@ export class UserPickerModalComponent implements OnInit {
     public listItemTap(args: ItemEventData) {
         let lv = <ListView>args.object;
         let user = <IUser>lv.items[args.index];
-        ///console.log('list item tap: ' + user.fullName);
         this.params.closeCallback(user);
-
     }
 }

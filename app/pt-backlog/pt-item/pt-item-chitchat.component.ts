@@ -72,8 +72,6 @@ export class PTItemChitchatComponent implements OnInit {
 
 
     public ngOnInit() {
-        console.log('init item details: ' + this.route.parent.toString());
-
         this.route.parent.params
             .switchMap((params: Params) => this.backlogService.getItem(params['id']))
             .subscribe((item: IPTItem) => this.item = item);

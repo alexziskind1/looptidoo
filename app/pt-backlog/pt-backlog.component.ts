@@ -32,7 +32,6 @@ export class PTBacklogComponent implements AfterViewInit {
 
     public get sideDrawerTransition(): DrawerTransitionBase {
         return this._sideDrawerTransition;
-        //return this._drawerService.sideDrawerTransition;
     }
 
     constructor(private router: RouterExtensions,
@@ -46,7 +45,6 @@ export class PTBacklogComponent implements AfterViewInit {
     public ngAfterViewInit() {
         this._drawer = this.drawerComponent.sideDrawer;
         this._drawer.drawerLocation = SideDrawerLocation.Right;
-        //this._drawerService.initDrawer(this.drawerComponent.sideDrawer);
     }
 
     public showSlideout() {
@@ -56,9 +54,6 @@ export class PTBacklogComponent implements AfterViewInit {
     public selectFilteredView(itemFilterIndex: number, pageTitle: string) {
         this.selectedViewIndex = itemFilterIndex;
         this._drawer.closeDrawer();
-        console.log('selectedViewIndex: ' + this.selectedViewIndex);
-        //this.actionBarTitle = pageTitle;
-        //this.isSessionsPage = this.selectedViewIndex < 2;
     }
 
     public showAddItemModal() {
