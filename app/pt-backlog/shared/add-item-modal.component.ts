@@ -82,7 +82,7 @@ export class AddItemModalComponent implements OnInit {
 
     public showTypeModal() {
         const options: ModalDialogOptions = {
-            context: { promptMsg: "Select item type" },
+            context: { itemTitle: this.newItem.title, promptMsg: "Select item type" },
             fullscreen: true,
             viewContainerRef: this.vcRef
         };
