@@ -48,14 +48,7 @@ export class AddItemModalComponent implements OnInit {
     constructor(private userService: UserService,
         private params: ModalDialogParams,
         private modalService: ModalDialogService,
-        private vcRef: ViewContainerRef) {
-        this.prompt = params.context.promptMsg;
-        this.newItem = {
-            title: '',
-            description: '',
-            type: ItemTypeEnum.PBI
-        };
-    }
+        private vcRef: ViewContainerRef) { }
 
 
     public tapCancel() {
@@ -67,7 +60,12 @@ export class AddItemModalComponent implements OnInit {
     }
 
     ngOnInit() {
-
+        this.prompt = this.params.context.promptMsg;
+        this.newItem = {
+            title: '',
+            description: '',
+            type: ItemTypeEnum.PBI
+        };
     }
 
     public textViewFieldHeight(value: string): number {
