@@ -32,8 +32,9 @@
                 <StackLayout class="form-group">
                     <StackLayout #itemTypeRow class="input-field">
                         <GridLayout rows="40" [columns]="formFieldGridCols" (tap)="showTypeModal()">
-                            <Label col="0" text="Type"></Label>
-
+                            <GridLayout col="0">
+                                <Label text="Type" class="input"></Label>
+                            </GridLayout>
                             <StackLayout col="1" #itemTypeName orientation="horizontal" class="form-field-col">
                                 <Image [src]="newItem.type | typeImage" class="input-img"></Image>
                                 <Label [text]="newItem.type | typeDisplay" class="input"></Label>

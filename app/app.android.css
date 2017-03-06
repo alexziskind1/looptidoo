@@ -21,7 +21,7 @@ TextView {
 }
 
 .modal-wrapper {
-    margin-top: 20;
+    margin-top: 0;
     background-color: #eeedf2;
 }
 
@@ -123,10 +123,10 @@ Chore -
 
 .form-group {
     background-color: #ffffff;
-    margin: 15 0 15 0;
-    border-width: 1;
-    border-top-color: #e4e4e6;
-    border-bottom-color: #e4e4e6;  
+    margin: 0 0 0 0;
+
+    padding-top: 20;
+    padding-bottom: 20;
 }
 
 .form-list.form-list {
@@ -137,7 +137,7 @@ Chore -
     text-transform: uppercase;
     font-size: 12;
     padding: 15 15 0 15;
-    margin-bottom: -10;
+    margin-bottom: 10;
 }
 
 .task-checkbox {
@@ -159,11 +159,17 @@ Chore -
     margin-left: 15;
     margin-right: 15;
     font-size: 14;
+    border-width: 1;
+    border-color: red;
 }
 
 .input-field-border {
-    border-bottom-width: 0.5;
-    border-bottom-color: #e4e4e6;
+    /*border-bottom-width: 0.5;
+    border-bottom-color: #e4e4e6;*/
+}
+
+.input-label {
+    vertical-align: middle;
 }
 
 .input {
