@@ -1,0 +1,29 @@
+.backlog-container {
+    margin-top: 0;
+    background-color: #ffffff;
+    height: 100%;
+}
+
+.side-drawer-panel {
+    background-color: #333333;
+}
+
+.slide-out-img {
+    margin: 20 0 30 12;
+}
+
+.list-container {
+    height: 100%;
+}
+
+.btn-add-wrapper {
+    vertical-align: middle;
+}
+.btn-add {
+    vertical-align: middle;
+    height: 100%;
+    background-color: #555a97;
+    border-color: #555a97;
+    border-width: 1;
+    color: white;
+}

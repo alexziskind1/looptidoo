@@ -1,5 +1,5 @@
 <ActionBar title="Backlog">
-    <ActionItem text="TapMe" (tap)="showSlideout($event)"></ActionItem>
+    <ActionItem android.position="left" text="TapMe" (tap)="showSlideout($event)"></ActionItem>
 </ActionBar>
 
 
@@ -14,11 +14,11 @@
                 <Button (tap)="selectFilteredView(0, 'MY ITEMS')" [class]="selectedViewIndex === 0 ? 'slide-out-btn-selected' : 'slide-out-btn' "
                     text="MY ITEMS"></Button>
 
-                <Button (tap)="selectFilteredView(1, 'OPEN ITEMS')" [class]="selectedViewIndex === 1 ? 'slide-out-btn-selected' : 'slide-out-btn' "
-                    text="OPEN ITEMS"></Button>
+                    <Button (tap)="selectFilteredView(1, 'OPEN ITEMS')" [class]="selectedViewIndex === 1 ? 'slide-out-btn-selected' : 'slide-out-btn' "
+                        text="OPEN ITEMS"></Button>
 
-                <Button (tap)="selectFilteredView(2, 'FINISHED ITEMS')" [class]="selectedViewIndex === 2 ? 'slide-out-btn-selected' : 'slide-out-btn' "
-                    text="FINISHED ITEMS"></Button>
+                        <Button (tap)="selectFilteredView(2, 'FINISHED ITEMS')" [class]="selectedViewIndex === 2 ? 'slide-out-btn-selected' : 'slide-out-btn' "
+                            text="FINISHED ITEMS"></Button>
             </StackLayout>
             <StackLayout row="2">
                 <Button (tap)="logoutTap()" text="LOGOUT" class="slide-out-btn"></Button>
