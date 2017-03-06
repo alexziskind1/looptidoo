@@ -24,9 +24,9 @@
                 <StackLayout class="form-group">
                     <StackLayout #itemTypeRow class="input-field input-field-border">
                         <GridLayout rows="40" [columns]="formFieldGridCols" (tap)="showTypeModal()">
-                            <Label col="0" text="Type"></Label>
+                            <Label col="0" text="Type" class="form-field-col"></Label>
 
-                            <StackLayout col="1" #itemTypeName orientation="horizontal" class="form-field-col">
+                            <StackLayout col="1" #itemTypeName orientation="horizontal" class="form-field-col right">
                                 <Image [src]="item.type | typeImage" class="input-img"></Image>
                                 <Label [text]="item.type | typeDisplay" class="input"></Label>
                             </StackLayout>
@@ -39,8 +39,8 @@
 
                     <StackLayout class="input-field input-field-border">
                         <GridLayout rows="40" [columns]="formFieldGridCols" (tap)="showStatusOptions()">
-                            <Label col="0" text="Status"></Label>
-                            <StackLayout col="1" orientation="horizontal" class="form-field-col">
+                            <Label col="0" text="Status" class="form-field-col"></Label>
+                            <StackLayout col="1" orientation="horizontal" class="form-field-col right">
                                 <Label [text]="item.status | statusDisplay" class="input"></Label>
                             </StackLayout>
                             <GridLayout col="2" class="icon-arrow-wrapper">
@@ -51,8 +51,8 @@
 
                     <StackLayout class="input-field input-field-border">
                         <GridLayout rows="40" [columns]="formFieldGridCols">
-                            <Label col="0" text="Estimate"></Label>
-                            <Label col="1" [text]="item.estimate | estimateDisplay" class="form-field-col input"></Label>
+                            <Label col="0" text="Estimate" class="form-field-col"></Label>
+                            <Label col="1" [text]="item.estimate | estimateDisplay" class="form-field-col input right"></Label>
                             <StackLayout col="2" class="form-field-col">
                                 <inc-dec (notifyIncDecTapped)="estimateIncDecTapped($event)" [decEnabled]=" item.estimate > 0">
                                 </inc-dec>
@@ -62,8 +62,8 @@
 
                     <StackLayout class="input-field">
                         <GridLayout rows="40" [columns]="formFieldGridCols">
-                            <Label col="0" text="Priority"></Label>
-                            <StackLayout col="1" class="form-field-col">
+                            <Label col="0" text="Priority" class="form-field-col"></Label>
+                            <StackLayout col="1" class="form-field-col right">
                                 <Label [text]="item.priority | priorityDisplay" [class]="item.priority | priorityClass"></Label>
                             </StackLayout>
                             <StackLayout col="2" class="form-field-col">
@@ -79,9 +79,9 @@
                 <StackLayout class="form-group">
                     <StackLayout #itemAssigneeRow class="input-field">
                         <GridLayout rows="40" [columns]="formFieldGridCols" (tap)="showAssigneeModal()">
-                            <Label col="0" text="Assignee"></Label>
+                            <Label col="0" text="Assignee" class="form-field-col"></Label>
 
-                            <StackLayout #itemAssigneeName col="1" orientation="horizontal" class="form-field-col">
+                            <StackLayout #itemAssigneeName col="1" orientation="horizontal" class="form-field-col right">
                                 <Label [text]="item.assignee.fullName" class="input-user"></Label>
                                 <Image [src]="item.assignee.avatar" class="input-img avatar"></Image>
 

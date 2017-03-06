@@ -17,6 +17,9 @@ TextView {
 
 .form-field-col {
     vertical-align: middle;
+}
+
+.form-field-col.right {
     horizontal-align: right;
 }
 

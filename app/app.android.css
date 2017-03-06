@@ -17,6 +17,9 @@ TextView {
 
 .form-field-col {
     vertical-align: middle;
+}
+
+.form-field-col.right {
     horizontal-align: right;
 }
 
@@ -159,8 +162,6 @@ Chore -
     margin-left: 15;
     margin-right: 15;
     font-size: 14;
-    border-width: 1;
-    border-color: red;
 }
 
 .input-field-border {
