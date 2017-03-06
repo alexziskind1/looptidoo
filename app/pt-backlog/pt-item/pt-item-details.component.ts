@@ -1,5 +1,5 @@
 //angular imports
-import { Component, OnInit, HostBinding, ViewChild, ElementRef, ViewContainerRef, NgZone } from "@angular/core";
+import { Component, OnInit, HostBinding, ViewChild, ElementRef, ViewContainerRef } from "@angular/core";
 import { Router, ActivatedRoute, Params, UrlSegment } from '@angular/router';
 
 //nativescript imports
@@ -63,14 +63,15 @@ export class PTItemDetailsComponent {
         private routerExtensions: RouterExtensions,
         private backlogService: BacklogService,
         private modalService: ModalDialogService,
-        private vcRef: ViewContainerRef,
-        private zone: NgZone) { }
+        private vcRef: ViewContainerRef) { }
 
 
     public ngOnInit() {
         this.route.parent.params
             .switchMap((params: Params) => this.backlogService.getItem(params['id']))
-            .subscribe((item: IPTItem) => this.item = item);
+            .subscribe((item: IPTItem) => {
+                this.item = item;
+            });
     }
 
 
@@ -120,7 +121,7 @@ export class PTItemDetailsComponent {
         this.modalService.showModal(ItemTypePickerModalComponent, options).then((res: ItemTypeEnum) => {
             if (res) {
                 this.backlogService.updatePtItemType(this.item, res);
-                this.flashRow(this.itemTypeRow.nativeElement, this.itemTypeName.nativeElement);
+                //this.flashRow(this.itemTypeRow.nativeElement, this.itemTypeName.nativeElement);
             }
         });
     }
@@ -159,7 +160,7 @@ export class PTItemDetailsComponent {
         this.modalService.showModal(UserPickerModalComponent, options).then((res: IUser) => {
             if (res) {
                 this.backlogService.updatePtItemAssignee(this.item, res);
-                this.flashRow(this.itemAssigneeRow.nativeElement, this.itemAssigneeName.nativeElement);
+                //this.flashRow(this.itemAssigneeRow.nativeElement, this.itemAssigneeName.nativeElement);
             }
         });
     }
