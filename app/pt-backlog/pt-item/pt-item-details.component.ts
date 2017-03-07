@@ -74,13 +74,6 @@ export class PTItemDetailsComponent {
             });
     }
 
-
-    public changeMeTapped() {
-        //this.item.estimate++;
-        this.backlogService.incrementEstimate(this.item);
-        this.backlogService.switchAssignee(this.item);
-    }
-
     public textViewFieldHeight(value: string): number {
         if (value) {
             let lineHeight = 20;
