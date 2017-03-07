@@ -11,7 +11,6 @@ import { isIOS } from "platform";
 
 //app imports
 import { BacklogService } from '../../services/backlog.service';
-import { ptItemRoutingConfig } from "./pt-item-routing.module";
 
 import { PTItemDetailsComponent } from './pt-item-details.component';
 import { PTItemTasksComponent } from './pt-item-tasks.component';
@@ -27,7 +26,6 @@ import { PipeModule } from '../pipes/pipe.module';
     imports: [
         NativeScriptModule,
         NativeScriptFormsModule,
-        ptItemRoutingConfig,
         PipeModule
     ],
     declarations: [
