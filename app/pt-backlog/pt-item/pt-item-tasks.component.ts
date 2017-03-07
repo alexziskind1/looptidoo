@@ -6,6 +6,7 @@ import { Router, ActivatedRoute, Params, UrlSegment } from '@angular/router';
 import { RouterExtensions } from 'nativescript-angular/router';
 import { TextView } from 'ui/text-view';
 import { ScrollView } from 'ui/scroll-view';
+import { isIOS, isAndroid } from 'platform';
 
 //3rd party imports
 import 'rxjs/add/operator/switchMap';
@@ -23,6 +24,7 @@ import INewTask = PTDomain.INewTask;
     moduleId: module.id,
     selector: 'pt-item-tasks',
     templateUrl: 'pt-item-tasks.component.html',
+    styleUrls: ['pt-item-tasks.component.css'],
     animations: slideInAnimations
 })
 export class PTItemTasksComponent implements OnInit {
@@ -77,14 +79,9 @@ export class PTItemTasksComponent implements OnInit {
     }
 
     public taskHeight(taskTitle: string) {
-        //if (taskTitle) {
-        let lineHeight = 20;
+        let lineHeight = isIOS ? 20 : 30;
         let numlines = Math.ceil(taskTitle.length / 25);
         return ((numlines < 2 ? 2 : numlines) * lineHeight) + 10;
-        //}
-        //else {
-        //    return 40;
-        //}
     }
 
     public taskTitleChange(task: ITask, args: string) {

@@ -5,11 +5,11 @@
                 <StackLayout class="form-group">
                     <StackLayout class="input-field" [height]="commentHeight(newCommentText)">
                         <GridLayout columns="40, *, 70">
-                            <GridLayout col="0">
-                                <Image [src]="currentUserAvatar" stretch="aspectFit"></Image>
-                            </GridLayout>
+                            <StackLayout col="0">
+                                <Image [src]="currentUserAvatar" stretch="aspectFit" class="img-comment-avatar"></Image>
+                            </StackLayout>
                             <StackLayout col="1">
-                                <TextView #newCommentTV [(ngModel)]="newCommentText" hint="Enter new comment..."></TextView>
+                                <TextView #newCommentTV [(ngModel)]="newCommentText" hint="Enter new comment..." class="comment-new-text"></TextView>
                             </StackLayout>
                             <Button col="2" class="btn-task-add" [class.enabled]="newCommentText.length > 0" isEnabled="{{ newCommentText.length > 0 }}"
                                 text="add" (tap)="addTapped(newCommentTV)"></Button>

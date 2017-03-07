@@ -6,6 +6,7 @@ import { Router, ActivatedRoute, Params, UrlSegment } from '@angular/router';
 import { RouterExtensions } from 'nativescript-angular/router';
 import { TextView } from 'ui/text-view';
 import { ScrollView } from 'ui/scroll-view';
+import { isIOS, isAndroid } from 'platform';
 
 //3rd party imports
 import 'rxjs/add/operator/switchMap';
@@ -23,27 +24,8 @@ import INewComment = PTDomain.INewComment;
     moduleId: module.id,
     selector: 'pt-item-chitchat',
     templateUrl: 'pt-item-chitchat.component.html',
-    animations: slideInAnimations,
-    styles: [`
-        .img-comment-avatar {
-            margin-top: 5;
-        }
-        .comment-text-wrapper {
-            margin-left: 10;
-        }
-        .comment-name {
-            font-size: 10;
-            font-weight: bold;
-            color: #555a97;
-            margin-left: 5;
-        }
-        .comment-date {
-            font-size: 10;
-            font-weight: bold;
-            color: #555a97;
-            horizontal-align: right;
-        }
-    `]
+    styleUrls: ['pt-item-chitchat.component.css'],
+    animations: slideInAnimations
 })
 export class PTItemChitchatComponent implements OnInit {
 
@@ -95,7 +77,7 @@ export class PTItemChitchatComponent implements OnInit {
     }
 
     public commentHeight(commentTitle: string) {
-        let lineHeight = 20;
+        let lineHeight = isIOS ? 20 : 30;
         let numlines = Math.ceil(commentTitle.length / 22);
         return ((numlines < 2 ? 2 : numlines) * lineHeight) + 10;
     }
