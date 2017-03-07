@@ -4,6 +4,15 @@
     height: 100%;
 }
 
+ActionBar {
+     color: #ffffff;
+}
+
+.action-bar-text-item-right {
+    color: #ffffff;
+    padding-right:15;
+}
+
 .side-drawer-panel {
     background-color: #333333;
 }
