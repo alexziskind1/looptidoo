@@ -22,38 +22,7 @@ import IPTItem = PTDomain.IPTItem;
     moduleId: module.id,
     selector: 'pt-item-list',
     templateUrl: 'pt-item-list.component.html',
-    styles: [
-        `
-            .items-list {
-                height: 100%;
-            }
-            .li-wrapper {
-
-            }
-            .li-indicator {
-                height: 58;
-                width: 10;
-                text-align: left;
-            }
-            .li-indicator label {
-                width: 5;
-                height: 58;
-                horizontal-align: left;
-            }
-            .li-info-wrapper {
-                margin-left: 5;
-            }
-            .li-title {
-                font-size: 14;
-                color: #4b5833;
-            }
-            .li-estimate {
-                font-size: 10;
-                font-weight: bold;
-                color: #555a97;
-            }
-        `
-    ]
+    styleUrls: ['pt-item-list.component.css']
 })
 export class PTItemListComponent implements OnInit {
     public ptItems: IPTItem[] = [];
