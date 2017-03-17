@@ -19,21 +19,7 @@ import IUser = PTDomain.IUser;
     moduleId: module.id,
     selector: 'add-item-modal',
     templateUrl: 'add-item-modal.component.html',
-    styles: [`
-        .btn-item-add-wrapper {
-            vertical-align: middle;
-            height: 60;
-        }
-        .btn-item-add {
-            height: 100%;
-            background-color: #e4e4e6;
-            color: #ffffff;
-        }
-        .btn-item-add.enabled {
-            background-color: #555c95;
-            color: #ffffff;
-        }
-    `]
+    styleUrls: ['add-item-modal.component.css']
 })
 export class AddItemModalComponent implements OnInit {
     public prompt: string;
