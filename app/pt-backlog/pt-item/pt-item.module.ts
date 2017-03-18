@@ -18,15 +18,14 @@ import { PTItemChitchatComponent } from './pt-item-chitchat.component';
 import { IncDecComponent } from '../shared/inc-dec.component';
 import { ItemTypePickerModalComponent } from '../shared/item-type-picker-modal.component';
 import { UserPickerModalComponent } from '../shared/user-picker-modal.component';
-//import { TypeDisplayPipe, PriorityClassPipe, PriorityDisplayPipe, TypeImagePipe } from '../pipes';
-import { PipeModule } from '../pipes/pipe.module';
+import { PipesModule } from '../pipes/pipes.module';
 
 
 @NgModule({
     imports: [
         NativeScriptModule,
         NativeScriptFormsModule,
-        PipeModule
+        PipesModule
     ],
     declarations: [
         PTItemDetailsComponent,

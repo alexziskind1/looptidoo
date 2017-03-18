@@ -36,4 +36,4 @@ import {
         EstimateDisplayPipe
     ]
 })
-export class PipeModule { }
+export class PipesModule { }

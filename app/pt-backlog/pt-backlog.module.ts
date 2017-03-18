@@ -16,7 +16,7 @@ import { PTItemListComponent } from './pt-item-list/pt-item-list.component';
 import { PTItemComponent } from './pt-item/pt-item.component';
 import { PTItemModule } from './pt-item/pt-item.module';
 import { AddItemModalComponent } from './shared/add-item-modal.component';
-import { PipeModule } from './pipes/pipe.module';
+import { PipesModule } from './pipes/pipes.module';
 
 
 @NgModule({
@@ -25,7 +25,7 @@ import { PipeModule } from './pipes/pipe.module';
         NativeScriptFormsModule,
         backlogRoutingConfig,
         PTItemModule,
-        PipeModule
+        PipesModule
     ],
     declarations: [
         PTBacklogComponent,
