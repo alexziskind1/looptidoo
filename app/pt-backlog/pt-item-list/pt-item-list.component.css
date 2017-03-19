@@ -28,3 +28,9 @@
     font-weight: bold;
     color: #555a97;
 }
+
+.li-date {
+    font-size: 12;
+    color: #555a97;
+    margin-left: 10;
+}
