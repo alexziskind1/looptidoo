@@ -40,3 +40,19 @@
     color: #555a97;
     margin-left: 10;
 }
+
+.indicator-pbi {
+    background-color: #527FD7;
+}
+
+.indicator-bug {
+    background-color: #D75252;
+}
+
+.indicator-chore {
+    background-color: #666666;
+}
+
+.indicator-impediment {
+    background-color: #D7C152;
+}
