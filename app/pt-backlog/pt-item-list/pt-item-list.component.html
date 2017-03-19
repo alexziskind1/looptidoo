@@ -5,7 +5,9 @@
                 <Label [class]="getIndicatorClass(item)"></Label>
             </StackLayout>
 
-            <Image col="1" [src]="item.assignee.avatar" stretch="aspectFit"></Image>
+            <GridLayout col="1" class="li-avatar">
+                <Image *ngIf="item.assignee" [src]="item.assignee.avatar" stretch="aspectFit"></Image>
+            </GridLayout>
 
             <StackLayout class="li-info-wrapper" col="2">
                 <Label class="li-title" textWrap="true" [text]="item.title"></Label>

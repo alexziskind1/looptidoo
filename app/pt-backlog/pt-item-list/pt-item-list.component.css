@@ -23,6 +23,12 @@
     color: #4b5833;
 }
 
+.li-avatar {
+    background-color: #eeeeee;
+    width: 50;
+    height: 50;
+}
+
 .li-estimate {
     font-size: 10;
     font-weight: bold;
