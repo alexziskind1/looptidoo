@@ -15,8 +15,6 @@ import { ItemTypeEnum, PriorityEnum, StatusEnum } from '../../shared/static-data
 import { FilterState } from '../../shared/filter-state.model';
 import { PTDomain } from '../../typings/domain';
 import IPTItem = PTDomain.IPTItem;
-//import IItemType = PTDomain.IItemType;
-//import IPriority = PTDomain.IPriority;
 
 @Component({
     moduleId: module.id,
@@ -34,8 +32,6 @@ export class PTItemListComponent implements OnInit {
     public set selectedViewIndex(value: number) {
         this._selectedViewIndex = value;
         this.refresh();
-
-        //this.hideSearchKeyboard();
     }
 
     public get ptItemsArray() {
