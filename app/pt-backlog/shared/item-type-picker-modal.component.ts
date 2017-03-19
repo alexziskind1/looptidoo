@@ -2,15 +2,10 @@
 import { Component, OnInit } from "@angular/core";
 
 //nativescript imports
-import { Page } from 'ui/page';
-import { ModalDialogParams, ModalDialogOptions } from "nativescript-angular/directives/dialogs";
-import { ItemEventData, ListView } from 'ui/list-view';
+import { ModalDialogParams } from "nativescript-angular/directives/dialogs";
 
 //app imports
-import { UserService } from '../../services';
 import { ItemTypeEnum } from '../../shared/static-data';
-import { PTDomain } from '../../typings/domain';
-
 
 @Component({
     moduleId: module.id,
@@ -23,7 +18,7 @@ export class ItemTypePickerModalComponent implements OnInit {
 
     public items: DisplayItem[];
 
-    constructor(private params: ModalDialogParams, private userService: UserService) { }
+    constructor(private params: ModalDialogParams) { }
 
     public close() {
         this.params.closeCallback(null);

@@ -8,7 +8,6 @@ import { ItemEventData, ListView } from 'ui/list-view';
 import { ItemTypePickerModalComponent } from "../shared/item-type-picker-modal.component";
 
 //app imports
-import { UserService } from '../../services';
 import { ItemTypeEnum } from '../../shared/static-data';
 import { PTDomain } from '../../typings/domain';
 import INewItem = PTDomain.INewItem;
@@ -31,11 +30,10 @@ export class AddItemModalComponent implements OnInit {
         return this.newItem.title.length > 0;
     }
 
-    constructor(private userService: UserService,
+    constructor(
         private params: ModalDialogParams,
         private modalService: ModalDialogService,
         private vcRef: ViewContainerRef) { }
-
 
     public tapCancel() {
         this.params.closeCallback(null);
