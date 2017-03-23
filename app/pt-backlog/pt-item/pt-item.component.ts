@@ -4,7 +4,7 @@ import { Router, ActivatedRoute, Params, UrlSegment } from '@angular/router';
 
 //nativescript imports
 import { RouterExtensions } from 'nativescript-angular/router';
-import { SegmentedBar, SegmentedBarItem, SelectedIndexChangedEventData } from 'ui/segmented-bar';
+import { SegmentedBar, SegmentedBarItem } from 'ui/segmented-bar';
 import { confirm, action, ActionOptions, ConfirmOptions } from 'ui/dialogs';
 
 //3rd party imports
