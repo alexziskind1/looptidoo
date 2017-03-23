@@ -45,9 +45,8 @@ export class MockDataService {
         let priorityStr = PriorityEnum[_.random(1, 4)];
         let priority = PriorityEnum[priorityStr];
 
-        let statusStr = _.sample(StatusEnum);
+        let statusStr = StatusEnum[_.random(1, 4)];
         let status = StatusEnum[statusStr];
-
 
         let ptItem: IPTItem = {
             id: faker.random.uuid(),
