@@ -5,15 +5,15 @@
             <Image src="res://rps_logo" stretch="aspectFit"></Image>
         </StackLayout>
 
-        <StackLayout row="1">
+        <StackLayout #loginInputs row="1">
             <TextField hint="Username" class="login-field" [(ngModel)]="loginModel.username" [isEnabled]="!isLoading"></TextField>
             <TextField hint="Password" class="login-field" secure="true" [(ngModel)]="loginModel.password" [isEnabled]="!isLoading"></TextField>
-            <StackLayout class="btn-login-wrapper">
-                <Button text="SIGN IN" class="btn-login" (tap)="login()" [isEnabled]="!isLoading"></Button>
+            <StackLayout #btnLoginWrapper class="btn-login-wrapper">
+                <Button #btnLogin text="SIGN IN" class="btn-login" (tap)="login()" [isEnabled]="!isLoading"></Button>
             </StackLayout>
         </StackLayout>
 
 
-        <ActivityIndicator row="2" [busy]="isLoading"></ActivityIndicator>
+        <ActivityIndicator row="1" [busy]="isLoading"></ActivityIndicator>
     </GridLayout>
 </GridLayout>

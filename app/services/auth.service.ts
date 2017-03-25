@@ -9,7 +9,7 @@ import { Observable, Observer } from 'rxjs/Rx';
 import 'rxjs/add/operator/map'
 
 //app imports
-import { APP_SETTINGS_CURRENT_USER } from '../shared/constants';
+import { APP_SETTINGS_CURRENT_USER, DEMO_PASSWORD } from '../shared/constants';
 import { UserService } from './';
 import { PTDomain } from '../typings/domain';
 import IUser = PTDomain.IUser;
@@ -29,10 +29,17 @@ export class AuthenticationService {
     public login(username: string, password: string) {
         return Observable.create((observer: Observer<IUser>) => {
             //simulate logging in
-            setTimeout(() => {
-                observer.next(this.currentUser);
-                appSettingsModule.setString(APP_SETTINGS_CURRENT_USER, JSON.stringify(this.currentUser));
-            }, 1000);
+            if (password === DEMO_PASSWORD) {
+                setTimeout(() => {
+                    observer.next(this.currentUser);
+                    appSettingsModule.setString(APP_SETTINGS_CURRENT_USER, JSON.stringify(this.currentUser));
+                }, 3000);
+            } else {
+                setTimeout(() => {
+                    observer.next(null);
+                }, 3000);
+            }
+
         });
     }
 
