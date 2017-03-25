@@ -13,6 +13,16 @@ TextView {
     font-size: 14;
 }
 
+Button:highlighted {
+  animation-name: btnHighlight;
+  animation-duration: 500ms;
+}
+
+@keyframes btnHighlight {
+  from { background-color: #555c95; }
+  to { background-color: #4b5833; } 
+}
+
 .form-field-col {
     vertical-align: middle;
 }
