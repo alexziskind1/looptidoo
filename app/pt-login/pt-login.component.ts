@@ -57,6 +57,7 @@ export class LoginComponent implements OnInit {
 
     public login() {
         this.isLoading = true;
+        this.loginInputs.className = '';
 
         this.loginAnimationForward();
 
@@ -80,7 +81,6 @@ export class LoginComponent implements OnInit {
 
     private loginAnimationForward() {
         this.btnLogin.opacity = 0;
-        this.loginInputs.className = '';
         return this.btnLoginWrapper.animate({
             scale: { x: 0.5, y: 0.5 },
             duration: 200,
