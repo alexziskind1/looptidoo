@@ -60,8 +60,6 @@ export class LoginComponent implements OnInit {
 
         this.loginAnimationForward();
 
-        let loginSuccess = false;
-
         this.authService.login(this.loginModel.username, this.loginModel.password)
             .subscribe(data => {
                 if (data === null) {
