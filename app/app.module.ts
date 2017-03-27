@@ -19,15 +19,23 @@ setStatusBarColors();
     declarations: [
         AppComponent
     ],
-    bootstrap: [AppComponent],
-    imports: [NativeScriptModule,
+    bootstrap: [
+        AppComponent
+    ],
+    imports: [
+        NativeScriptModule,
         NativeScriptRouterModule,
         appRoutingConfig,
         LoginModule,
-        PTBacklogModule],
-    schemas: [NO_ERRORS_SCHEMA],
-    providers: [UserService,
+        PTBacklogModule
+    ],
+    providers: [
+        UserService,
         AuthenticationService,
-        authProviders]
+        authProviders
+    ],
+    schemas: [
+        NO_ERRORS_SCHEMA
+    ]
 })
 export class AppModule { }
