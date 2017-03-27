@@ -13,17 +13,10 @@ import * as constModule from '../shared/constants';
 import { ItemTypeEnum, PriorityEnum, StatusEnum } from '../shared/static-data';
 
 import { PTDomain } from '../typings/domain';
-
-
 import IUser = PTDomain.IUser;
 import IPTItem = PTDomain.IPTItem;
-//import IItemType = PTDomain.IItemType;
-//import IPriority = PTDomain.IPriority;
 import ITask = PTDomain.ITask;
 import IComment = PTDomain.IComment;
-//import ItemTypeEnum = PTDomain.ItemTypeEnum;
-//import PriorityEnum = PTDomain.PriorityEnum;
-//import StatusEnum = PTDomain.StatusEnum;
 
 @Injectable()
 export class MockDataService {
