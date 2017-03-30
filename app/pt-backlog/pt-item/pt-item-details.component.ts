@@ -113,7 +113,6 @@ export class PTItemDetailsComponent {
         this.modalService.showModal(ItemTypePickerModalComponent, options).then((res: ItemTypeEnum) => {
             if (res) {
                 this.backlogService.updatePtItemType(this.item, res);
-                //this.flashRow(this.itemTypeRow.nativeElement, this.itemTypeName.nativeElement);
             }
         });
     }
@@ -152,22 +151,7 @@ export class PTItemDetailsComponent {
         this.modalService.showModal(UserPickerModalComponent, options).then((res: IUser) => {
             if (res) {
                 this.backlogService.updatePtItemAssignee(this.item, res);
-                //this.flashRow(this.itemAssigneeRow.nativeElement, this.itemAssigneeName.nativeElement);
             }
         });
     }
-
-    private flashRow(theRow: View, theView: View) {
-        theView.opacity = 0;
-        theRow.backgroundColor = new Color('#efefef');
-
-        setTimeout(() => {
-            theRow.animate({
-                duration: 500,
-                backgroundColor: new Color('ffffff')
-            });
-            theView.animate({ duration: 200, opacity: 1 });
-        }, 500);
-    }
-
 }
