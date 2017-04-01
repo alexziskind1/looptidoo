@@ -46,8 +46,7 @@ export class LoginComponent implements OnInit {
 
     constructor(private page: Page,
         private router: RouterExtensions,
-        private authService: AuthenticationService,
-        private userService: UserService) {
+        private authService: AuthenticationService) {
 
     }
 
