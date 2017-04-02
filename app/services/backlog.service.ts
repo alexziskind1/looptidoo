@@ -166,11 +166,6 @@ export class BacklogService {
         this.publishUpdates();
     }
 
-    public incrementEstimate(item: IPTItem) {
-        item.estimate++;
-        this.publishUpdates();
-    }
-
     public updatePtItemStatus(item: IPTItem, newStatusStr: string) {
         let newStatus = StatusEnum[newStatusStr];
         if (item.status != newStatus) {
