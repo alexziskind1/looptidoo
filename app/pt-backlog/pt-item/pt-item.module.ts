@@ -34,10 +34,6 @@ import { PipesModule } from '../pipes/pipes.module';
         IncDecComponent,
         ItemTypePickerModalComponent,
         UserPickerModalComponent
-        //TypeDisplayPipe,
-        //TypeImagePipe,
-        //PriorityDisplayPipe,
-        //PriorityClassPipe
     ],
     entryComponents: [
         ItemTypePickerModalComponent,
