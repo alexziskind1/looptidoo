@@ -1,4 +1,4 @@
-import { ModuleWithProviders } from "@angular/core";
+import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from "@angular/router";
 
 import { PTBacklogComponent } from "./pt-backlog.component";
@@ -40,4 +40,10 @@ const backlogRoutes: Routes = [
         ]
     }
 ];
-export const backlogRoutingConfig: ModuleWithProviders = RouterModule.forChild(backlogRoutes);
+
+
+@NgModule({
+    imports: [RouterModule.forChild(backlogRoutes)],
+    exports: [RouterModule]
+})
+export class BacklogRoutingModule { }
