@@ -2,7 +2,7 @@
 import { NgModule } from "@angular/core";
 
 //nativescript imports
-import { NativeScriptModule } from "nativescript-angular/nativescript.module";
+import { NativeScriptModule } from 'nativescript-angular/nativescript.module';
 
 //app imports
 import {

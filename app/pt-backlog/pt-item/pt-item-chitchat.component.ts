@@ -14,11 +14,7 @@ import 'rxjs/add/operator/switchMap';
 //app imports
 import { slideInDownAnimation, slideInAnimations } from '../../shared/animations';
 import { BacklogService, AuthenticationService, UserService } from '../../services';
-import { PTDomain } from '../../typings/domain';
-import IPTItem = PTDomain.IPTItem;
-import ITask = PTDomain.ITask;
-import INewComment = PTDomain.INewComment;
-
+import { PtItem, PtNewComment } from '../../shared/models/domain-models';
 
 @Component({
     moduleId: module.id,
@@ -30,7 +26,7 @@ import INewComment = PTDomain.INewComment;
 export class PTItemChitchatComponent implements OnInit {
 
     private selectedViewIndex = 0;
-    public item: IPTItem;
+    public item: PtItem;
     public newCommentText: string = '';
 
     public get comments() {
@@ -56,14 +52,14 @@ export class PTItemChitchatComponent implements OnInit {
     public ngOnInit() {
         this.route.parent.params
             .switchMap((params: Params) => this.backlogService.getItem(params['id']))
-            .subscribe((item: IPTItem) => this.item = item);
+            .subscribe((item: PtItem) => this.item = item);
     }
 
     public addTapped(newCommentTV: TextView) {
         let newTitle = this.newCommentText.trim();
         if (newTitle.length === 0)
             return;
-        let newComment: INewComment = {
+        let newComment: PtNewComment = {
             title: newTitle,
             userId: this.authService.currentUser.id
         };

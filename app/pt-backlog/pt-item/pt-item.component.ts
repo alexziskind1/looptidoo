@@ -12,9 +12,8 @@ import 'rxjs/add/operator/switchMap';
 
 //app imports
 import { BacklogService, AuthenticationService } from '../../services';
-import { ItemTypeEnum } from '../../shared/static-data';
-import { PTDomain } from '../../typings/domain';
-import IPTItem = PTDomain.IPTItem;
+import { PtItem } from '../../shared/models/domain-models';
+import { ItemTypeEnum } from '../../shared/models/domain-enums';
 
 
 @Component({
@@ -32,7 +31,7 @@ export class PTItemComponent implements OnInit {
     ];
     public myNavItems: Array<SegmentedBarItem> = [];
     private _selectedItemDetailScreenIndex: number = 0;
-    public item: IPTItem;
+    public item: PtItem;
 
     public get itemTitle() {
         return this.item ? this.item.title : '';
@@ -41,8 +40,6 @@ export class PTItemComponent implements OnInit {
     public get typeImg() {
         return this.item ? ItemTypeEnum.getImage(this.item.type) : '';
     }
-
-
 
     private _selectedIndex;
     public set selectedIndex(val) {
@@ -66,7 +63,7 @@ export class PTItemComponent implements OnInit {
     public ngOnInit() {
         this.route.params
             .switchMap((params: Params) => this.backlogService.getItem(params['id']))
-            .subscribe((item: IPTItem) => this.item = item);
+            .subscribe((item: PtItem) => this.item = item);
     }
 
     public onNavBackTap() {

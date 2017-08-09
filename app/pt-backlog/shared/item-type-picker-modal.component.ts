@@ -5,7 +5,7 @@ import { Component, OnInit } from "@angular/core";
 import { ModalDialogParams } from "nativescript-angular/directives/dialogs";
 
 //app imports
-import { ItemTypeEnum } from '../../shared/static-data';
+import { ItemTypeEnum } from '../../shared/models/domain-enums';
 
 @Component({
     moduleId: module.id,

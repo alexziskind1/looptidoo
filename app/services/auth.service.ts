@@ -11,13 +11,12 @@ import 'rxjs/add/operator/map'
 //app imports
 import { APP_SETTINGS_CURRENT_USER, DEMO_PASSWORD } from '../shared/constants';
 import { UserService } from './';
-import { PTDomain } from '../typings/domain';
-import IUser = PTDomain.IUser;
+import { PtUser } from '../shared/models/domain-models';
 
 @Injectable()
 export class AuthenticationService {
 
-    public currentUser: IUser;
+    public currentUser: PtUser;
 
     constructor(private userService: UserService) {
 
@@ -27,7 +26,7 @@ export class AuthenticationService {
     }
 
     public login(username: string, password: string) {
-        return Observable.create((observer: Observer<IUser>) => {
+        return Observable.create((observer: Observer<PtUser>) => {
             //simulate logging in
             if (password === DEMO_PASSWORD) {
                 setTimeout(() => {

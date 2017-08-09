@@ -1,9 +1,8 @@
 //angular imports
 import { Pipe, PipeTransform } from '@angular/core';
 
-
 //app imports
-import { StatusEnum } from '../../shared/static-data';
+import { StatusEnum } from '../../shared/models/domain-enums';
 
 @Pipe({
     name: 'statusDisplay'

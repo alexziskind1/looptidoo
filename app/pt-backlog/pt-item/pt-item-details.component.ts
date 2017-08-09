@@ -18,10 +18,8 @@ import { ItemTypePickerModalComponent } from "../shared/item-type-picker-modal.c
 import { UserPickerModalComponent } from "../shared/user-picker-modal.component";
 import { slideInDownAnimation, slideInAnimations } from '../../shared/animations';
 import { BacklogService, AuthenticationService } from '../../services';
-import { ItemTypeEnum, PriorityEnum, StatusEnum } from '../../shared/static-data';
-import { PTDomain } from '../../typings/domain';
-import IPTItem = PTDomain.IPTItem;
-import IUser = PTDomain.IUser;
+import { PtItem, PtUser } from '../../shared/models/domain-models';
+import { PriorityEnum, ItemTypeEnum, StatusEnum } from '../../shared/models/domain-enums';
 
 
 @Component({
@@ -38,7 +36,7 @@ export class PTItemDetailsComponent {
     @ViewChild('itemAssigneeRow') itemAssigneeRow: ElementRef;
     @ViewChild('itemAssigneeName') itemAssigneeName: ElementRef;
 
-    public item: IPTItem;
+    public item: PtItem;
     private selectedViewIndex = 0;
 
     public get animationState() {
@@ -68,7 +66,7 @@ export class PTItemDetailsComponent {
     public ngOnInit() {
         this.route.parent.params
             .switchMap((params: Params) => this.backlogService.getItem(params['id']))
-            .subscribe((item: IPTItem) => {
+            .subscribe((item: PtItem) => {
                 this.item = item;
             });
     }
@@ -148,7 +146,7 @@ export class PTItemDetailsComponent {
             viewContainerRef: this.vcRef
         };
 
-        this.modalService.showModal(UserPickerModalComponent, options).then((res: IUser) => {
+        this.modalService.showModal(UserPickerModalComponent, options).then((res: PtUser) => {
             if (res) {
                 this.backlogService.updatePtItemAssignee(this.item, res);
             }

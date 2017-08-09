@@ -11,10 +11,9 @@ import * as _ from 'lodash';
 
 //app imports
 import { BacklogService, AuthenticationService } from '../../services';
-import { ItemTypeEnum, PriorityEnum, StatusEnum } from '../../shared/static-data';
 import { FilterState } from '../../shared/filter-state.model';
-import { PTDomain } from '../../typings/domain';
-import IPTItem = PTDomain.IPTItem;
+import { PtItem } from '../../shared/models/domain-models';
+import { ItemTypeEnum } from '../../shared/models/domain-enums';
 
 @Component({
     moduleId: module.id,
@@ -23,7 +22,7 @@ import IPTItem = PTDomain.IPTItem;
     styleUrls: ['pt-item-list.component.css']
 })
 export class PTItemListComponent implements OnInit {
-    public ptItems: IPTItem[] = [];
+    public ptItems: PtItem[] = [];
     private _selectedViewIndex: number;
 
     @Input() public get selectedViewIndex() {
@@ -47,7 +46,7 @@ export class PTItemListComponent implements OnInit {
     }
 
 
-    public getIndicatorClass(item: IPTItem) {
+    public getIndicatorClass(item: PtItem) {
         return ItemTypeEnum.getIndicatorClass(item.type);
     }
 
@@ -73,7 +72,7 @@ export class PTItemListComponent implements OnInit {
 
     public listItemTap(args: ItemEventData) {
         let lv = <ListView>args.object;
-        let item = <IPTItem>lv.items[args.index];
+        let item = <PtItem>lv.items[args.index];
         this._routerExtensions.navigate(['/pt-item', item.id]);
     }
 

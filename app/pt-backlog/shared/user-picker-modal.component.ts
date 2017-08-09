@@ -8,8 +8,7 @@ import { ItemEventData, ListView } from 'ui/list-view';
 
 //app imports
 import { UserService } from '../../services';
-import { PTDomain } from '../../typings/domain';
-import IUser = PTDomain.IUser;
+import { PtUser } from '../../shared/models/domain-models';
 
 @Component({
     moduleId: module.id,
@@ -34,7 +33,7 @@ export class UserPickerModalComponent implements OnInit {
 
     public listItemTap(args: ItemEventData) {
         let lv = <ListView>args.object;
-        let user = <IUser>lv.items[args.index];
+        let user = <PtUser>lv.items[args.index];
         this.params.closeCallback(user);
     }
 }

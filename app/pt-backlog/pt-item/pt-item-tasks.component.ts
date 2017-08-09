@@ -14,11 +14,7 @@ import 'rxjs/add/operator/switchMap';
 //app imports
 import { slideInDownAnimation, slideInAnimations } from '../../shared/animations';
 import { BacklogService, AuthenticationService } from '../../services';
-import { PTDomain } from '../../typings/domain';
-import IPTItem = PTDomain.IPTItem;
-import ITask = PTDomain.ITask;
-import INewTask = PTDomain.INewTask;
-
+import { PtItem, PtTask, PtNewTask } from '../../shared/models/domain-models';
 
 @Component({
     moduleId: module.id,
@@ -29,7 +25,7 @@ import INewTask = PTDomain.INewTask;
 })
 export class PTItemTasksComponent implements OnInit {
     private selectedViewIndex = 0;
-    public item: IPTItem;
+    public item: PtItem;
     public newTaskTitle: string = '';
 
     public get tasks() {
@@ -51,12 +47,12 @@ export class PTItemTasksComponent implements OnInit {
     public ngOnInit() {
         this.route.parent.params
             .switchMap((params: Params) => this.backlogService.getItem(params['id']))
-            .subscribe((item: IPTItem) => this.item = item);
+            .subscribe((item: PtItem) => this.item = item);
     }
 
 
 
-    public toggleTapped(task: ITask) {
+    public toggleTapped(task: PtTask) {
         this.backlogService.toggleTask(this.item, task);
     }
 
@@ -65,7 +61,7 @@ export class PTItemTasksComponent implements OnInit {
         let newTitle = this.newTaskTitle.trim();
         if (newTitle.length === 0)
             return;
-        let newTask: INewTask = {
+        let newTask: PtNewTask = {
             title: newTitle,
             completed: false
         };
@@ -84,7 +80,7 @@ export class PTItemTasksComponent implements OnInit {
         return ((numlines < 2 ? 2 : numlines) * lineHeight) + 10;
     }
 
-    public taskTitleChange(task: ITask, args: string) {
+    public taskTitleChange(task: PtTask, args: string) {
         this.backlogService.updateTask(this.item, task, args);
     }
 }

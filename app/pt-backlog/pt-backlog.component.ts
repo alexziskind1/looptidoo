@@ -10,9 +10,7 @@ import { RouterExtensions } from 'nativescript-angular/router';
 //app imports
 import { BacklogService, AuthenticationService } from '../services';
 import { AddItemModalComponent } from "./shared/add-item-modal.component";
-import { PTDomain } from '../typings/domain';
-import INewItem = PTDomain.INewItem;
-
+import { PtNewItem } from '../shared/models/domain-models';
 
 @Component({
     moduleId: module.id,
@@ -63,7 +61,7 @@ export class PTBacklogComponent implements AfterViewInit {
             viewContainerRef: this.vcRef
         };
 
-        this.modalService.showModal(AddItemModalComponent, options).then((newItem: INewItem) => {
+        this.modalService.showModal(AddItemModalComponent, options).then((newItem: PtNewItem) => {
             if (newItem != null) {
                 this.backlogService.addNewPTItem(newItem, this.authService.currentUser);
             }

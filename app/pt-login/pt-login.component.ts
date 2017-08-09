@@ -12,8 +12,8 @@ import * as enums from 'ui/enums';
 //app imports
 import { AuthenticationService, UserService } from '../services';
 import { DEMO_PASSWORD } from '../shared/constants';
-import { PTDomain } from '../typings/domain';
-import ILoginModel = PTDomain.ILoginModel;
+import { PtLoginModel } from '../shared/models/domain-models';
+
 
 @Component({
     moduleId: module.id,
@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
         return this.btnLoginRef.nativeElement;
     }
 
-    public loginModel: ILoginModel = { username: 'alexziskind', password: DEMO_PASSWORD };
+    public loginModel: PtLoginModel = { username: 'alexziskind', password: DEMO_PASSWORD };
 
     constructor(private page: Page,
         private router: RouterExtensions,

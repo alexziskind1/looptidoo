@@ -8,11 +8,8 @@ import { ItemEventData, ListView } from 'ui/list-view';
 import { ItemTypePickerModalComponent } from "../shared/item-type-picker-modal.component";
 
 //app imports
-import { ItemTypeEnum } from '../../shared/static-data';
-import { PTDomain } from '../../typings/domain';
-import INewItem = PTDomain.INewItem;
-
-import IUser = PTDomain.IUser;
+import { PtNewItem } from '../../shared/models/domain-models';
+import { ItemTypeEnum } from '../../shared/models/domain-enums';
 
 @Component({
     moduleId: module.id,
@@ -24,7 +21,7 @@ export class AddItemModalComponent implements OnInit {
     public prompt: string;
 
     public formFieldGridCols = '90, *, 90';
-    public newItem: INewItem;
+    public newItem: PtNewItem;
 
     public get btnDoneEnabled() {
         return this.newItem.title.length > 0;

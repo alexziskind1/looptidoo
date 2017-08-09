@@ -9,37 +9,30 @@ import * as _ from 'lodash';
 import { AuthenticationService, UserService } from './';
 import { MockDataService } from './mock-data.service';
 import { FilterState } from '../shared/filter-state.model';
-import { PTDomain } from '../typings/domain';
-import { ItemTypeEnum, PriorityEnum, StatusEnum } from '../shared/static-data';
-import IUser = PTDomain.IUser;
-import IPTItem = PTDomain.IPTItem;
-import ITask = PTDomain.ITask;
-import IComment = PTDomain.IComment;
-import INewItem = PTDomain.INewItem;
-import INewTask = PTDomain.INewTask;
-import INewComment = PTDomain.INewComment;
+import { PtItem, PtNewItem, PtUser, PtTask, PtNewTask, PtNewComment, PtComment } from '../shared/models/domain-models';
+import { PriorityEnum, StatusEnum, ItemTypeEnum } from '../shared/models/domain-enums';
 
 
 @Injectable()
 export class BacklogService {
 
-    private _genetatedItems: Array<IPTItem> = [];
-    private _itemsObs: Observable<Array<IPTItem>>;
-    private _itemsSubj: BehaviorSubject<Array<IPTItem>>;
-    private _observer: Observer<Array<IPTItem>>;
+    private _genetatedItems: Array<PtItem> = [];
+    private _itemsObs: Observable<Array<PtItem>>;
+    private _itemsSubj: BehaviorSubject<Array<PtItem>>;
+    private _observer: Observer<Array<PtItem>>;
     private _filterState: FilterState;
-    private _allItems: Array<IPTItem> = [];
-    private _filteredItems: Array<IPTItem> = [];
+    private _allItems: Array<PtItem> = [];
+    private _filteredItems: Array<PtItem> = [];
 
-    public get itemsSubj(): BehaviorSubject<Array<IPTItem>> {
+    public get itemsSubj(): BehaviorSubject<Array<PtItem>> {
         return this._itemsSubj;
     }
 
-    public get items(): Array<IPTItem> {
+    public get items(): Array<PtItem> {
         return this._genetatedItems;
     }
 
-    public get ptItemsObs(): Observable<Array<IPTItem>> {
+    public get ptItemsObs(): Observable<Array<PtItem>> {
         return this._itemsObs;
     }
 
@@ -59,7 +52,7 @@ export class BacklogService {
         this.publishUpdates();
 
 
-        this._itemsObs = Observable.create((observer: Observer<Array<IPTItem>>) => {
+        this._itemsObs = Observable.create((observer: Observer<Array<PtItem>>) => {
             this._observer = observer;
             observer.next(this._allItems);
         });
@@ -71,8 +64,8 @@ export class BacklogService {
         return Promise.resolve(selectedItem);
     }
 
-    public addNewPTItem(newItem: INewItem, assignee: IUser) {
-        let item: IPTItem = {
+    public addNewPTItem(newItem: PtNewItem, assignee: PtUser) {
+        let item: PtItem = {
             id: _.uniqueId(),
             title: newItem.title,
             description: newItem.description,
@@ -89,31 +82,31 @@ export class BacklogService {
         this.addItem(item);
     }
 
-    public addItem(item: IPTItem) {
+    public addItem(item: PtItem) {
         this._allItems.unshift(item);
         this._observer.next(this._allItems);
         this.publishUpdates();
     }
 
-    public deleteItem(item: IPTItem) {
+    public deleteItem(item: PtItem) {
         _.remove(this._allItems, (ptitem) => ptitem.id === item.id);
         this.publishUpdates();
     }
 
-    public toggleTask(item: IPTItem, task: ITask) {
+    public toggleTask(item: PtItem, task: PtTask) {
         var index = _.indexOf(item.tasks, task);
         task.completed = !task.completed;
         item.tasks.splice(index, 1, task);
     }
 
-    public updateTask(item: IPTItem, task: ITask, newTitle: string) {
+    public updateTask(item: PtItem, task: PtTask, newTitle: string) {
         var index = _.indexOf(item.tasks, task);
         task.title = newTitle;
         item.tasks.splice(index, 1, task);
     }
 
-    public addTask(item: IPTItem, newTask: INewTask) {
-        var task: ITask = {
+    public addTask(item: PtItem, newTask: PtNewTask) {
+        var task: PtTask = {
             id: _.uniqueId(),
             title: newTask.title,
             completed: newTask.completed,
@@ -123,8 +116,8 @@ export class BacklogService {
         item.tasks.unshift(task);
     }
 
-    public addComment(item: IPTItem, newComment: INewComment) {
-        var comment: IComment = {
+    public addComment(item: PtItem, newComment: PtNewComment) {
+        var comment: PtComment = {
             id: _.uniqueId(),
             title: newComment.title,
             user: _.find(this.userService.users, (user) => user.id === newComment.userId),
@@ -134,17 +127,17 @@ export class BacklogService {
         item.comments.unshift(comment);
     }
 
-    public updatePtItem(item: IPTItem) {
+    public updatePtItem(item: PtItem) {
         this.publishUpdates();
     }
 
-    public updatePtItemEstimate(item: IPTItem, incdec: boolean) {
+    public updatePtItemEstimate(item: PtItem, incdec: boolean) {
         if (item.estimate === 0 && !incdec) return;
         item.estimate = incdec ? item.estimate + 1 : item.estimate - 1;
         this.publishUpdates();
     }
 
-    public updatePtItemPriority(item: IPTItem, incdec: boolean) {
+    public updatePtItemPriority(item: PtItem, incdec: boolean) {
         if (PriorityEnum.isMax(item.priority) && incdec) return;
         if (PriorityEnum.isMin(item.priority) && !incdec) return;
 
@@ -156,17 +149,17 @@ export class BacklogService {
         this.publishUpdates();
     }
 
-    public updatePtItemType(item: IPTItem, newType: ItemTypeEnum) {
+    public updatePtItemType(item: PtItem, newType: ItemTypeEnum) {
         item.type = newType;
         this.publishUpdates();
     }
 
-    public updatePtItemAssignee(item: IPTItem, user: IUser) {
+    public updatePtItemAssignee(item: PtItem, user: PtUser) {
         item.assignee = user;
         this.publishUpdates();
     }
 
-    public updatePtItemStatus(item: IPTItem, newStatusStr: string) {
+    public updatePtItemStatus(item: PtItem, newStatusStr: string) {
         let newStatus = StatusEnum[newStatusStr];
         if (item.status != newStatus) {
             item.status = newStatus;
@@ -174,8 +167,8 @@ export class BacklogService {
         }
     }
 
-    public switchAssignee(item: IPTItem) {
-        let ranUser = _.sample<IUser>(this.userService.users);
+    public switchAssignee(item: PtItem) {
+        let ranUser = _.sample<PtUser>(this.userService.users);
         item.assignee = ranUser;
         this.publishUpdates();
     }

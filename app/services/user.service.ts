@@ -7,21 +7,20 @@ import * as _ from 'lodash';
 
 //app imports
 import { MockDataService } from './mock-data.service';
-import { PTDomain } from '../typings/domain';
-import IUser = PTDomain.IUser;
+import { PtUser } from '../shared/models/domain-models';
 
 @Injectable()
 export class UserService {
 
-    private _generatedUsers: Array<IUser> = [];
-    private _observer: Observer<Array<IUser>>;
+    private _generatedUsers: Array<PtUser> = [];
+    private _observer: Observer<Array<PtUser>>;
 
-    public get users(): Array<IUser> {
+    public get users(): Array<PtUser> {
         return this._generatedUsers;
     }
 
-    public get usersObs(): Observable<Array<IUser>> {
-        return Observable.create((observer: Observer<Array<IUser>>) => {
+    public get usersObs(): Observable<Array<PtUser>> {
+        return Observable.create((observer: Observer<Array<PtUser>>) => {
             this._observer = observer;
             observer.next(this._generatedUsers);
         });

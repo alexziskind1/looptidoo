@@ -10,25 +10,20 @@ import * as _ from 'lodash';
 
 //app imports
 import * as constModule from '../shared/constants';
-import { ItemTypeEnum, PriorityEnum, StatusEnum } from '../shared/static-data';
-
-import { PTDomain } from '../typings/domain';
-import IUser = PTDomain.IUser;
-import IPTItem = PTDomain.IPTItem;
-import ITask = PTDomain.ITask;
-import IComment = PTDomain.IComment;
+import { PtItem, PtUser, PtTask, PtComment } from '../shared/models/domain-models';
+import { PriorityEnum, ItemTypeEnum, StatusEnum } from '../shared/models/domain-enums';
 
 @Injectable()
 export class MockDataService {
 
-    public generatePTItems(users: Array<IUser>): Array<IPTItem> {
+    public generatePTItems(users: Array<PtUser>): Array<PtItem> {
         let items = _.times(constModule.NUM_PT_ITEMS, () => {
             return this.generatePTItem(users);
         });
         return items;
     }
 
-    public generatePTItem(users: Array<IUser>): IPTItem {
+    public generatePTItem(users: Array<PtUser>): PtItem {
         let date = faker.date.past(1);
         let title = this.toTitleCase(faker.company.bs());
 
@@ -41,7 +36,7 @@ export class MockDataService {
         let statusStr = StatusEnum[_.random(1, 4)];
         let status = StatusEnum[statusStr];
 
-        let ptItem: IPTItem = {
+        let ptItem: PtItem = {
             id: faker.random.uuid(),
             title: title,
             dateCreated: date,
@@ -58,7 +53,7 @@ export class MockDataService {
         return ptItem;
     }
 
-    public generateTasks(): Array<ITask> {
+    public generateTasks(): Array<PtTask> {
         let numTasks = _.random(5, 20);
         let tasks = _.times(numTasks, () => {
             return this.generateTask();
@@ -66,10 +61,10 @@ export class MockDataService {
         return tasks;
     }
 
-    public generateTask(): ITask {
+    public generateTask(): PtTask {
         let date = faker.date.past(1);
         let title = this.toTitleCase(faker.company.bs());
-        let task: ITask = {
+        let task: PtTask = {
             id: faker.random.uuid(),
             title: title,
             dateCreated: date,
@@ -79,7 +74,7 @@ export class MockDataService {
         return task;
     }
 
-    public generateUsers(): Array<IUser> {
+    public generateUsers(): Array<PtUser> {
         let avatarsMen = this.getUserAvatars('images/avatars/base64/men.txt');
         let avatarsWomen = this.getUserAvatars('images/avatars/base64/women.txt');
 
@@ -91,10 +86,10 @@ export class MockDataService {
         return users;
     }
 
-    public getMeUser(): IUser {
+    public getMeUser(): PtUser {
         let avatarMe = this.getUserAvatars('images/avatars/base64/me.txt')[0];
 
-        let userMe: IUser = {
+        let userMe: PtUser = {
             id: faker.random.uuid(),
             fullName: 'Alex Ziskind',
             avatar: avatarMe
@@ -102,7 +97,7 @@ export class MockDataService {
         return userMe;
     }
 
-    public generateUser(avatarsMen: string[], avatarsWomen?: string[]): IUser {
+    public generateUser(avatarsMen: string[], avatarsWomen?: string[]): PtUser {
         let genderBool = faker.random.boolean();
         let genderInt = parseInt(genderBool + '');
         let firstName = faker.name.firstName(genderInt);
@@ -114,7 +109,7 @@ export class MockDataService {
             avatar = _.sample(avatarsMen);
         }
 
-        let user: IUser = {
+        let user: PtUser = {
             id: faker.random.uuid(),
             fullName: firstName + ' ' + lastName,
             avatar: avatar
@@ -122,7 +117,7 @@ export class MockDataService {
         return user;
     }
 
-    public generateComments(users: Array<IUser>): Array<IComment> {
+    public generateComments(users: Array<PtUser>): Array<PtComment> {
         let numComments = _.random(0, 5);
         let comments = _.times(numComments, () => {
             return this.generateComment(users);
@@ -130,12 +125,12 @@ export class MockDataService {
         return comments;
     }
 
-    public generateComment(users: Array<IUser>): IComment {
+    public generateComment(users: Array<PtUser>): PtComment {
         let date = faker.date.past(1);
         let commentText = this.toTitleCase(faker.lorem.sentence(20, 40));
         //let commentText = this.toTitleCase(faker.company.bs());
 
-        let comment: IComment = {
+        let comment: PtComment = {
             id: faker.random.uuid(),
             title: commentText,
             dateCreated: date,
