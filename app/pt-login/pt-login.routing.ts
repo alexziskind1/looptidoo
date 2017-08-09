@@ -1,4 +1,4 @@
-import { ModuleWithProviders } from "@angular/core";
+import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from "@angular/router";
 
 import { LoginComponent } from "./pt-login.component";
@@ -6,4 +6,9 @@ import { LoginComponent } from "./pt-login.component";
 const loginRoutes: Routes = [
     { path: "login", component: LoginComponent },
 ];
-export const loginRouting: ModuleWithProviders = RouterModule.forChild(loginRoutes);
+
+@NgModule({
+    imports: [RouterModule.forChild(loginRoutes)],
+    exports: [RouterModule]
+})
+export class LoginRoutingModule { }

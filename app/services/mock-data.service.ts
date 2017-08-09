@@ -80,12 +80,11 @@ export class MockDataService {
     }
 
     public generateUsers(): Array<IUser> {
-        //let avatarsMen = this.getUserAvatars('images/avatars/base64/men.txt');
-        //let avatarsWomen = this.getUserAvatars('images/avatars/base64/women.txt');
-        let avatarsLi = this.getUserLiUserAvatars('images/avatars/base64/base64.txt');
+        let avatarsMen = this.getUserAvatars('images/avatars/base64/men.txt');
+        let avatarsWomen = this.getUserAvatars('images/avatars/base64/women.txt');
+
         let users = _.times(constModule.NUM_USERS, () => {
-            //return this.generateUser(avatarsMen, avatarsWomen);
-            return this.generateUser(avatarsLi);
+            return this.generateUser(avatarsMen, avatarsWomen);
         });
         let userMe = this.getMeUser();
         users.unshift(userMe);
