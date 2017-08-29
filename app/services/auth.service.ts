@@ -11,25 +11,31 @@ import 'rxjs/add/operator/map'
 //app imports
 import { APP_SETTINGS_CURRENT_USER, DEMO_PASSWORD } from '../shared/constants';
 import { UserService } from './';
-import { PtUser } from '../shared/models/domain-models';
+import { PtCurrentUser } from '../shared/models/domain-models';
+import { Store } from "../shared/store";
 
 @Injectable()
 export class AuthenticationService {
 
-    public currentUser: PtUser;
+    //public currentUser: PtCurrentUser;
+    private get currentUser() {
+        return this.store.value.currentUser;
+    }
 
-    constructor(private userService: UserService) {
+    constructor(private store: Store, private userService: UserService) {
 
         userService.usersObs.subscribe((d) => {
-            this.currentUser = d[0];
+            //this.currentUser = <PtCurrentUser>d[0];
+            this.store.set('currentUser', d[0]);
         });
     }
 
     public login(username: string, password: string) {
-        return Observable.create((observer: Observer<PtUser>) => {
+        return Observable.create((observer: Observer<PtCurrentUser>) => {
             //simulate logging in
             if (password === DEMO_PASSWORD) {
                 setTimeout(() => {
+                    this.currentUser.isAuthenticated = true;
                     observer.next(this.currentUser);
                     appSettingsModule.setString(APP_SETTINGS_CURRENT_USER, JSON.stringify(this.currentUser));
                 }, 3000);

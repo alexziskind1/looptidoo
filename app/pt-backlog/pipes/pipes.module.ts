@@ -11,7 +11,8 @@ import {
     PriorityClassPipe,
     PriorityDisplayPipe,
     TypeImagePipe,
-    StatusDisplayPipe
+    StatusDisplayPipe,
+    SelectedFilterPipe
 } from './';
 
 
@@ -25,7 +26,8 @@ import {
         PriorityDisplayPipe,
         StatusDisplayPipe,
         PriorityClassPipe,
-        EstimateDisplayPipe
+        EstimateDisplayPipe,
+        SelectedFilterPipe
     ],
     exports: [
         TypeDisplayPipe,
@@ -33,7 +35,8 @@ import {
         PriorityDisplayPipe,
         StatusDisplayPipe,
         PriorityClassPipe,
-        EstimateDisplayPipe
+        EstimateDisplayPipe,
+        SelectedFilterPipe
     ]
 })
 export class PipesModule { }

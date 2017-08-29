@@ -1,5 +1,11 @@
 //angular imports
-import { Component, AfterViewInit, ViewChild, ViewContainerRef, ChangeDetectionStrategy } from "@angular/core";
+import { Component, OnInit, AfterViewInit, OnDestroy, ViewChild, ViewContainerRef, ChangeDetectionStrategy } from "@angular/core";
+
+//third party imports
+import { Observable } from "rxjs/Observable";
+import { Subscription } from "rxjs/Subscription";
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/do';
 
 //nativescript imports
 import { ModalDialogService, ModalDialogOptions } from 'nativescript-angular/modal-dialog';
@@ -10,7 +16,10 @@ import { RouterExtensions } from 'nativescript-angular/router';
 //app imports
 import { BacklogService, AuthenticationService } from '../services';
 import { AddItemModalComponent } from "./shared/add-item-modal.component";
-import { PtNewItem } from '../shared/models/domain-models';
+import { PtNewItem, PtItem } from '../shared/models/domain-models';
+import { Store } from "../shared/store";
+import { PtBacklogService } from "../services/ptbacklog.service";
+import { ViewIndex } from "../shared/models/state";
 
 @Component({
     moduleId: module.id,
@@ -19,25 +28,53 @@ import { PtNewItem } from '../shared/models/domain-models';
     styleUrls: ['pt-backlog.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PTBacklogComponent implements AfterViewInit {
+export class PTBacklogComponent implements OnInit, AfterViewInit, OnDestroy {
 
     private _sideDrawerTransition: DrawerTransitionBase = new SlideInOnTopTransition();
     private _drawer: SideDrawerType;
 
     @ViewChild(RadSideDrawerComponent) public drawerComponent: RadSideDrawerComponent;
 
-    public selectedViewIndex: number;
+    //public selectedViewIndex: number;
+    public selectedViewIndex$: Observable<number> = this.store.select<number>('selectedViewIndex');
+
+
+
+    public myItemsClass$ = this.selectedViewIndex$
+        .map(selectedViewIndex => selectedViewIndex === 0 ? 'slide-out-btn-selected' : 'slide-out-btn');
+    public openItemsClass$ = this.selectedViewIndex$
+        .map(selectedViewIndex => selectedViewIndex === 1 ? 'slide-out-btn-selected' : 'slide-out-btn');
+    public finishedItemsClass$ = this.selectedViewIndex$
+        .map(selectedViewIndex => selectedViewIndex === 2 ? 'slide-out-btn-selected' : 'slide-out-btn');
 
     public get sideDrawerTransition(): DrawerTransitionBase {
         return this._sideDrawerTransition;
     }
 
+    public items$: Observable<PtItem[]>;
+    public blSub: Subscription;
+
     constructor(private router: RouterExtensions,
+        private store: Store,
+        private ptBacklogService: PtBacklogService,
         private backlogService: BacklogService,
         private authService: AuthenticationService,
         private modalService: ModalDialogService,
         private vcRef: ViewContainerRef) {
-        this.selectedViewIndex = 1;
+        //this.selectedViewIndex = 1;
+    }
+
+    public ngOnInit() {
+        this.items$ = this.store.select<PtItem[]>('backlogItems');
+        this.selectedViewIndex$.subscribe(next => {
+            console.log('selectedIndex: ' + next);
+            this.ptBacklogService.fetchItems();
+        });
+        this.blSub = this.ptBacklogService.getBacklog$.subscribe();
+    }
+
+    public ngOnDestroy() {
+        this.blSub.unsubscribe();
     }
 
     public ngAfterViewInit() {
@@ -50,7 +87,8 @@ export class PTBacklogComponent implements AfterViewInit {
     }
 
     public selectFilteredView(itemFilterIndex: number, pageTitle: string) {
-        this.selectedViewIndex = itemFilterIndex;
+        //this.selectedViewIndex = itemFilterIndex;
+        this.store.set<ViewIndex>('selectedViewIndex', { idx: itemFilterIndex });
         this._drawer.closeDrawer();
     }
 
@@ -63,7 +101,7 @@ export class PTBacklogComponent implements AfterViewInit {
 
         this.modalService.showModal(AddItemModalComponent, options).then((newItem: PtNewItem) => {
             if (newItem != null) {
-                this.backlogService.addNewPTItem(newItem, this.authService.currentUser);
+                this.backlogService.addNewPTItem(newItem);
             }
         });
     }

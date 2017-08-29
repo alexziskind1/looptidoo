@@ -11,6 +11,7 @@ import { MockDataService } from './mock-data.service';
 import { FilterState } from '../shared/filter-state.model';
 import { PtItem, PtNewItem, PtUser, PtTask, PtNewTask, PtNewComment, PtComment } from '../shared/models/domain-models';
 import { PriorityEnum, StatusEnum, ItemTypeEnum } from '../shared/models/domain-enums';
+import { Store } from "../shared/store";
 
 
 @Injectable()
@@ -36,7 +37,9 @@ export class BacklogService {
         return this._itemsObs;
     }
 
-    constructor(private mockDataService: MockDataService,
+    constructor(
+        private store: Store,
+        private mockDataService: MockDataService,
         private userService: UserService,
         private authService: AuthenticationService,
         private zone: NgZone) {
@@ -64,7 +67,7 @@ export class BacklogService {
         return Promise.resolve(selectedItem);
     }
 
-    public addNewPTItem(newItem: PtNewItem, assignee: PtUser) {
+    public addNewPTItem(newItem: PtNewItem) {
         let item: PtItem = {
             id: _.uniqueId(),
             title: newItem.title,
@@ -73,7 +76,7 @@ export class BacklogService {
             estimate: 0,
             priority: PriorityEnum.Medium,
             status: StatusEnum.Open,
-            assignee: assignee,
+            assignee: this.store.value.currentUser,
             tasks: [],
             comments: [],
             dateCreated: new Date(),
@@ -182,7 +185,7 @@ export class BacklogService {
         var filteredItems = [];
         switch (this._filterState.filterViewIndex) {
             case 0:
-                filteredItems = this._allItems.filter(i => i.assignee.id === this.authService.currentUser.id);
+                filteredItems = this._allItems.filter(i => i.assignee.id === this.store.value.currentUser.id);
                 break;
             case 1:
                 filteredItems = this._allItems.filter(i => i.status === StatusEnum.Open || i.status === StatusEnum.ReOpened);

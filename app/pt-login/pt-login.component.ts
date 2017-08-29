@@ -12,7 +12,8 @@ import * as enums from 'ui/enums';
 //app imports
 import { AuthenticationService, UserService } from '../services';
 import { DEMO_PASSWORD } from '../shared/constants';
-import { PtLoginModel } from '../shared/models/domain-models';
+import { PtLoginModel, PtCurrentUser, PtUser } from '../shared/models/domain-models';
+import { Store } from "../shared/store";
 
 
 @Component({
@@ -46,6 +47,7 @@ export class LoginComponent implements OnInit {
 
     constructor(private page: Page,
         private router: RouterExtensions,
+        private store: Store,
         private authService: AuthenticationService) {
 
     }
@@ -61,8 +63,8 @@ export class LoginComponent implements OnInit {
         this.loginAnimationForward();
 
         this.authService.login(this.loginModel.username, this.loginModel.password)
-            .subscribe(data => {
-                if (data === null) {
+            .subscribe((user: PtCurrentUser) => {
+                if (user === null) {
                     this.loginAnimationReverse()
                         .then(() => {
                             this.loginInputs.className = 'login-failed';

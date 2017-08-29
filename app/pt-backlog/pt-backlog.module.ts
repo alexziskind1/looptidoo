@@ -16,6 +16,7 @@ import { PTItemComponent } from './pt-item/pt-item.component';
 import { PTItemModule } from './pt-item/pt-item.module';
 import { AddItemModalComponent } from './shared/add-item-modal.component';
 import { PipesModule } from './pipes/pipes.module';
+import { PtBacklogService } from "../services/ptbacklog.service";
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { PipesModule } from './pipes/pipes.module';
         AddItemModalComponent
     ],
     providers: [
+        PtBacklogService,
         BacklogService,
         MockDataService
     ]

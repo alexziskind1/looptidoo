@@ -5,17 +5,28 @@ export interface PtLoginModel {
     password: string;
 }
 
-export interface PtUser {
-    id: string;
-    fullName: string;
-    avatar: string;
-}
-
 export interface PtObjectBase {
     id: string;
-    title: string;
+    title?: string;
     dateCreated: Date;
     dateModified: Date;
+    dateDeleted?: Date;
+}
+
+export enum Gender {
+    Male = "Male",
+    Female = "Female",
+    Unspecified = "Unspecified",
+}
+
+export interface PtUser extends PtObjectBase {
+    fullName: string;
+    avatar: string;
+    gender: Gender;
+}
+
+export interface PtCurrentUser extends PtUser {
+    isAuthenticated: boolean;
 }
 
 export interface PtItem extends PtObjectBase {

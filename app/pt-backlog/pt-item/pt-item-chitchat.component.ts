@@ -15,6 +15,7 @@ import 'rxjs/add/operator/switchMap';
 import { slideInDownAnimation, slideInAnimations } from '../../shared/animations';
 import { BacklogService, AuthenticationService, UserService } from '../../services';
 import { PtItem, PtNewComment } from '../../shared/models/domain-models';
+import { Store } from "../../shared/store";
 
 @Component({
     moduleId: module.id,
@@ -38,15 +39,16 @@ export class PTItemChitchatComponent implements OnInit {
     }
 
     public get currentUserAvatar() {
-        return this.authService.currentUser.avatar;
+        return this.store.value.currentUser.avatar;
     }
 
-    constructor(private route: ActivatedRoute,
+    constructor(
+        private store: Store,
+        private route: ActivatedRoute,
         private router: Router,
         private routerExtensions: RouterExtensions,
-        private backlogService: BacklogService,
-        private authService: AuthenticationService,
-        private userService: UserService) { }
+        private backlogService: BacklogService
+    ) { }
 
 
     public ngOnInit() {
@@ -61,7 +63,7 @@ export class PTItemChitchatComponent implements OnInit {
             return;
         let newComment: PtNewComment = {
             title: newTitle,
-            userId: this.authService.currentUser.id
+            userId: this.store.value.currentUser.id
         };
         this.backlogService.addComment(this.item, newComment);
         this.newCommentText = '';

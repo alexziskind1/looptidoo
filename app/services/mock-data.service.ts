@@ -10,7 +10,7 @@ import * as _ from 'lodash';
 
 //app imports
 import * as constModule from '../shared/constants';
-import { PtItem, PtUser, PtTask, PtComment } from '../shared/models/domain-models';
+import { PtItem, PtUser, PtTask, PtComment, Gender } from '../shared/models/domain-models';
 import { PriorityEnum, ItemTypeEnum, StatusEnum } from '../shared/models/domain-enums';
 
 @Injectable()
@@ -75,44 +75,42 @@ export class MockDataService {
     }
 
     public generateUsers(): Array<PtUser> {
-        let avatarsMen = this.getUserAvatars('images/avatars/base64/men.txt');
-        let avatarsWomen = this.getUserAvatars('images/avatars/base64/women.txt');
-
-        let users = _.times(constModule.NUM_USERS, () => {
-            return this.generateUser(avatarsMen, avatarsWomen);
+        let users = _.times(constModule.NUM_USERS, (idx: number) => {
+            return this.generateUser(idx);
         });
-        let userMe = this.getMeUser();
-        users.unshift(userMe);
+
         return users;
     }
 
     public getMeUser(): PtUser {
         let avatarMe = this.getUserAvatars('images/avatars/base64/me.txt')[0];
-
+        let date = faker.date.past(1);
         let userMe: PtUser = {
             id: faker.random.uuid(),
             fullName: 'Alex Ziskind',
-            avatar: avatarMe
+            avatar: avatarMe,
+            gender: Gender.Male,
+            dateCreated: date,
+            dateModified: date
         };
         return userMe;
     }
 
-    public generateUser(avatarsMen: string[], avatarsWomen?: string[]): PtUser {
+    public generateUser(index: number): PtUser {
         let genderBool = faker.random.boolean();
-        let genderInt = parseInt(genderBool + '');
-        let firstName = faker.name.firstName(genderInt);
-        let lastName = faker.name.lastName(genderInt);
-        var avatar;
-        if (avatarsWomen) {
-            avatar = genderBool ? _.sample(avatarsMen) : _.sample(avatarsWomen);
-        } else {
-            avatar = _.sample(avatarsMen);
-        }
+        let firstName = faker.name.firstName(genderBool ? 1 : 0);
+        let lastName = faker.name.lastName(genderBool ? 1 : 0);
+        let date = faker.date.past(1);
+
+        const avatar = `app/images/avatars/${genderBool ? 'males' : 'females'}/image-${index + 1}.png`;
 
         let user: PtUser = {
             id: faker.random.uuid(),
             fullName: firstName + ' ' + lastName,
-            avatar: avatar
+            avatar: avatar,
+            gender: genderBool ? Gender.Male : Gender.Female,
+            dateCreated: date,
+            dateModified: date
         };
         return user;
     }
