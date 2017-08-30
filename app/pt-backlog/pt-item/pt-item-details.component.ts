@@ -20,6 +20,7 @@ import { slideInDownAnimation, slideInAnimations } from '../../shared/animations
 import { BacklogService, AuthenticationService } from '../../services';
 import { PtItem, PtUser } from '../../shared/models/domain-models';
 import { PriorityEnum, ItemTypeEnum, StatusEnum } from '../../shared/models/domain-enums';
+import { PtBacklogService } from "../../services/ptbacklog.service";
 
 
 @Component({
@@ -58,6 +59,7 @@ export class PTItemDetailsComponent {
     constructor(private route: ActivatedRoute,
         private router: Router,
         private routerExtensions: RouterExtensions,
+        private ptBacklogService: PtBacklogService,
         private backlogService: BacklogService,
         private modalService: ModalDialogService,
         private vcRef: ViewContainerRef) { }
@@ -65,7 +67,7 @@ export class PTItemDetailsComponent {
 
     public ngOnInit() {
         this.route.parent.params
-            .switchMap((params: Params) => this.backlogService.getItem(params['id']))
+            .switchMap((params: Params) => this.ptBacklogService.getItem(parseInt(params['id'])))
             .subscribe((item: PtItem) => {
                 this.item = item;
             });

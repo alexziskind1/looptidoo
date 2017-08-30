@@ -19,4 +19,4 @@ export const INITIAL_STATE: State = {
     selectedViewIndex: { idx: 1 }
 };
 
-export type StateKey = 'backlogItems' | 'currentUser' | 'selectedViewIndex';
+export type StateKey = 'users' | 'backlogItems' | 'currentUser' | 'selectedViewIndex';

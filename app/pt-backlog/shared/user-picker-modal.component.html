@@ -14,7 +14,7 @@
         <Label [text]="prompt" class="form-group-label"></Label>
 
         <StackLayout class="form-group form-list">
-            <ListView [items]="userService.usersObs | async" (itemTap)="listItemTap($event)">
+            <ListView [items]="userService.users" (itemTap)="listItemTap($event)">
                 <ng-template let-user="item" let-i="index">
                     <GridLayout columns="50, 200, *" class="user-picker-row">
                         <Image col="0" [src]="user.avatar" stretch="aspectFit"></Image>

@@ -14,6 +14,8 @@ import 'rxjs/add/operator/switchMap';
 import { BacklogService, AuthenticationService } from '../../services';
 import { PtItem } from '../../shared/models/domain-models';
 import { ItemTypeEnum } from '../../shared/models/domain-enums';
+import { Store } from "../../shared/store";
+import { PtBacklogService } from "../../services/ptbacklog.service";
 
 
 @Component({
@@ -49,9 +51,11 @@ export class PTItemComponent implements OnInit {
         return this._selectedIndex;
     }
 
-    constructor(private route: ActivatedRoute,
+    constructor(private store: Store,
+        private route: ActivatedRoute,
         private router: Router,
         private routerExtensions: RouterExtensions,
+        private ptBacklogService: PtBacklogService,
         private backlogService: BacklogService) {
         for (let i = 0; i < this._itemDetailScreens.length; i++) {
             let tmpSegmentedBarItem: SegmentedBarItem = <SegmentedBarItem>new SegmentedBarItem();
@@ -62,7 +66,7 @@ export class PTItemComponent implements OnInit {
 
     public ngOnInit() {
         this.route.params
-            .switchMap((params: Params) => this.backlogService.getItem(params['id']))
+            .switchMap((params: Params) => this.ptBacklogService.getItem(parseInt(params['id'])))
             .subscribe((item: PtItem) => this.item = item);
     }
 

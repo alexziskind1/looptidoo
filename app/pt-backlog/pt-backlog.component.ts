@@ -70,12 +70,12 @@ export class PTBacklogComponent implements OnInit, AfterViewInit, OnDestroy {
             console.log('selectedIndex: ' + next);
             this.ptBacklogService.fetchItems();
         });
-        this.blSub = this.ptBacklogService.getBacklog$.subscribe();
+        //this.blSub = this.ptBacklogService.getBacklog$.subscribe();
         //this.ptBacklogService.fetchItems();
     }
 
     public ngOnDestroy() {
-        this.blSub.unsubscribe();
+        //this.blSub.unsubscribe();
     }
 
     public ngAfterViewInit() {

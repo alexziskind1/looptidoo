@@ -1,5 +1,7 @@
+import * as _ from 'lodash';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+
 
 import { Injectable, NgZone } from '@angular/core';
 import { Http, Response } from '@angular/http';
@@ -34,11 +36,13 @@ export class PtBacklogService {
         }
     }
 
+    /*
     public getBacklog$ = this.http.get(this.filteredBacklogUrl)
         .map(res => res.json())
         .do((data: PtItem[]) => {
             this.store.set('backlogItems', data);
         });
+        */
 
     constructor(private http: Http, private store: Store, private zone: NgZone) { }
 
@@ -56,6 +60,11 @@ export class PtBacklogService {
 
                 this.store.set('backlogItems', data);
             });
+    }
+
+    public getItem(id: number) {
+        let selectedItem = _.find(this.store.value.backlogItems, i => i.id === id);
+        return Promise.resolve(selectedItem);
     }
 
 }
