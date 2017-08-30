@@ -7,7 +7,7 @@
 </ActionBar>
 
 
-<RadSideDrawer #drawer [transition]="sideDrawerTransition" selectionBehavior="None">
+<RadSideDrawer #drawer [transition]="sideDrawerTransition" selectionBehavior="None" (drawerClosing)="onDrawerClosing($event)">
 
     <StackLayout tkDrawerContent>
         <GridLayout class="side-drawer-panel" rows="auto, *, 100">
@@ -15,11 +15,11 @@
                 <Image src="res://rps_logo" class="slide-out-img" stretch="aspectFit"></Image>
             </StackLayout>
             <StackLayout row="1">
-                <Button (tap)="selectFilteredView(0, 'MY ITEMS')" [class]="myItemsClass$ | async" text="MY ITEMS"></Button>
+                <Button (tap)="selectFilteredView(0, 'MY ITEMS')" [class]="selectedViewIndex$ | async | filterBtnClass:0" text="MY ITEMS"></Button>
 
-                <Button (tap)="selectFilteredView(1, 'OPEN ITEMS')" [class]="openItemsClass$ | async" text="OPEN ITEMS"></Button>
+                <Button (tap)="selectFilteredView(1, 'OPEN ITEMS')" [class]="selectedViewIndex$ | async | filterBtnClass:1" text="OPEN ITEMS"></Button>
 
-                <Button (tap)="selectFilteredView(2, 'FINISHED ITEMS')" [class]="finishedItemsClass$ | async" text="FINISHED ITEMS"></Button>
+                <Button (tap)="selectFilteredView(2, 'FINISHED ITEMS')" [class]="selectedViewIndex$ | async | filterBtnClass:2" text="FINISHED ITEMS"></Button>
             </StackLayout>
             <StackLayout row="2">
                 <Button (tap)="logoutTap()" text="LOGOUT" class="slide-out-btn"></Button>

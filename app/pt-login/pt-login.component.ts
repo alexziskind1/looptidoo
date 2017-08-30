@@ -12,7 +12,7 @@ import * as enums from 'ui/enums';
 
 //app imports
 import { AuthenticationService, UserService } from '../services';
-import { DEMO_PASSWORD } from '../shared/constants';
+import { DEMO_PASSWORD } from '../common/constants';
 import { PtLoginModel, PtUser } from '../shared/models/domain-models';
 import { Store } from "../shared/store";
 

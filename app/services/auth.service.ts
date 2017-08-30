@@ -10,7 +10,7 @@ import { Observable, Observer } from 'rxjs/Rx';
 import 'rxjs/add/operator/map'
 
 //app imports
-import { APP_SETTINGS_TOKEN } from '../shared/constants';
+import { APP_SETTINGS_TOKEN } from '../common/constants';
 import { PtLoginModel, PtAuthToken, PtUser } from '../shared/models/domain-models';
 import { Store } from "../shared/store";
 import { usersUrl, authUrl } from "../common/api-access";

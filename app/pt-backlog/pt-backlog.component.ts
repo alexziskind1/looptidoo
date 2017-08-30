@@ -1,5 +1,5 @@
 //angular imports
-import { Component, OnInit, AfterViewInit, OnDestroy, ViewChild, ViewContainerRef, ChangeDetectionStrategy } from "@angular/core";
+import { Component, OnInit, AfterViewInit, ViewChild, ViewContainerRef, ChangeDetectionStrategy } from "@angular/core";
 
 //third party imports
 import { Observable } from "rxjs/Observable";
@@ -12,6 +12,8 @@ import { ModalDialogService, ModalDialogOptions } from 'nativescript-angular/mod
 import { RadSideDrawerComponent, SideDrawerType } from 'nativescript-telerik-ui/sidedrawer/angular';
 import { DrawerTransitionBase, SideDrawerLocation, SlideInOnTopTransition } from 'nativescript-telerik-ui/sidedrawer';
 import { RouterExtensions } from 'nativescript-angular/router';
+import { Label } from 'ui/label';
+import { LayoutBase } from "ui/layouts/layout-base";
 
 //app imports
 import { BacklogService, AuthenticationService } from '../services';
@@ -21,6 +23,7 @@ import { Store } from "../shared/store";
 import { PtBacklogService } from "../services/ptbacklog.service";
 import { ViewIndex } from "../shared/models/state";
 
+
 @Component({
     moduleId: module.id,
     selector: 'pt-backlog',
@@ -28,24 +31,14 @@ import { ViewIndex } from "../shared/models/state";
     styleUrls: ['pt-backlog.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PTBacklogComponent implements OnInit, AfterViewInit, OnDestroy {
+export class PTBacklogComponent implements OnInit, AfterViewInit {
 
     private _sideDrawerTransition: DrawerTransitionBase = new SlideInOnTopTransition();
     private _drawer: SideDrawerType;
 
     @ViewChild(RadSideDrawerComponent) public drawerComponent: RadSideDrawerComponent;
 
-    //public selectedViewIndex: number;
     public selectedViewIndex$: Observable<number> = this.store.select<number>('selectedViewIndex');
-
-
-
-    public myItemsClass$ = this.selectedViewIndex$
-        .map(selectedViewIndex => selectedViewIndex === 0 ? 'slide-out-btn' : 'slide-out-btn-selected');
-    public openItemsClass$ = this.selectedViewIndex$
-        .map(selectedViewIndex => selectedViewIndex === 1 ? 'slide-out-btn' : 'slide-out-btn-selected');
-    public finishedItemsClass$ = this.selectedViewIndex$
-        .map(selectedViewIndex => selectedViewIndex === 2 ? 'slide-out-btn' : 'slide-out-btn-selected');
 
     public get sideDrawerTransition(): DrawerTransitionBase {
         return this._sideDrawerTransition;
@@ -61,21 +54,13 @@ export class PTBacklogComponent implements OnInit, AfterViewInit, OnDestroy {
         private authService: AuthenticationService,
         private modalService: ModalDialogService,
         private vcRef: ViewContainerRef) {
-        //this.selectedViewIndex = 1;
     }
 
     public ngOnInit() {
         this.items$ = this.store.select<PtItem[]>('backlogItems');
         this.selectedViewIndex$.subscribe(next => {
-            console.log('selectedIndex: ' + next);
             this.ptBacklogService.fetchItems();
         });
-        //this.blSub = this.ptBacklogService.getBacklog$.subscribe();
-        //this.ptBacklogService.fetchItems();
-    }
-
-    public ngOnDestroy() {
-        //this.blSub.unsubscribe();
     }
 
     public ngAfterViewInit() {
@@ -84,11 +69,17 @@ export class PTBacklogComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     public showSlideout() {
+        const mainContentLayout = (<LayoutBase>this._drawer.mainContent);
+        mainContentLayout.className = 'drawer-content-in';
         this._drawer.showDrawer();
     }
 
+    public onDrawerClosing(args) {
+        const mainContentLayout = (<LayoutBase>this._drawer.mainContent);
+        mainContentLayout.className = 'drawer-content-out';
+    }
+
     public selectFilteredView(itemFilterIndex: number, pageTitle: string) {
-        //this.selectedViewIndex = itemFilterIndex;
         this.store.set<ViewIndex>('selectedViewIndex', { idx: itemFilterIndex });
         this._drawer.closeDrawer();
     }

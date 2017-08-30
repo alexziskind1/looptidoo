@@ -5,3 +5,4 @@ export * from './status-display.pipe';
 export * from './type-display.pipe';
 export * from './type-image.pipe';
 export * from './selected-filter.pipe';
+export * from './filter-button-class.pipe';
