@@ -1,3 +1,4 @@
+/*
 //angular imports
 import { Injectable } from '@angular/core';
 
@@ -10,8 +11,8 @@ import * as _ from 'lodash';
 
 //app imports
 import * as constModule from '../shared/constants';
-import { PtItem, PtUser, PtTask, PtComment, Gender } from '../shared/models/domain-models';
-import { PriorityEnum, ItemTypeEnum, StatusEnum } from '../shared/models/domain-enums';
+import { PtItem, PtUser, PtTask, PtComment } from '../shared/models/domain-models';
+import { PriorityEnum, ItemTypeEnum, StatusEnum, GenderEnum } from '../shared/models/domain-enums';
 
 @Injectable()
 export class MockDataService {
@@ -163,17 +164,5 @@ export class MockDataService {
         }
         return avatarList;
     }
-
-    private toTitleCase(str) {
-        return str.replace(/\w\S*/g, function (txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
-    }
-
-    private pickRandomProperty(obj) {
-        var result;
-        var count = 0;
-        for (var prop in obj)
-            if (Math.random() < 1 / ++count)
-                result = prop;
-        return result;
-    }
 }
+*/

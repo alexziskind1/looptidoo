@@ -6,27 +6,22 @@ export interface PtLoginModel {
 }
 
 export interface PtObjectBase {
-    id: string;
+    id: number;
     title?: string;
     dateCreated: Date;
     dateModified: Date;
     dateDeleted?: Date;
 }
 
-export enum Gender {
-    Male = "Male",
-    Female = "Female",
-    Unspecified = "Unspecified",
+export interface PtAuthToken {
+    access_token: string;
+    dateExpires: Date;
 }
 
 export interface PtUser extends PtObjectBase {
     fullName: string;
     avatar: string;
-    gender: Gender;
-}
-
-export interface PtCurrentUser extends PtUser {
-    isAuthenticated: boolean;
+    gender: enums.GenderEnum;
 }
 
 export interface PtItem extends PtObjectBase {
@@ -55,7 +50,7 @@ export interface PtNewTask {
 
 export interface PtNewComment {
     title: string;
-    userId: string;
+    userId: number;
 }
 
 export interface PtNewItem {

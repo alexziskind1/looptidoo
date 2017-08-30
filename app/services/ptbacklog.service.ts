@@ -6,21 +6,12 @@ import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Store } from "../shared/store";
 import { PtItem } from "../shared/models/domain-models";
+import { baseUrl } from "../common/api-access";
 
-const localIP = '192.168.1.202:8080';
-//const localIP = '10.142.32.184:8080';
-const apiEndpoint = '/api';
+
 
 @Injectable()
 export class PtBacklogService {
-    private get baseUrl() {
-        return `http://${localIP}${apiEndpoint}`;
-    }
-
-    private get backlogUrl() {
-        return `${this.baseUrl}/backlog`;
-    }
-
     private get filterIndex() {
         return this.store.value.selectedViewIndex;
     }
@@ -30,16 +21,16 @@ export class PtBacklogService {
             case 0:
                 const user = this.store.value.currentUser;
                 if (user) {
-                    return `${this.baseUrl}/myItems?userId=${this.store.value.currentUser.id}`;
+                    return `${baseUrl}/myItems?userId=${this.store.value.currentUser.id}`;
                 } else {
-                    return `${this.baseUrl}/backlog`;
+                    return `${baseUrl}/backlog`;
                 }
             case 1:
-                return `${this.baseUrl}/openItems`;
+                return `${baseUrl}/openItems`;
             case 2:
-                return `${this.baseUrl}/closedItems`;
+                return `${baseUrl}/closedItems`;
             default:
-                return `${this.baseUrl}/backlog`;
+                return `${baseUrl}/backlog`;
         }
     }
 
@@ -60,7 +51,7 @@ export class PtBacklogService {
             .subscribe((data: PtItem[]) => {
 
                 data.forEach(i => {
-                    i.assignee.avatar = `${this.baseUrl}/photo/${i.assignee.id}`;
+                    i.assignee.avatar = `${baseUrl}/photo/${i.assignee.id}`;
                 });
 
                 this.store.set('backlogItems', data);

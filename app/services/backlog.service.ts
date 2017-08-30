@@ -7,7 +7,7 @@ import * as _ from 'lodash';
 
 //app imports
 import { AuthenticationService, UserService } from './';
-import { MockDataService } from './mock-data.service';
+//import { MockDataService } from './mock-data.service';
 import { FilterState } from '../shared/filter-state.model';
 import { PtItem, PtNewItem, PtUser, PtTask, PtNewTask, PtNewComment, PtComment } from '../shared/models/domain-models';
 import { PriorityEnum, StatusEnum, ItemTypeEnum } from '../shared/models/domain-enums';
@@ -39,11 +39,11 @@ export class BacklogService {
 
     constructor(
         private store: Store,
-        private mockDataService: MockDataService,
+        //private mockDataService: MockDataService,
         private userService: UserService,
         private authService: AuthenticationService,
         private zone: NgZone) {
-        this._genetatedItems = this.mockDataService.generatePTItems(this.userService.users);
+        //this._genetatedItems = this.mockDataService.generatePTItems(this.userService.users);
 
         this._itemsSubj = new BehaviorSubject([]);
         _.forEach(this._genetatedItems, (item) => {
@@ -62,14 +62,14 @@ export class BacklogService {
     }
 
 
-    public getItem(id: string) {
-        let selectedItem = _.find(this._allItems, i => i.id == id);
+    public getItem(id: number) {
+        let selectedItem = _.find(this._allItems, i => i.id === id);
         return Promise.resolve(selectedItem);
     }
 
     public addNewPTItem(newItem: PtNewItem) {
         let item: PtItem = {
-            id: _.uniqueId(),
+            id: 0,
             title: newItem.title,
             description: newItem.description,
             type: newItem.type,
@@ -86,6 +86,7 @@ export class BacklogService {
     }
 
     public addItem(item: PtItem) {
+        item.id = this._allItems.length + 1;
         this._allItems.unshift(item);
         this._observer.next(this._allItems);
         this.publishUpdates();
@@ -110,7 +111,7 @@ export class BacklogService {
 
     public addTask(item: PtItem, newTask: PtNewTask) {
         var task: PtTask = {
-            id: _.uniqueId(),
+            id: item.tasks.length + 1,
             title: newTask.title,
             completed: newTask.completed,
             dateCreated: new Date(),
@@ -120,14 +121,16 @@ export class BacklogService {
     }
 
     public addComment(item: PtItem, newComment: PtNewComment) {
+        /*
         var comment: PtComment = {
-            id: _.uniqueId(),
+            id: item.comments.length + 1,
             title: newComment.title,
             user: _.find(this.userService.users, (user) => user.id === newComment.userId),
             dateCreated: new Date(),
             dateModified: new Date()
         };
         item.comments.unshift(comment);
+        */
     }
 
     public updatePtItem(item: PtItem) {
@@ -171,9 +174,11 @@ export class BacklogService {
     }
 
     public switchAssignee(item: PtItem) {
+        /*
         let ranUser = _.sample<PtUser>(this.userService.users);
         item.assignee = ranUser;
         this.publishUpdates();
+        */
     }
 
     public filter(filterState: FilterState) {

@@ -7,12 +7,13 @@ import { Page } from 'ui/page';
 import { View } from "ui/core/view";
 import { Animation } from "ui/animation";
 import { Color } from "color";
+import { connectionType, getConnectionType } from "connectivity";
 import * as enums from 'ui/enums';
 
 //app imports
 import { AuthenticationService, UserService } from '../services';
 import { DEMO_PASSWORD } from '../shared/constants';
-import { PtLoginModel, PtCurrentUser, PtUser } from '../shared/models/domain-models';
+import { PtLoginModel, PtUser } from '../shared/models/domain-models';
 import { Store } from "../shared/store";
 
 
@@ -24,7 +25,7 @@ import { Store } from "../shared/store";
 })
 export class LoginComponent implements OnInit {
 
-    public isLoading: boolean = false;
+    public isAuthenticating: boolean = false;
     @ViewChild('loginInputs') loginInputsRef: ElementRef;
     @ViewChild('btnLoginWrapper') btnLoginWrapperRef: ElementRef;
     @ViewChild('btnLogin') btnLoginRef: ElementRef;
@@ -57,26 +58,28 @@ export class LoginComponent implements OnInit {
     }
 
     public login() {
-        this.isLoading = true;
+        if (getConnectionType() === connectionType.none) {
+            alert('Sorry, an internet connection is required to log in.');
+            return;
+        }
+
+        this.isAuthenticating = true;
         this.loginInputs.className = '';
 
-        this.loginAnimationForward();
-
-        this.authService.login(this.loginModel.username, this.loginModel.password)
-            .subscribe((user: PtCurrentUser) => {
-                if (user === null) {
-                    this.loginAnimationReverse()
-                        .then(() => {
-                            this.loginInputs.className = 'login-failed';
-                        });
-                }
-                else {
-                    this.router.navigate(["/"], { clearHistory: true });
-                }
-                this.isLoading = false;
-            },
-            error => {
-                this.isLoading = false;
+        this.loginAnimationForward()
+            .then(() => {
+                this.authService.login(this.loginModel)
+                    .subscribe(() => {
+                        this.isAuthenticating = false;
+                        this.router.navigate(["/"], { clearHistory: true });
+                    },
+                    (error) => {
+                        this.loginAnimationReverse()
+                            .then(() => {
+                                this.loginInputs.className = 'login-failed';
+                            });
+                        this.isAuthenticating = false;
+                    });
             });
     }
 

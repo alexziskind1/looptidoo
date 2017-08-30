@@ -9,7 +9,7 @@ import { SIDEDRAWER_DIRECTIVES } from "nativescript-telerik-ui/sidedrawer/angula
 //app imports
 import { BacklogRoutingModule } from './pt-backlog.routing';
 import { BacklogService } from '../services/backlog.service';
-import { MockDataService } from '../services/mock-data.service';
+//import { MockDataService } from '../services/mock-data.service';
 import { PTBacklogComponent } from './pt-backlog.component';
 import { PTItemListComponent } from './pt-item-list/pt-item-list.component';
 import { PTItemComponent } from './pt-item/pt-item.component';
@@ -39,8 +39,8 @@ import { PtBacklogService } from "../services/ptbacklog.service";
     ],
     providers: [
         PtBacklogService,
-        BacklogService,
-        MockDataService
+        BacklogService
+        //MockDataService
     ]
 })
 export class PTBacklogModule { }

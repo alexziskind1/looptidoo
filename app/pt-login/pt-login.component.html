@@ -6,14 +6,14 @@
         </StackLayout>
 
         <StackLayout #loginInputs row="1">
-            <TextField hint="Username" class="login-field" [(ngModel)]="loginModel.username" [isEnabled]="!isLoading"></TextField>
-            <TextField hint="Password" class="login-field" secure="true" [(ngModel)]="loginModel.password" [isEnabled]="!isLoading"></TextField>
+            <TextField hint="Username" class="login-field" [(ngModel)]="loginModel.username" [isEnabled]="!isAuthenticating"></TextField>
+            <TextField hint="Password" class="login-field" secure="true" [(ngModel)]="loginModel.password" [isEnabled]="!isAuthenticating"></TextField>
             <StackLayout #btnLoginWrapper class="btn-login-wrapper">
-                <Button #btnLogin text="SIGN IN" class="btn-login" (tap)="login()" [isEnabled]="!isLoading"></Button>
+                <Button #btnLogin text="SIGN IN" class="btn-login" (tap)="login()" [isEnabled]="!isAuthenticating"></Button>
             </StackLayout>
         </StackLayout>
 
 
-        <ActivityIndicator row="1" [busy]="isLoading"></ActivityIndicator>
+        <ActivityIndicator row="1" [busy]="isAuthenticating"></ActivityIndicator>
     </GridLayout>
 </GridLayout>

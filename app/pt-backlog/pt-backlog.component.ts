@@ -41,11 +41,11 @@ export class PTBacklogComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
     public myItemsClass$ = this.selectedViewIndex$
-        .map(selectedViewIndex => selectedViewIndex === 0 ? 'slide-out-btn-selected' : 'slide-out-btn');
+        .map(selectedViewIndex => selectedViewIndex === 0 ? 'slide-out-btn' : 'slide-out-btn-selected');
     public openItemsClass$ = this.selectedViewIndex$
-        .map(selectedViewIndex => selectedViewIndex === 1 ? 'slide-out-btn-selected' : 'slide-out-btn');
+        .map(selectedViewIndex => selectedViewIndex === 1 ? 'slide-out-btn' : 'slide-out-btn-selected');
     public finishedItemsClass$ = this.selectedViewIndex$
-        .map(selectedViewIndex => selectedViewIndex === 2 ? 'slide-out-btn-selected' : 'slide-out-btn');
+        .map(selectedViewIndex => selectedViewIndex === 2 ? 'slide-out-btn' : 'slide-out-btn-selected');
 
     public get sideDrawerTransition(): DrawerTransitionBase {
         return this._sideDrawerTransition;
@@ -71,6 +71,7 @@ export class PTBacklogComponent implements OnInit, AfterViewInit, OnDestroy {
             this.ptBacklogService.fetchItems();
         });
         this.blSub = this.ptBacklogService.getBacklog$.subscribe();
+        //this.ptBacklogService.fetchItems();
     }
 
     public ngOnDestroy() {
