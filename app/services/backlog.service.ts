@@ -7,7 +7,6 @@ import * as _ from 'lodash';
 
 //app imports
 import { AuthenticationService, UserService } from './';
-//import { MockDataService } from './mock-data.service';
 import { FilterState } from '../shared/filter-state.model';
 import { PtItem, PtNewItem, PtUser, PtTask, PtNewTask, PtNewComment, PtComment } from '../shared/models/domain-models';
 import { PriorityEnum, StatusEnum, ItemTypeEnum } from '../shared/models/domain-enums';
@@ -39,11 +38,9 @@ export class BacklogService {
 
     constructor(
         private store: Store,
-        //private mockDataService: MockDataService,
         private userService: UserService,
         private authService: AuthenticationService,
         private zone: NgZone) {
-        //this._genetatedItems = this.mockDataService.generatePTItems(this.userService.users);
 
         this._itemsSubj = new BehaviorSubject([]);
         _.forEach(this._genetatedItems, (item) => {

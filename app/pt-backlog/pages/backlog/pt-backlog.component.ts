@@ -16,12 +16,14 @@ import { Label } from 'ui/label';
 import { LayoutBase } from "ui/layouts/layout-base";
 
 //app imports
-import { BacklogService, AuthenticationService } from '../services';
-import { AddItemModalComponent } from "./shared/add-item-modal.component";
-import { PtNewItem, PtItem } from '../shared/models/domain-models';
-import { Store } from "../shared/store";
-import { PtBacklogService } from "../services/ptbacklog.service";
-import { ViewIndex } from "../shared/models/state";
+import { BacklogService, AuthenticationService } from '../../../services';
+import { AddItemModalComponent } from "../../shared/add-item-modal.component";
+import { PtNewItem, PtItem } from '../../../shared/models/domain-models';
+import { Store } from "../../../shared/store";
+import { PtBacklogService } from "../../../services/ptbacklog.service";
+import { ViewIndex } from "../../../shared/models/ui-models";
+import { NavigationOptions } from "nativescript-angular/router/ns-location-strategy";
+import { NavigationTransition } from "tns-core-modules/ui/frame";
 
 
 @Component({
@@ -96,6 +98,17 @@ export class PTBacklogComponent implements OnInit, AfterViewInit {
                 this.backlogService.addNewPTItem(newItem);
             }
         });
+    }
+
+    public onAddTap() {
+        var t: NavigationTransition = {
+            duration: 2000,
+            name: 'slideTop'
+        };
+        var options: NavigationOptions = {
+            transition: t
+        };
+        this.router.navigate(["/pt-add-item"], options);
     }
 
     public logoutTap() {

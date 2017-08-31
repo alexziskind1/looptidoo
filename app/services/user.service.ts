@@ -9,7 +9,6 @@ import * as _ from 'lodash';
 import { Observable, Observer } from "rxjs/Rx";
 
 //app imports
-//import { MockDataService } from './mock-data.service';
 import { PtUser } from '../shared/models/domain-models';
 import { Store } from "../shared/store";
 import { usersUrl, baseUrl } from "../common/api-access";
@@ -37,10 +36,7 @@ export class UserService {
         return this.store.value.users;
     }
 
-    constructor(private http: Http, private store: Store
-        //private mockDataService: MockDataService
-    ) {
-        //this._generatedUsers = this.mockDataService.generateUsers();
+    constructor(private http: Http, private store: Store) {
         this.fetchUsers();
     }
 

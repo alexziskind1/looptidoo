@@ -9,14 +9,18 @@ import { SIDEDRAWER_DIRECTIVES } from "nativescript-telerik-ui/sidedrawer/angula
 //app imports
 import { BacklogRoutingModule } from './pt-backlog.routing';
 import { BacklogService } from '../services/backlog.service';
-//import { MockDataService } from '../services/mock-data.service';
-import { PTBacklogComponent } from './pt-backlog.component';
+import { PTBacklogComponent } from './pages/backlog/pt-backlog.component';
 import { PTItemListComponent } from './pt-item-list/pt-item-list.component';
 import { PTItemComponent } from './pt-item/pt-item.component';
 import { PTItemModule } from './pt-item/pt-item.module';
 import { AddItemModalComponent } from './shared/add-item-modal.component';
+
 import { PipesModule } from './pipes/pipes.module';
 import { PtBacklogService } from "../services/ptbacklog.service";
+import { AddItemComponent } from "./pages/add-item/add-item.component";
+import { PtBacklog2Component } from "./pt-backlog2.component";
+import { PtBlComponent } from "./pt-bl.component";
+import { PtBlAddComponent } from "./pt-bl-add.component";
 
 
 @NgModule({
@@ -31,7 +35,13 @@ import { PtBacklogService } from "../services/ptbacklog.service";
         PTBacklogComponent,
         PTItemListComponent,
         PTItemComponent,
+        AddItemComponent,
         AddItemModalComponent,
+
+        PtBacklog2Component,
+        PtBlComponent,
+        PtBlAddComponent,
+
         SIDEDRAWER_DIRECTIVES
     ],
     entryComponents: [
@@ -40,7 +50,6 @@ import { PtBacklogService } from "../services/ptbacklog.service";
     providers: [
         PtBacklogService,
         BacklogService
-        //MockDataService
     ]
 })
 export class PTBacklogModule { }

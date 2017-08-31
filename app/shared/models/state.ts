@@ -1,8 +1,5 @@
 import { PtItem, PtUser } from "./domain-models";
-
-export interface ViewIndex {
-    idx: number;
-}
+import { ViewIndex } from "./ui-models";
 
 export interface State {
     backlogItems: PtItem[],

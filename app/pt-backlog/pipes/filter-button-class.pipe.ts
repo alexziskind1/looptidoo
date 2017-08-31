@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { ViewIndex } from "../../shared/models/state";
+import { ViewIndex } from "../../shared/models/ui-models";
 
 @Pipe({
     name: 'filterBtnClass'

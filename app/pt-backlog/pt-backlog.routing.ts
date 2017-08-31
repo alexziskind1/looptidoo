@@ -1,20 +1,41 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from "@angular/router";
 
-import { PTBacklogComponent } from "./pt-backlog.component";
+import { PTBacklogComponent } from "./pages/backlog/pt-backlog.component";
 import { PTItemComponent } from "./pt-item/pt-item.component";
-
 import { PTItemDetailsComponent } from "./pt-item/pt-item-details.component";
 import { PTItemTasksComponent } from "./pt-item/pt-item-tasks.component";
 import { PTItemChitchatComponent } from "./pt-item/pt-item-chitchat.component";
+import { AddItemComponent } from "./pages/add-item/add-item.component";
 
 import { AuthGuard } from '../services/auth-guard.service';
+
+
+import { PtBacklog2Component } from "./pt-backlog2.component";
+import { PtBlComponent } from "./pt-bl.component";
+import { PtBlAddComponent } from "./pt-bl-add.component";
+
 
 const backlogRoutes: Routes = [
     {
         path: "pt-backlog",
-        component: PTBacklogComponent,
-        canActivate: [AuthGuard]
+        component: PtBacklog2Component,
+        //canActivate: [AuthGuard],
+        children: [
+            {
+                path: "",
+                redirectTo: "pt-bl",
+                pathMatch: "full"
+            },
+            {
+                path: "pt-bl",
+                component: PtBlComponent
+            },
+            {
+                path: "pt-bl-add",
+                component: PtBlAddComponent
+            }
+        ]
     },
     {
         path: "pt-item/:id",
@@ -38,6 +59,10 @@ const backlogRoutes: Routes = [
                 component: PTItemChitchatComponent
             }
         ]
+    },
+    {
+        path: "pt-add-item",
+        component: AddItemComponent,
     }
 ];
 
